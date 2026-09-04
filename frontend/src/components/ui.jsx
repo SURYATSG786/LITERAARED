@@ -77,7 +77,7 @@ export function LessonArt({ lessonId, title }) {
   );
 }
 
-export function FeedbackBanner({ correct, explanation, t }) {
+export function FeedbackBanner({ correct, t }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -88,7 +88,6 @@ export function FeedbackBanner({ correct, explanation, t }) {
       role="status"
     >
       <div className="text-lg font-black">{correct ? t('correct') : t('incorrect')}</div>
-      <div className="mt-1 text-sm font-bold opacity-95">{t('explanation')}: {explanation}</div>
     </motion.div>
   );
 }

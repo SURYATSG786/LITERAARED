@@ -390,7 +390,6 @@ export default function CoursePlayer() {
                 {revealed ? (
                   <FeedbackBanner
                     correct={selected === question.correct_index}
-                    explanation={question.explanation}
                     t={t}
                   />
                 ) : null}
