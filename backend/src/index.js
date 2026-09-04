@@ -85,7 +85,14 @@ async function startServer() {
   });
 }
 
-if (!process.env.VERCEL && process.env.NODE_ENV !== 'test') {
+const isDirectExecution = Boolean(
+  process.argv[1] &&
+  (process.argv[1].endsWith('backend/src/index.js') ||
+   process.argv[1].endsWith('backend/src/index') ||
+   process.argv[1].endsWith('src/index.js'))
+);
+
+if (isDirectExecution && !process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME && process.env.NODE_ENV !== 'test') {
   startServer();
 }
 
