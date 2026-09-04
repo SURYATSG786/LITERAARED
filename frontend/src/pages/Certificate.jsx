@@ -77,12 +77,23 @@ export default function Certificate() {
   // Screen state: 'welcome' | 'directory'
   const [screen, setScreen] = useState("welcome");
 
-  // Parse user earned course certificates
-  const userCourseCerts = Array.isArray(user?.certificates) && user.certificates.length > 0
+  // Parse user earned course certificates from user context and local storage fallback
+  const localCerts = (() => {
+    try {
+      const raw = localStorage.getItem(`literaai_certs_${user?.id || 'guest'}`);
+      return raw ? JSON.parse(raw) : [];
+    } catch (_) {
+      return [];
+    }
+  })();
+
+  const rawUserCerts = Array.isArray(user?.certificates) && user.certificates.length > 0
     ? user.certificates.filter((c) => c.issued)
     : user?.certificate?.issued
     ? [user.certificate]
     : [];
+
+  const userCourseCerts = [...rawUserCerts, ...localCerts];
 
   // Parse user earned league certificates
   const userLeagueCerts = Array.isArray(user?.league_certificates)

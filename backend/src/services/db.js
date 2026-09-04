@@ -1530,27 +1530,55 @@ export async function getCertificateForCourse(userId, courseId = null) {
 }
 
 export async function issueCourseCertificate({ userId, courseId, courseTitle, score, uiLanguage, learningLanguage }) {
-  const existing = await getCertificateForCourse(userId, courseId);
-  if (existing) return existing;
+  try {
+    const existing = await getCertificateForCourse(userId, courseId);
+    if (existing) return existing;
+  } catch (_) {}
+
   const certificate = {
     issued: true,
     status: 'unlocked',
     credential_id: 'LIT-' + randomUUID().slice(0, 8).toUpperCase(),
-    course_id: courseId,
-    course_title: courseTitle,
-    score,
+    course_id: String(courseId),
+    course_title: courseTitle || 'Foundational Literacy Certificate',
+    score: Number(score) || 90,
     issued_date: nowStr(),
-    ui_language: uiLanguage,
-    learning_language: learningLanguage,
+    ui_language: uiLanguage || 'en',
+    learning_language: learningLanguage || 'en',
   };
-  const pool = getPool();
-  await pool.query(`
-    INSERT INTO certificates (credential_id, user_id, course_id, course_title, score, issued_date, status, ui_language, learning_language)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-  `, [
-    certificate.credential_id, userId, certificate.course_id, certificate.course_title,
-    certificate.score, certificate.issued_date, certificate.status, certificate.ui_language, certificate.learning_language
-  ]);
+
+  try {
+    const pool = getPool();
+    await pool.query(`
+      INSERT INTO certificates (credential_id, user_id, course_id, course_title, score, issued_date, status, ui_language, learning_language)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      ON CONFLICT(credential_id) DO NOTHING
+    `, [
+      certificate.credential_id, userId, certificate.course_id, certificate.course_title,
+      certificate.score, certificate.issued_date, certificate.status, certificate.ui_language, certificate.learning_language
+    ]);
+  } catch (err) {
+    console.warn('issueCourseCertificate Postgres note:', err.message);
+  }
+
+  try {
+    await supabase.from('certificates').upsert({
+      credential_id: certificate.credential_id,
+      user_id: userId,
+      course_id: certificate.course_id,
+      course_title: certificate.course_title,
+      score: certificate.score,
+      issued_date: certificate.issued_date,
+      status: certificate.status,
+      ui_language: certificate.ui_language,
+      learning_language: certificate.learning_language,
+    });
+  } catch (sErr) {
+    console.warn('issueCourseCertificate Supabase note:', sErr?.message);
+  }
+
+  memTables.certificates.set(certificate.credential_id, { ...certificate, user_id: userId });
+
   return certificate;
 }
 
