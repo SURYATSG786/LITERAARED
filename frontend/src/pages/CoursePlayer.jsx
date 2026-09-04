@@ -317,8 +317,8 @@ export default function CoursePlayer() {
       <div className="flex flex-wrap items-center justify-between gap-2 shrink-0">
         <div>
           <PageTitle
-            title={lesson.title}
-            subtitle={`${course.title} · Lesson ${lessonIndex + 1} of ${course.lessons?.length || 4}`}
+            title={course.title || lesson.title}
+            subtitle={course.objective || `${course.title} · Interactive Practice`}
           />
         </div>
         <GuideBird
@@ -407,7 +407,7 @@ export default function CoursePlayer() {
                     </button>
                   ) : (
                     <button className="btn-primary w-full py-4 text-base sm:text-lg font-black shadow-xl cursor-pointer hover:scale-101 transition-all" type="button" disabled={finishing} onClick={advance}>
-                      {isLastQ ? (lessonIndex < (course?.lessons?.length || 1) - 1 ? t('nextLesson') : t('getCertificate')) : t('continue')}
+                      {isLastQ ? t('getCertificate', 'Finish & Get Certificate 🎓') : t('continue', 'Next Question ➡️')}
                     </button>
                   )}
                 </div>

@@ -134,7 +134,7 @@ export default function Courses() {
             id: `course-${langKey}-${pathKey}`,
             path: pathKey,
             title: DEFAULT_TITLES[langKey][idx],
-            lesson_count: 4,
+            lesson_count: 1,
           }))
       )
     : (data?.courses || (data?.course ? [data.course] : []));
@@ -162,7 +162,7 @@ export default function Courses() {
           const scores = courseScores[course.id];
           const hasScores = scores?.lessons?.length > 0;
           const completedLessons = scores?.lessons?.length || 0;
-          const totalLessons = course.lesson_count || 4;
+          const totalLessons = course.lesson_count || 1;
           const theme = COURSE_THEMES[i % COURSE_THEMES.length];
 
           return (

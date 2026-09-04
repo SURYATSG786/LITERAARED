@@ -81,16 +81,16 @@ function buildStaticCourses() {
       const title = COURSE_TITLES[lang]?.[courseIdx] || `Course ${courseIdx + 1}`;
       const objective = COURSE_OBJECTIVES[lang]?.[courseIdx] || 'Master foundational literacy skills.';
 
-      const lessons = [0, 1, 2, 3].map((lessonIdx) => {
-        return {
-          id: String(lessonIdx),
-          title: `${title} — Part ${lessonIdx + 1}`,
-          learning_goal: `Complete practical literacy exercise ${lessonIdx + 1}`,
+      const lessons = [
+        {
+          id: '0',
+          title: title,
+          learning_goal: objective,
           teaching_content: `Practice reading and understanding words for ${title}.`,
           image_key: 'book',
           practice_questions: questions,
-        };
-      });
+        },
+      ];
 
       courses.push({
         id: `${pathKey}_${lang}`,
@@ -99,6 +99,7 @@ function buildStaticCourses() {
         title,
         objective,
         certificate_criteria: { min_score_percent: 70 },
+        lesson_count: 1,
         lessons,
         checkpoint: { questions },
         checkpoint_test: questions,
