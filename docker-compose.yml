@@ -1,0 +1,25 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      JWT_SECRET: ${JWT_SECRET:-literaai-change-me-in-production}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      SUPABASE_URL: ${SUPABASE_URL:-https://qpszdjgagfyhqsjceynm.supabase.co}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-sb_publishable_Tz8DSDRzPBXu-3-jstBwmw_R1xTbu20}
+      DATABASE_URL: ${DATABASE_URL:-}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:5173}
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ""
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
