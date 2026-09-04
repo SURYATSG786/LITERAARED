@@ -63,9 +63,14 @@ const COURSE_OBJECTIVES = {
 function buildStaticCourses() {
   if (cachedCourses) return cachedCourses;
 
-  const rawVerified = fs.existsSync(verifiedCourseQuestionsPath)
-    ? JSON.parse(fs.readFileSync(verifiedCourseQuestionsPath, 'utf8'))
-    : {};
+  let rawVerified = {};
+  try {
+    if (fs.existsSync(verifiedCourseQuestionsPath)) {
+      rawVerified = JSON.parse(fs.readFileSync(verifiedCourseQuestionsPath, 'utf8'));
+    }
+  } catch (err) {
+    console.warn('Could not read verified course questions:', err.message);
+  }
 
   const courses = [];
 
