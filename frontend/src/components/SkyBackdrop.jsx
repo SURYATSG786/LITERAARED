@@ -1,3 +1,5 @@
+import appBg from '../assets/app_background.png';
+
 /** Shows the app-wide illustrated backdrop across all pages. */
 export default function SkyBackdrop() {
   return (
@@ -5,7 +7,7 @@ export default function SkyBackdrop() {
       className="fixed inset-0 -z-10 pointer-events-none"
       style={{
         backgroundColor: '#eaf8f5',
-        backgroundImage: "url('/assets/app_background.png')",
+        backgroundImage: `url("${appBg || '/assets/app_background.png'}")`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -15,4 +17,5 @@ export default function SkyBackdrop() {
     />
   );
 }
+
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'litera-ai-v1';
+const CACHE_NAME = 'litera-ai-v4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
