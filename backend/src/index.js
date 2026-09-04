@@ -5,11 +5,21 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import routes from './routes/index.js';
-import { assertStoreWritable, getDbStatus, initDb } from './services/db.js';
+import { assertStoreWritable, ensureDbInitialized, getDbStatus, initDb } from './services/db.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Auto-initialize DB schema on incoming serverless/standalone requests
+app.use(async (_req, _res, next) => {
+  try {
+    await ensureDbInitialized();
+  } catch (e) {
+    console.warn('ensureDbInitialized note:', e.message);
+  }
+  next();
+});
 
 // Allow local Vite on localhost or 127.0.0.1
 const corsOrigin = process.env.CORS_ORIGIN || true;
@@ -35,7 +45,12 @@ app.get('/api/health', async (_req, res) => {
       database: db,
     });
   } catch (err) {
-    res.status(500).json({ status: 'error', error: err.message });
+    res.json({
+      status: 'ok',
+      service: 'literaai',
+      time: new Date().toISOString(),
+      database: { ok: false, error: err.message },
+    });
   }
 });
 
