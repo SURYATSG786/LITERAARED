@@ -101,7 +101,7 @@ const COURSE_THEMES = [
 
 export default function Courses() {
   const { t, i18n } = useTranslation();
-  const { user, refreshUser } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const currentLang = user?.learningLanguage || user?.uiLanguage || i18n.language || 'en';
   const initialStaticCourses = getStaticCoursesList(currentLang);
@@ -109,12 +109,6 @@ export default function Courses() {
   const [data, setData] = useState({ courses: initialStaticCourses });
   const [error, setError] = useState('');
   const [courseScores, setCourseScores] = useState({});
-
-  useEffect(() => {
-    api.me().then((res) => {
-      if (res?.user) refreshUser(res.user);
-    }).catch(() => {});
-  }, []);
 
   useEffect(() => {
     api.recommended()
@@ -143,15 +137,6 @@ export default function Courses() {
   const isLocked = user?.assessment_score == null;
   const coursesToRender = (data?.courses && data.courses.length > 0) ? data.courses : initialStaticCourses;
 
-  const rawUserCerts = Array.isArray(user?.certificates) && user.certificates.length > 0
-    ? user.certificates.filter((c) => c.issued)
-    : user?.certificate?.issued
-    ? [user.certificate]
-    : [];
-
-  const prog = user?.course_progress;
-  const progLessons = prog?.lessons_completed || [];
-
   return (
     <div className="w-full flex-1 flex flex-col justify-between gap-2.5 sm:gap-3 p-1 sm:p-1.5 pb-2 h-[calc(100vh-105px)] min-h-0">
       {/* Top Banner Guide */}
@@ -172,29 +157,10 @@ export default function Courses() {
       {/* 2x2 Balanced Grid (2 in each row) filling 100% of the page perfectly */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 lg:gap-5 items-stretch flex-1 min-h-0 p-1">
         {coursesToRender.map((course, i) => {
-          const scores = courseScores[course.id] || courseScores[String(i)] || {};
+          const scores = courseScores[course.id];
+          const hasScores = scores?.lessons?.length > 0;
+          const completedLessons = scores?.lessons?.length || 0;
           const totalLessons = course.lesson_count || 1;
-
-          const isCourse0Completed = (i === 0) && (
-            progLessons.length > 0 ||
-            rawUserCerts.length > 0 ||
-            (user?.xp && Number(user.xp) > 0) ||
-            (scores?.lessons?.length > 0)
-          );
-
-          const isCourseCompleted = (
-            (String(prog?.course_id) === String(i) && progLessons.length > 0) ||
-            rawUserCerts.some((c) => String(c.course_id) === String(i) || Number(c.stage) === (i + 1) || String(c.course_id).includes(course.path)) ||
-            (scores?.lessons?.length > 0) ||
-            (i === 0 && isCourse0Completed)
-          );
-
-          const completedLessons = isCourseCompleted ? totalLessons : (scores?.lessons?.length || 0);
-          const isFullyComplete = completedLessons >= totalLessons;
-          const displayScore = isFullyComplete
-            ? (scores?.course_average || prog?.lesson_scores?.[0] || 100)
-            : (scores?.course_average || 0);
-
           const theme = COURSE_THEMES[i % COURSE_THEMES.length];
 
           return (
@@ -228,16 +194,10 @@ export default function Courses() {
                       🔒 {t('locked', 'Locked')}
                     </span>
                   ) : (
-                    isFullyComplete ? (
-                      <div className="inline-flex items-center gap-1 rounded-full bg-emerald-600 text-white px-3 py-0.5 text-xs font-black shadow-xs">
-                        <CheckCircle2 size={13} /> 100% {t('mastered', 'Mastered')}
+                    scores?.course_average > 0 && (
+                      <div className="inline-flex items-center gap-1 rounded-full bg-white/80 px-3 py-0.5 text-xs font-black text-black border border-black/10 shadow-xs">
+                        <Trophy size={13} className="text-amber-500" /> {scores.course_average}%
                       </div>
-                    ) : (
-                      displayScore > 0 && (
-                        <div className="inline-flex items-center gap-1 rounded-full bg-white/80 px-3 py-0.5 text-xs font-black text-black border border-black/10 shadow-xs">
-                          <Trophy size={13} className="text-amber-500" /> {displayScore}%
-                        </div>
-                      )
                     )
                   )}
                 </div>
@@ -283,23 +243,38 @@ export default function Courses() {
                     <div className="space-y-1.5">
                       <div className="flex justify-between items-center text-xs font-black text-[#032038]/80">
                         <span>{t('lessonsCompleted')}</span>
-                        <span className={isFullyComplete ? "text-emerald-700 font-extrabold" : ""}>
-                          {completedLessons} {t('of')} {totalLessons} {isFullyComplete && "✅"}
-                        </span>
+                        <span>{completedLessons} {t('of')} {totalLessons}</span>
                       </div>
                       <ProgressBar value={completedLessons} max={totalLessons} label={t('lessonsCompleted')} />
 
-                      {isFullyComplete ? (
-                        <div className="flex items-center gap-1.5 pt-0.5">
-                          <span className="inline-flex items-center gap-1 rounded-lg px-2.5 py-0.5 text-[11px] font-black bg-emerald-500/20 text-emerald-950 border border-emerald-600/40 shadow-2xs">
-                            <CheckCircle2 size={12} className="text-emerald-700" />
-                            Lesson 1: {displayScore}%
-                          </span>
-                          <span className="text-[11px] font-bold text-emerald-800">
-                            Course Completed 🎉
-                          </span>
+                      {hasScores && (
+                        <div className="flex flex-wrap gap-1.5 pt-0.5">
+                          {Array.from({ length: totalLessons }, (_, li) => {
+                            const lessonScore = scores.lessons.find((l) => String(l.lesson_id) === String(li));
+                            return (
+                              <span
+                                key={li}
+                                className={`inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-black border ${
+                                  lessonScore
+                                    ? lessonScore.score >= 70
+                                      ? 'bg-green-500/20 text-green-950 border-green-600/40'
+                                      : 'bg-amber-500/20 text-amber-950 border-amber-600/40'
+                                    : 'bg-white/40 text-[#032038]/60 border-[#032038]/15'
+                                }`}
+                              >
+                                {lessonScore ? (
+                                  <>
+                                    <CheckCircle2 size={11} className="text-emerald-700" />
+                                    L{li + 1}: {lessonScore.score}%
+                                  </>
+                                ) : (
+                                  <>L{li + 1}</>
+                                )}
+                              </span>
+                            );
+                          })}
                         </div>
-                      ) : null}
+                      )}
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -308,12 +283,12 @@ export default function Courses() {
                         type="button"
                         onClick={() => navigate(`/course/${course.id}`)}
                       >
-                        <span>{isFullyComplete ? t('reviewCourse', 'Review Course 🔁') : t('startCourse', 'Start Course')}</span>
+                        <span>{completedLessons >= totalLessons && completedLessons > 0 ? t('reviewCourse', 'Review Course 🔁') : t('startCourse', 'Start Course')}</span>
                       </button>
 
-                      {isFullyComplete && (
+                      {completedLessons >= totalLessons && completedLessons > 0 && (
                         <button
-                          className="py-2.5 sm:py-3 px-3.5 rounded-2xl font-black text-xs sm:text-sm bg-amber-400 hover:bg-amber-300 text-amber-950 border-2 border-amber-500 shadow-md cursor-pointer transition flex items-center gap-1"
+                          className="py-2.5 sm:py-3 px-3.5 rounded-2xl font-black text-xs sm:text-sm bg-amber-400 hover:bg-amber-300 text-amber-950 border-2 border-amber-500 shadow-md cursor-pointer transition flex items-center gap-1 shrink-0"
                           type="button"
                           onClick={() => navigate('/certificate')}
                         >

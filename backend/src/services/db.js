@@ -1625,37 +1625,23 @@ export async function issueCourseCertificate({ userId, courseId, courseTitle, sc
 
 export async function getCourseScores(userId, courseId) {
   const pool = getPool();
-  const strId = String(courseId || '0');
-  const altId = strId === '0' ? 'foundation' : (strId === '1' ? 'beginner' : (strId === '2' ? 'intermediate' : (strId === '3' ? 'advanced' : (strId === 'foundation' ? '0' : strId))));
-
   const lessonRowsRes = await pool.query(
-    'SELECT lesson_id, score FROM user_course_lesson_progress WHERE user_id = $1 AND (course_id = $2 OR course_id = $3)',
-    [userId, strId, altId]
+    'SELECT lesson_id, score FROM user_course_lesson_progress WHERE user_id = $1 AND course_id = $2',
+    [userId, courseId]
   );
   const certRowRes = await pool.query(
-    'SELECT score FROM certificates WHERE user_id = $1 AND (course_id = $2 OR course_id = $3)',
-    [userId, strId, altId]
+    'SELECT score FROM certificates WHERE user_id = $1 AND course_id = $2',
+    [userId, courseId]
   );
 
-  let lessonScores = lessonRowsRes.rows.map((r) => ({ lesson_id: r.lesson_id, score: r.score || 0 }));
-  let checkpointScore = certRowRes.rows[0]?.score || null;
-
-  if (lessonScores.length === 0) {
-    const user = await findUserById(userId);
-    const prog = user?.course_progress;
-    if (prog && (String(prog.course_id) === strId || String(prog.course_id) === altId || (strId === '0' && prog.lessons_completed?.length > 0))) {
-      lessonScores = (prog.lessons_completed || []).map((lid) => ({
-        lesson_id: lid,
-        score: prog.lesson_scores?.[lid] || 100,
-      }));
-    }
-  }
+  const lessonScores = lessonRowsRes.rows.map((r) => ({ lesson_id: r.lesson_id, score: r.score || 0 }));
+  const checkpointScore = certRowRes.rows[0]?.score || null;
 
   const allScores = lessonScores.map((l) => l.score);
   if (checkpointScore != null) allScores.push(checkpointScore);
   const courseAverage = allScores.length > 0
     ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length)
-    : (lessonScores.length > 0 ? 100 : 0);
+    : 0;
 
   return { lessons: lessonScores, checkpoint_score: checkpointScore, course_average: courseAverage };
 }

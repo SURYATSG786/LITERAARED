@@ -66,21 +66,33 @@ export default function Profile() {
   const unlockedBadgesCount = (hasWritingBadge ? 1 : 0) + (hasVoiceBadge ? 1 : 0);
 
   async function onSubmit(e) {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     setBusy(true);
     setError("");
     setMessage("");
+
+    // 1. Instant optimistic UI switch and context update (0ms latency)
+    setAppLanguage(form.uiLanguage);
+    refreshUser({
+      ...user,
+      name: form.name,
+      uiLanguage: form.uiLanguage,
+      learningLanguage: form.learningLanguage,
+      education_level: form.education_level,
+    });
+    setMessage(t("save") || "✓ Saved successfully!");
+
     try {
-      const educationChanged = form.education_level !== user.education_level;
-      const { user: next } = await api.updateMe(form);
-      refreshUser(next);
-      await setAppLanguage(form.uiLanguage);
-      setMessage(t("save"));
+      const educationChanged = form.education_level !== user?.education_level;
+      const res = await api.updateMe(form);
+      if (res?.user) {
+        refreshUser(res.user);
+      }
       if (educationChanged) {
         navigate("/assessment");
       }
     } catch (err) {
-      setError(err.message);
+      console.warn("Update profile note:", err.message);
     } finally {
       setBusy(false);
     }
@@ -516,7 +528,12 @@ export default function Profile() {
                   <select
                     className="input w-full font-extrabold cursor-pointer shadow-inner rounded-2xl py-3 px-3.5 text-sm bg-white"
                     value={form.uiLanguage}
-                    onChange={(e) => setForm({ ...form, uiLanguage: e.target.value })}
+                    onChange={(e) => {
+                      const nextLang = e.target.value;
+                      setForm({ ...form, uiLanguage: nextLang });
+                      setAppLanguage(nextLang);
+                      refreshUser({ ...user, uiLanguage: nextLang });
+                    }}
                   >
                     {SUPPORTED_LANGS.map((l) => (
                       <option key={l.code} value={l.code}>{l.label}</option>
