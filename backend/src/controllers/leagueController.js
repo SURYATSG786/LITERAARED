@@ -1,4 +1,5 @@
 import { awardUserReward, findUserById, getLeagueExamFromDb, promoteUserLeague, sanitizeUser, listUsers } from '../services/db.js';
+import { buildLeagueExam } from '../data/leagueExams.js';
 
 const LEAGUES = ['bronze', 'silver', 'gold'];
 const LEAGUE_RANKS = { bronze: 1, silver: 2, gold: 3 };
@@ -84,7 +85,9 @@ export async function getLeagueExam(req, res) {
     const uiLanguage = user.uiLanguage || user.preferred_language || 'en';
     const learningLanguage = user.learningLanguage || user.preferred_language || 'en';
 
-    const examData = await getLeagueExamFromDb(current, uiLanguage, learningLanguage);
+    const rawExam = await getLeagueExamFromDb(current, uiLanguage, learningLanguage);
+    const examData = rawExam || buildLeagueExam(current, uiLanguage, learningLanguage);
+
     if (current === 'gold' && (user.league_certificates || []).some((certificate) => certificate.league === 'gold')) {
       return res.status(409).json({ error: 'Gold Trophy has already been earned' });
     }
@@ -129,7 +132,8 @@ export async function submitLeagueExam(req, res) {
       return res.status(409).json({ error: 'Gold Trophy has already been earned' });
     }
 
-    const examData = await getLeagueExamFromDb(current, uiLanguage, learningLanguage);
+    const rawExam = await getLeagueExamFromDb(current, uiLanguage, learningLanguage);
+    const examData = rawExam || buildLeagueExam(current, uiLanguage, learningLanguage);
     if (!examData) {
       return res.status(404).json({ error: `Exam for ${current} league not found` });
     }
