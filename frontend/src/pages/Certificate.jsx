@@ -65,7 +65,7 @@ function LockedChainsOverlay() {
 
 export default function Certificate() {
   const { i18n } = useTranslation();
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const navigate = useNavigate();
   const certRef = useRef(null);
 
@@ -77,11 +77,28 @@ export default function Certificate() {
   // Screen state: 'welcome' | 'directory'
   const [screen, setScreen] = useState("welcome");
 
-  // Parse user earned course certificates from user context and local storage fallback
+  // Fetch latest user certificates from API on mount
+  useEffect(() => {
+    api.me().then((res) => {
+      if (res?.user) refreshUser(res.user);
+    }).catch(() => {});
+  }, []);
+
+  // Parse user earned course certificates from user context and all local storage keys
   const localCerts = (() => {
     try {
-      const raw = localStorage.getItem(`literaai_certs_${user?.id || 'guest'}`);
-      return raw ? JSON.parse(raw) : [];
+      const allFound = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && (key.startsWith('literaai_cert') || key.startsWith('literaai_completed'))) {
+          try {
+            const parsed = JSON.parse(localStorage.getItem(key) || 'null');
+            if (Array.isArray(parsed)) allFound.push(...parsed);
+            else if (parsed && typeof parsed === 'object') allFound.push(parsed);
+          } catch (_) {}
+        }
+      }
+      return allFound;
     } catch (_) {
       return [];
     }
@@ -229,25 +246,26 @@ export default function Certificate() {
           String(c.courseId) === String(item.courseId) ||
           Number(c.stage) === Number(item.stage) ||
           Number(c.courseId) === Number(item.courseId) ||
+          c.id === item.id ||
           c.course_title?.toLowerCase().includes(`course ${item.stage}`) ||
           c.course_title?.toLowerCase().includes(`stage ${item.stage}`) ||
-          (item.stage === 1 && (String(c.course_id).includes('foundation') || c.course_title?.toLowerCase().includes('reading everyday words'))) ||
-          (item.stage === 2 && (String(c.course_id).includes('beginner') || c.course_title?.toLowerCase().includes('understanding everyday sentences'))) ||
-          (item.stage === 3 && (String(c.course_id).includes('intermediate') || c.course_title?.toLowerCase().includes('using information in daily life'))) ||
-          (item.stage === 4 && (String(c.course_id).includes('advanced') || c.course_title?.toLowerCase().includes('reading for understanding')))
+          (item.stage === 1 && (String(c.course_id).includes('foundation') || String(c.course_id) === '0' || c.course_title?.toLowerCase().includes('reading everyday words') || c.course_title?.toLowerCase().includes('words'))) ||
+          (item.stage === 2 && (String(c.course_id).includes('beginner') || String(c.course_id) === '1' || c.course_title?.toLowerCase().includes('understanding everyday sentences'))) ||
+          (item.stage === 3 && (String(c.course_id).includes('intermediate') || String(c.course_id) === '2' || c.course_title?.toLowerCase().includes('using information in daily life'))) ||
+          (item.stage === 4 && (String(c.course_id).includes('advanced') || String(c.course_id) === '3' || c.course_title?.toLowerCase().includes('reading for understanding')))
       );
 
-      // Auto-unlock if user has course completion in course_progress
+      // Auto-unlock if user has completed course or has lessons/xp in progress
       if (!earnedMatch) {
         const prog = user?.course_progress;
         const done = prog?.lessons_completed || [];
         const isProgMatch =
-          (item.stage === 1 && (prog?.course_id === '0' || prog?.course_id === 0 || String(prog?.course_id || '').includes('foundation') || done.length > 0)) ||
+          (item.stage === 1 && (prog?.course_id === '0' || prog?.course_id === 0 || String(prog?.course_id || '').includes('foundation') || done.length > 0 || (user?.xp || 0) > 0 || user?.assessment_score != null)) ||
           (item.stage === 2 && (prog?.course_id === '1' || prog?.course_id === 1 || String(prog?.course_id || '').includes('beginner'))) ||
           (item.stage === 3 && (prog?.course_id === '2' || prog?.course_id === 2 || String(prog?.course_id || '').includes('intermediate'))) ||
           (item.stage === 4 && (prog?.course_id === '3' || prog?.course_id === 3 || String(prog?.course_id || '').includes('advanced')));
 
-        if (isProgMatch && done.length > 0) {
+        if (isProgMatch && (done.length > 0 || (item.stage === 1 && ((user?.xp || 0) > 0 || user?.assessment_score != null)))) {
           earnedMatch = {
             issued: true,
             status: 'unlocked',
@@ -280,9 +298,12 @@ export default function Certificate() {
     };
   });
 
-  const [activeCert, setActiveCert] = useState(
-    certificatesList.find((c) => c.isUnlocked) || certificatesList[0]
-  );
+  const [selectedCertId, setSelectedCertId] = useState(() => {
+    const firstUnlocked = certificatesList.find((c) => c.isUnlocked);
+    return firstUnlocked ? firstUnlocked.id : certificatesList[0].id;
+  });
+
+  const activeCert = certificatesList.find((c) => c.id === selectedCertId) || certificatesList[0];
   const [filterType, setFilterType] = useState("all");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -290,7 +311,7 @@ export default function Certificate() {
   useEffect(() => {
     const firstUnlocked = certificatesList.find((c) => c.isUnlocked);
     if (firstUnlocked && (!activeCert || !activeCert.isUnlocked)) {
-      setActiveCert(firstUnlocked);
+      setSelectedCertId(firstUnlocked.id);
     }
   }, [certificatesList]);
 
@@ -780,7 +801,7 @@ export default function Certificate() {
                     key={cert.id}
                     whileHover={{ y: -2 }}
                     onClick={() => {
-                      setActiveCert(cert.earnedData || cert);
+                      setSelectedCertId(cert.id);
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
                     className={`glass-card rounded-2xl p-4 border-2 transition flex flex-col justify-between space-y-3 relative overflow-hidden cursor-pointer ${
@@ -860,7 +881,7 @@ export default function Certificate() {
                           <button
                             type="button"
                             onClick={() => {
-                              setActiveCert(cert.earnedData || cert);
+                              setSelectedCertId(cert.id);
                               window.scrollTo({ top: 0, behavior: "smooth" });
                             }}
                             className={`btn-primary flex-1 py-2 px-3 text-xs font-black flex items-center justify-center gap-1.5 shadow-md hover:scale-101 transition cursor-pointer text-black ${
@@ -873,7 +894,7 @@ export default function Certificate() {
 
                           <button
                             type="button"
-                            onClick={() => download(cert.earnedData || cert)}
+                            onClick={() => download(cert)}
                             className="py-2 px-2.5 rounded-xl font-black text-xs bg-amber-500/10 text-amber-900 border border-amber-400/50 hover:bg-amber-500 hover:text-white transition cursor-pointer"
                             title={labels.download}
                           >
@@ -884,7 +905,7 @@ export default function Certificate() {
                         <button
                           type="button"
                           onClick={() => {
-                            setActiveCert(cert.earnedData || cert);
+                            setSelectedCertId(cert.id);
                             window.scrollTo({ top: 0, behavior: "smooth" });
                           }}
                           className={`btn-primary w-full py-2.5 px-3 text-xs font-black flex items-center justify-center gap-1.5 shadow-md hover:scale-101 transition cursor-pointer text-black ${

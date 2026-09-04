@@ -217,8 +217,20 @@ const DEFAULT_FOUNDATION_COURSE = {
 };
 
 export function getCourseById(id, lang = null) {
-  const found = loadCourses(lang).find((c) => c.id === id || c.path === id);
-  return found || loadCourses('en').find((c) => c.id === id || c.path === id) || DEFAULT_FOUNDATION_COURSE;
+  const strId = String(id != null ? id : '').trim().toLowerCase();
+  let targetPath = strId;
+  if (strId === '0' || strId === 'course-0' || strId === 'course_0' || strId.includes('foundation')) targetPath = 'foundation';
+  else if (strId === '1' || strId === 'course-1' || strId === 'course_1' || strId.includes('beginner')) targetPath = 'beginner';
+  else if (strId === '2' || strId === 'course-2' || strId === 'course_2' || strId.includes('intermediate')) targetPath = 'intermediate';
+  else if (strId === '3' || strId === 'course-3' || strId === 'course_3' || strId.includes('advanced')) targetPath = 'advanced';
+
+  const courses = loadCourses(lang);
+  const found = courses.find((c) => c.id === strId || c.path === strId || c.path === targetPath || c.id.startsWith(targetPath));
+  if (found) return found;
+
+  const enCourses = loadCourses('en');
+  const enFound = enCourses.find((c) => c.id === strId || c.path === strId || c.path === targetPath || c.id.startsWith(targetPath));
+  return enFound || courses[0] || enCourses[0] || DEFAULT_FOUNDATION_COURSE;
 }
 
 export function getRecommendedCourses(score, lang = null) {

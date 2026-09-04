@@ -76,7 +76,13 @@ export function AuthProvider({ children }) {
   }
 
   function refreshUser(next) {
-    setUser(next);
+    if (next && typeof next === 'object') {
+      setUser(next);
+    } else {
+      api.me().then((res) => {
+        if (res?.user) setUser(res.user);
+      }).catch(() => {});
+    }
   }
 
   function clearJustLoggedIn() {

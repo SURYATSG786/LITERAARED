@@ -11,12 +11,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Auto-initialize DB schema on incoming serverless/standalone requests
-app.use(async (_req, _res, next) => {
-  try {
-    await ensureDbInitialized();
-  } catch (e) {
-    console.warn('ensureDbInitialized note:', e.message);
+// Fast background DB initialization without blocking incoming serverless requests
+let dbInitStarted = false;
+app.use((_req, _res, next) => {
+  if (!dbInitStarted) {
+    dbInitStarted = true;
+    ensureDbInitialized().catch(() => {});
   }
   next();
 });

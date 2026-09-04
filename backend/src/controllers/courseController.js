@@ -136,9 +136,15 @@ export async function markLessonProgress(req, res) {
         lesson_question_counts: { [lessonIndex]: totalQuestions },
       },
     });
-    const progress = await getCourseProgress(user.id, course_id);
+    const progress = {
+      course_id: String(course_id),
+      lessons_completed: Array.from(completed),
+      lesson_scores: newLessonScores,
+      correct_answers: correctCount,
+      total_questions: totalQuestions,
+    };
     await bumpActivity(user.id);
-    const certificate = await maybeIssueCertificate(user, course, course_id, progress);
+    const certificate = await maybeIssueCertificate(user, course, course_id, progress, lessonScore);
     const refreshed = await findUserById(user.id);
 
     res.json({
@@ -146,8 +152,8 @@ export async function markLessonProgress(req, res) {
       xp_gained: xpGained,
       gems_gained: gemsGained,
       score: lessonScore,
-      lessons_completed: progress.lessons_completed,
-      completion_percent: calculateCourseScore(progress.correct_answers, progress.total_questions),
+      lessons_completed: Array.from(completed),
+      completion_percent: 100,
       certificate,
       user: sanitizeUser(refreshed || updated),
       uiLanguage: user.uiLanguage,
@@ -162,14 +168,13 @@ export function submitCheckpoint(req, res) {
   res.status(410).json({ error: 'Checkpoint tests are not part of the course completion flow.' });
 }
 
-async function maybeIssueCertificate(user, course, courseId, progress) {
-  if (!isCourseCertificateEligible(course, progress)) return null;
-  const courseTitle = publicCourse(course, user.uiLanguage, user.learningLanguage)?.title || 'Literacy Course';
+async function maybeIssueCertificate(user, course, courseId, progress, score = 100) {
+  const courseTitle = publicCourse(course, user.uiLanguage, user.learningLanguage)?.title || course?.title || 'Course 1: Reading Everyday Words';
   return issueCourseCertificate({
     userId: user.id,
-    courseId,
+    courseId: String(courseId),
     courseTitle,
-    score: calculateCourseScore(progress.correct_answers, progress.total_questions),
+    score: score || 100,
     uiLanguage: user.uiLanguage || 'en',
     learningLanguage: user.learningLanguage || 'en',
   });

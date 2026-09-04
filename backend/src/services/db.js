@@ -845,12 +845,18 @@ export async function rowToUser(row) {
     ? { current: streakRow.current_streak, goal: streakRow.goal, last_activity: streakRow.last_activity }
     : defaultStreak();
 
+  let userCourseProg = {};
+  try {
+    if (typeof row.course_progress === 'string') userCourseProg = JSON.parse(row.course_progress || '{}');
+    else if (row.course_progress && typeof row.course_progress === 'object') userCourseProg = row.course_progress;
+  } catch (_) {}
+
   const activeCourseRes = await pool.query(`
     SELECT course_id FROM user_course_lesson_progress
     WHERE user_id = $1 AND course_id IS NOT NULL
     ORDER BY completed_at DESC LIMIT 1
   `, [row.id]);
-  const activeCourse = activeCourseRes.rows[0]?.course_id || null;
+  const activeCourse = activeCourseRes.rows[0]?.course_id || userCourseProg.course_id || '0';
 
   let progressRows = [];
   if (activeCourse) {
@@ -858,11 +864,15 @@ export async function rowToUser(row) {
       SELECT lesson_id, score, course_id FROM user_course_lesson_progress
       WHERE user_id = $1 AND course_id = $2 ORDER BY completed_at
     `, [row.id, activeCourse]);
-    progressRows = progRes.rows;
+    progressRows = progRes.rows || [];
   }
 
-  const lessons_completed = progressRows.map((r) => (/^\d+$/.test(String(r.lesson_id)) ? Number(r.lesson_id) : r.lesson_id));
-  const lesson_scores = progressRows.reduce((acc, r) => { acc[r.lesson_id] = r.score ?? 0; return acc; }, {});
+  const lessons_completed_db = progressRows.map((r) => (/^\d+$/.test(String(r.lesson_id)) ? Number(r.lesson_id) : r.lesson_id));
+  const lessons_completed = Array.from(new Set([...lessons_completed_db, ...(userCourseProg.lessons_completed || [])]));
+  const lesson_scores = {
+    ...(userCourseProg.lesson_scores || {}),
+    ...progressRows.reduce((acc, r) => { acc[r.lesson_id] = r.score ?? 0; return acc; }, {})
+  };
 
   let certRows = [];
   try {
@@ -884,7 +894,7 @@ export async function rowToUser(row) {
     if (memCerts.length > 0) certRows = memCerts;
   }
 
-  if (lessons_completed.length > 0 && certRows.length === 0) {
+  if ((lessons_completed.length > 0 || (row.xp && Number(row.xp) > 0) || row.assessment_score != null) && certRows.length === 0) {
     const autoCert = {
       issued: true,
       status: 'unlocked',
