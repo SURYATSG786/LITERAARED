@@ -64,8 +64,8 @@ export default function VoicePracticePage() {
   // Screen: 'welcome' | 'practice' | 'completed'
   const [screen, setScreen] = useState('welcome');
 
-  // 3-Level progression: 'alphabet' | 'word' | 'sentence'
-  const [voiceLevel, setVoiceLevel] = useState('alphabet');
+  // 2-Level progression: 'word' | 'sentence'
+  const [voiceLevel, setVoiceLevel] = useState('word');
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Scores & feedback tracking
@@ -80,32 +80,26 @@ export default function VoicePracticePage() {
   // Active items list based on language and level
   const activeItems = useMemo(() => {
     if (isEnglish) {
-      if (voiceLevel === 'alphabet') return VOICE_ALPHABETS;
       if (voiceLevel === 'word') return VOICE_WORDS;
       return VOICE_SENTENCES_EN;
     }
     if (isTamil) {
-      if (voiceLevel === 'alphabet') return TAMIL_VOICE_ALPHABETS;
       if (voiceLevel === 'word') return TAMIL_VOICE_WORDS;
       return TAMIL_VOICE_SENTENCES;
     }
     if (isTelugu) {
-      if (voiceLevel === 'alphabet') return TELUGU_VOICE_ALPHABETS;
       if (voiceLevel === 'word') return TELUGU_VOICE_WORDS;
       return TELUGU_VOICE_SENTENCES;
     }
     if (isMalayalam) {
-      if (voiceLevel === 'alphabet') return MALAYALAM_VOICE_ALPHABETS;
       if (voiceLevel === 'word') return MALAYALAM_VOICE_WORDS;
       return MALAYALAM_VOICE_SENTENCES;
     }
     if (isKannada) {
-      if (voiceLevel === 'alphabet') return KANNADA_VOICE_ALPHABETS;
       if (voiceLevel === 'word') return KANNADA_VOICE_WORDS;
       return KANNADA_VOICE_SENTENCES;
     }
     if (isHindi) {
-      if (voiceLevel === 'alphabet') return HINDI_VOICE_ALPHABETS;
       if (voiceLevel === 'word') return HINDI_VOICE_WORDS;
       return HINDI_VOICE_SENTENCES;
     }
@@ -114,9 +108,7 @@ export default function VoicePracticePage() {
 
   const currentItem = activeItems[currentIndex] || activeItems[0];
   const targetText = isStructured
-    ? voiceLevel === 'alphabet'
-      ? currentItem?.letter || ''
-      : voiceLevel === 'word'
+    ? voiceLevel === 'word'
       ? currentItem?.word || ''
       : currentItem?.text || ''
     : currentItem?.text || '';
@@ -156,7 +148,7 @@ export default function VoicePracticePage() {
       }
       lastEvaluatedRef.current = { text: transcript, itemKey };
 
-      const variants = isStructured && voiceLevel === 'alphabet' ? currentItem.soundVariants : [];
+      const variants = [];
       const res = gradePronunciation(targetText, transcript, variants);
       setGradedResult(res);
 
@@ -166,7 +158,7 @@ export default function VoicePracticePage() {
         // Award reward once per item key
         if (!awardedItemsRef.current.has(itemKey)) {
           awardedItemsRef.current.add(itemKey);
-          const earnedXp = isStructured ? (voiceLevel === 'alphabet' ? 10 : voiceLevel === 'word' ? 15 : 20) : 50;
+          const earnedXp = isStructured ? (voiceLevel === 'word' ? 15 : 25) : 50;
           const earnedGems = isStructured ? 1 : 2;
           setTotalXpEarned((prev) => prev + earnedXp);
           setTotalGemsEarned((prev) => prev + earnedGems);
@@ -209,10 +201,7 @@ export default function VoicePracticePage() {
     if (currentIndex < activeItems.length - 1) {
       setCurrentIndex((i) => i + 1);
     } else if (isStructured) {
-      if (voiceLevel === 'alphabet') {
-        setVoiceLevel('word');
-        setCurrentIndex(0);
-      } else if (voiceLevel === 'word') {
+      if (voiceLevel === 'word') {
         setVoiceLevel('sentence');
         setCurrentIndex(0);
       } else {
@@ -309,11 +298,11 @@ export default function VoicePracticePage() {
                     : isMalayalam
                     ? t('mlVoiceJourneySub', '3-ഘട്ട ഉച്ചാരണ യാത്ര: ലെവൽ 1 അക്ഷരങ്ങൾ (15 സ്വരാക്ഷരങ്ങൾ + 36 വ്യഞ്ജനാക്ഷരങ്ങൾ), ലെവൽ 2 വാക്കുകൾ (10 അടിസ്ഥാന വാക്കുകൾ), ലെവൽ 3 വാക്യങ്ങൾ (10 പരിശീലന വാക്യങ്ങൾ).')
                     : isKannada
-                    ? t('knVoiceJourneySub', '3-ಹಂತದ ಉಚ್ಚಾರಣಾ ಪಯಣ: ಹಂತ 1 ಅಕ್ಷರಗಳು (15 ಸ್ವರಗಳು + 36 ವ್ಯಂಜನಗಳು = 51 ಅಕ್ಷರಗಳು), ಹಂತ 2 ಪದಗಳು (10 ಮೂಲಭೂತ ಪದಗಳು), ಮತ್ತು ಹಂತ 3 ವಾಕ್ಯಗಳು (10 ಅಭ್ಯಾಸ ವಾಕ್ಯಗಳು).')
+                    ? t('knVoiceJourneySub', '2-ಹಂತದ ಉಚ್ಚಾರಣಾ ಪಯಣ: ಹಂತ 1 ಪದಗಳು (10 ಮೂಲಭೂತ ಪದಗಳು), ಮತ್ತು ಹಂತ 2 ವಾಕ್ಯಗಳು (10 ಅಭ್ಯಾಸ ವಾಕ್ಯಗಳು).')
                     : isHindi
-                    ? t('hiVoiceJourneySub', '3-स्तरीय उच्चारण यात्रा: स्तर 1 अक्षर (13 स्वर + 36 व्यंजन = 49 अक्षर), स्तर 2 शब्द (10 बुनियादी शब्द), और स्तर 3 वाक्य (10 अभ्यास वाक्य)।')
+                    ? t('hiVoiceJourneySub', '2-स्तरीय उच्चारण यात्रा: स्तर 1 शब्द (10 बुनियादी शब्द), और स्तर 2 वाक्य (10 अभ्यास वाक्य)।')
                     : isEnglish
-                    ? t('voiceJourneySub', 'Follow the 3-level pronunciation journey: Level 1 Alphabet sounds (A–Z), Level 2 Vocabulary words, and Level 3 Conversational sentences.')
+                    ? t('voiceJourneySub', 'Follow the 2-level pronunciation journey: Level 1 Vocabulary words, and Level 2 Conversational sentences.')
                     : t('voicePracticeSub', 'Practice speaking everyday sentences out loud. Complete all sentences to earn XP, Gems, and improve your speaking confidence.')}
                 </p>
               </div>
@@ -335,7 +324,7 @@ export default function VoicePracticePage() {
                   style={{ background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(224, 242, 254, 0.85) 100%)' }}
                 >
                   <Star className="text-amber-500 mb-1" size={20} />
-                  <span className="text-xs sm:text-sm font-black text-black">{isStructured ? '+10 / +20 XP' : '+50 XP'}</span>
+                  <span className="text-xs sm:text-sm font-black text-black">{isStructured ? '+15 / +25 XP' : '+50 XP'}</span>
                   <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-wider text-black/70 mt-0.5">
                     {t('perStageReward', 'Per Stage')}
                   </span>
@@ -370,7 +359,7 @@ export default function VoicePracticePage() {
                   onClick={() => {
                     practiceSessionId.current = crypto.randomUUID();
                     setScreen('practice');
-                    setVoiceLevel('alphabet');
+                    setVoiceLevel('word');
                     setCurrentIndex(0);
                     setResults({});
                     setGradedResult(null);
@@ -395,13 +384,11 @@ export default function VoicePracticePage() {
           animate={{ opacity: 1, y: 0 }}
           key={`${voiceLevel}_${currentIndex}_${currentLang}`}
         >
-          {/* Top Roadmap / Quick Navigation Tabs (For Structured 3-Levels: English, Tamil, Telugu, Malayalam) */}
+          {/* Top Roadmap / Quick Navigation Tabs (For Structured 2-Levels: Words -> Sentences) */}
           {isStructured && (
             <div className="shrink-0 space-y-1.5 border-b border-black/10 pb-2">
               <div className="flex items-center justify-between text-xs font-black text-black">
                 <span className="inline-flex items-center rounded-full bg-indigo-100 text-indigo-900 px-3 py-0.5 font-black text-[11px] border border-indigo-300 shadow-xs">
-                  {voiceLevel === 'alphabet' &&
-                    t('letterPronunciationHeader', { letter: currentItem?.letter, current: currentIndex + 1, total: activeItems.length, defaultValue: `Letter ${currentItem?.letter} (${currentIndex + 1} of ${activeItems.length}): Letter Pronunciation` })}
                   {voiceLevel === 'word' &&
                     t('wordSoundHeader', { word: currentItem?.word, current: currentIndex + 1, total: activeItems.length, defaultValue: `Word ${currentItem?.word} (${currentIndex + 1} of ${activeItems.length}): Vocabulary Sound` })}
                   {voiceLevel === 'sentence' &&
@@ -418,21 +405,8 @@ export default function VoicePracticePage() {
                 </div>
               </div>
 
-              {/* 3 Level Stepper Tabs (Alphabet -> Words -> Sentences) */}
-              <div className="grid grid-cols-3 gap-2 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => handleLevelChange('alphabet')}
-                  className={`py-2 px-3 rounded-2xl font-black text-xs flex items-center justify-center gap-1.5 transition cursor-pointer border ${
-                    voiceLevel === 'alphabet'
-                      ? 'btn-primary text-black shadow-md border-amber-500/80 scale-101'
-                      : 'bg-white/80 text-black border-slate-300 hover:bg-white'
-                  }`}
-                >
-                  <Headphones size={15} />
-                  <span>{t('voiceLevel1Tab', { count: isEnglish ? 26 : isTamil ? 30 : isHindi ? 49 : 51, defaultValue: `1. Alphabet (${isEnglish ? 26 : isTamil ? 30 : isHindi ? 49 : 51}) 🔤` })}</span>
-                </button>
-
+              {/* 2 Level Stepper Tabs (Words -> Sentences) */}
+              <div className="grid grid-cols-2 gap-2 shrink-0">
                 <button
                   type="button"
                   onClick={() => handleLevelChange('word')}
@@ -443,7 +417,7 @@ export default function VoicePracticePage() {
                   }`}
                 >
                   <Volume2 size={15} />
-                  <span>{t('voiceLevel2Tab', { count: isEnglish ? 26 : 10, defaultValue: `2. Words (${isEnglish ? 26 : 10}) 🗣️` })}</span>
+                  <span>{t('voiceLevel2Tab', { count: isEnglish ? 26 : 10, defaultValue: `1. Words (${isEnglish ? 26 : 10}) 🗣️` })}</span>
                 </button>
 
                 <button
@@ -456,12 +430,12 @@ export default function VoicePracticePage() {
                   }`}
                 >
                   <Languages size={15} />
-                  <span>{t('voiceLevel3Tab', { count: 10, defaultValue: '3. Sentences (10) 💬' })}</span>
+                  <span>{t('voiceLevel3Tab', { count: 10, defaultValue: '2. Sentences (10) 💬' })}</span>
                 </button>
               </div>
 
-              {/* Quick Navigation Carousel for Alphabet & Word levels */}
-              {voiceLevel !== 'sentence' && (
+              {/* Quick Navigation Carousel for Word level */}
+              {voiceLevel === 'word' && (
                 <div className="flex items-center gap-1.5 overflow-x-auto py-1 no-scrollbar scroll-smooth">
                   {activeItems.map((item, idx) => {
                     const isCurrent = currentIndex === idx;
@@ -477,11 +451,11 @@ export default function VoicePracticePage() {
                       btnCls += ' bg-white text-black border-slate-300 hover:bg-slate-100';
                     }
 
-                    const displayLabel = voiceLevel === 'alphabet' ? item.letter : `${item.word || item.text || idx + 1} ${item.emoji || ''}`;
+                    const displayLabel = `${item.word || item.text || idx + 1} ${item.emoji || ''}`;
 
                     return (
                       <button
-                        key={`${item.letter || item.word || item.id || idx}_${idx}`}
+                        key={`${item.word || item.id || idx}_${idx}`}
                         type="button"
                         onClick={() => {
                           setCurrentIndex(idx);
@@ -489,7 +463,7 @@ export default function VoicePracticePage() {
                           resetTranscript();
                         }}
                         className={btnCls}
-                        title={voiceLevel === 'alphabet' ? `Letter ${item.letter} (${item.word} ${item.emoji})` : (item.word || item.text || `Item ${idx + 1}`)}
+                        title={item.word || item.text || `Item ${idx + 1}`}
                       >
                         {isPassed ? (
                           <Star size={13} className="text-emerald-700 fill-emerald-500" />
@@ -524,11 +498,9 @@ export default function VoicePracticePage() {
               <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.14em] text-indigo-900 bg-indigo-100 px-3 py-1 rounded-full border border-indigo-300 self-start shrink-0">
                 <Mic size={12} />
                 <span>
-                  {voiceLevel === 'alphabet'
-                    ? `${t('level1Badge', 'Level 1 • Alphabet Sound')} "${currentItem?.letter || ''}"`
-                    : voiceLevel === 'word'
-                    ? `${t('level2Badge', 'Level 2 • Word Pronunciation')} "${currentItem?.word || ''}"`
-                    : t('level3Badge', 'Level 3 • Sentence Fluency')}
+                  {voiceLevel === 'word'
+                    ? `${t('level1Badge', 'Level 1 • Word Pronunciation')} "${currentItem?.word || ''}"`
+                    : t('level2Badge', 'Level 2 • Sentence Fluency')}
                 </span>
               </div>
 
@@ -570,7 +542,6 @@ export default function VoicePracticePage() {
                     {currentItem?.emoji || '🗣️'}
                   </span>
                   <span className="text-xs sm:text-sm font-black text-slate-700 mt-2 tracking-wider text-center max-w-[90%]">
-                    {isStructured && voiceLevel === 'alphabet' && `${currentItem?.letter || ''} • ${currentItem?.word || ''}`}
                     {isStructured && voiceLevel === 'word' && (
                       <>
                         {currentItem?.word || ''}{' '}
@@ -694,9 +665,7 @@ export default function VoicePracticePage() {
                     {currentIndex < activeItems.length - 1
                       ? t('next', 'Next')
                       : isStructured && voiceLevel !== 'sentence'
-                      ? voiceLevel === 'alphabet'
-                        ? t('goToWordsLevel', 'Next Level: Words 🗣️')
-                        : t('goToSentencesLevel', 'Next Level: Sentences 💬')
+                      ? t('goToSentencesLevel', 'Next Level: Sentences 💬')
                       : t('finishPractice', 'Finish Practice 🎉')}
                   </span>
                   <ArrowRight size={16} />
@@ -745,7 +714,7 @@ export default function VoicePracticePage() {
               type="button"
               onClick={() => {
                 setScreen('welcome');
-                setVoiceLevel('alphabet');
+                setVoiceLevel('word');
                 setCurrentIndex(0);
                 setResults({});
                 setGradedResult(null);
