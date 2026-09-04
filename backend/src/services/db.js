@@ -91,7 +91,7 @@ function createMemoryPool() {
   };
 }
 
-function handleMemoryQuery(sql, params = []) {
+async function handleMemoryQuery(sql, params = []) {
   const upper = String(sql || '').toUpperCase().replace(/\s+/g, ' ');
 
   if (upper.startsWith('BEGIN') || upper.startsWith('COMMIT') || upper.startsWith('ROLLBACK')) {
@@ -127,32 +127,65 @@ function handleMemoryQuery(sql, params = []) {
       league: 'bronze',
     };
     memTables.users.set(user.id, user);
+    try {
+      await supabase.from('users').upsert(user);
+    } catch (_) {}
     return { rowCount: 1, rows: [user] };
   }
 
   if (upper.includes('SELECT * FROM USERS WHERE LOWER(EMAIL) =') || upper.includes('SELECT ID FROM USERS WHERE LOWER(EMAIL) =')) {
     const email = String(params[0] || '').toLowerCase().trim();
     const excludeId = params[1] || null;
-    const match = Array.from(memTables.users.values()).find(
-      (u) => u.email.toLowerCase() === email && (excludeId ? u.id !== excludeId : true)
+    let match = Array.from(memTables.users.values()).find(
+      (u) => (u.email || '').toLowerCase() === email && (excludeId ? u.id !== excludeId : true)
     );
+    if (!match) {
+      try {
+        const { data } = await supabase.from('users').select('*').ilike('email', email).maybeSingle();
+        if (data && (excludeId ? data.id !== excludeId : true)) {
+          match = data;
+          memTables.users.set(data.id, data);
+        }
+      } catch (_) {}
+    }
     return { rowCount: match ? 1 : 0, rows: match ? [match] : [] };
   }
 
   if (upper.includes('SELECT * FROM USERS WHERE ID =')) {
     const id = params[0];
-    const match = memTables.users.get(id);
+    let match = memTables.users.get(id);
+    if (!match) {
+      try {
+        const { data } = await supabase.from('users').select('*').eq('id', id).maybeSingle();
+        if (data) {
+          match = data;
+          memTables.users.set(data.id, data);
+        }
+      } catch (_) {}
+    }
     return { rowCount: match ? 1 : 0, rows: match ? [match] : [] };
   }
 
   if (upper.includes('SELECT * FROM USERS')) {
+    try {
+      const { data } = await supabase.from('users').select('*');
+      if (data && Array.isArray(data)) {
+        data.forEach((u) => memTables.users.set(u.id, u));
+      }
+    } catch (_) {}
     const list = Array.from(memTables.users.values());
     return { rowCount: list.length, rows: list };
   }
 
   if (upper.includes('UPDATE USERS SET')) {
     const id = params[params.length - 1];
-    const existing = memTables.users.get(id);
+    let existing = memTables.users.get(id);
+    if (!existing) {
+      try {
+        const { data } = await supabase.from('users').select('*').eq('id', id).maybeSingle();
+        if (data) existing = data;
+      } catch (_) {}
+    }
     if (existing) {
       if (upper.includes('NAME = $1')) {
         existing.name = params[0];
@@ -183,36 +216,36 @@ function handleMemoryQuery(sql, params = []) {
         existing.updated_at = new Date().toISOString();
       }
       memTables.users.set(id, existing);
+      try {
+        await supabase.from('users').upsert(existing);
+      } catch (_) {}
     }
-    return { rowCount: 1, rows: [] };
+    return { rowCount: 1, rows: existing ? [existing] : [] };
   }
 
   // Streaks
-  if (upper.includes('INSERT INTO USER_STREAKS')) {
-    const item = { user_id: params[0], current_streak: params[1], goal: params[2], last_activity: params[3] };
-    memTables.user_streaks.set(params[0], item);
+  if (upper.includes('INSERT INTO USER_STREAKS') || upper.includes('UPDATE USER_STREAKS')) {
+    const userId = params[0];
+    const item = { user_id: userId, current_streak: Number(params[1] || 0), goal: Number(params[2] || 14), last_activity: params[3] || null };
+    memTables.user_streaks.set(userId, item);
+    try {
+      await supabase.from('user_streaks').upsert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
-  if (upper.includes('UPDATE USER_STREAKS SET CURRENT_STREAK =')) {
-    const matchVal = upper.match(/CURRENT_STREAK\s*=\s*(\d+|\$\d+)/);
-    let streakVal = 7;
-    let userId = params[0];
-    if (matchVal && matchVal[1].startsWith('$')) {
-      streakVal = Number(params[0]);
-      userId = params[1];
-    } else if (matchVal) {
-      streakVal = Number(matchVal[1]);
-      userId = params[0];
-    }
-    const existing = memTables.user_streaks.get(userId) || { user_id: userId, goal: 14, last_activity: null };
-    existing.current_streak = streakVal;
-    memTables.user_streaks.set(userId, existing);
-    return { rowCount: 1, rows: [] };
-  }
-
   if (upper.includes('SELECT CURRENT_STREAK, GOAL, LAST_ACTIVITY FROM USER_STREAKS WHERE USER_ID =')) {
-    const item = memTables.user_streaks.get(params[0]);
+    const userId = params[0];
+    let item = memTables.user_streaks.get(userId);
+    if (!item) {
+      try {
+        const { data } = await supabase.from('user_streaks').select('*').eq('user_id', userId).maybeSingle();
+        if (data) {
+          item = data;
+          memTables.user_streaks.set(userId, item);
+        }
+      } catch (_) {}
+    }
     return { rowCount: item ? 1 : 0, rows: item ? [item] : [] };
   }
 
@@ -229,18 +262,35 @@ function handleMemoryQuery(sql, params = []) {
       completed_at: params[6] || new Date().toISOString(),
     };
     memTables.user_course_lesson_progress.set(key, item);
+    try {
+      await supabase.from('user_course_lesson_progress').upsert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
   if (upper.includes('SELECT COURSE_ID FROM USER_COURSE_LESSON_PROGRESS WHERE USER_ID =')) {
-    const list = Array.from(memTables.user_course_lesson_progress.values()).filter((p) => p.user_id === params[0]);
+    const userId = params[0];
+    try {
+      const { data } = await supabase.from('user_course_lesson_progress').select('*').eq('user_id', userId);
+      if (data && Array.isArray(data)) {
+        data.forEach((p) => memTables.user_course_lesson_progress.set(`${p.user_id}:${p.course_id}:${p.lesson_id}`, p));
+      }
+    } catch (_) {}
+    const list = Array.from(memTables.user_course_lesson_progress.values()).filter((p) => p.user_id === userId);
     list.sort((a, b) => new Date(b.completed_at).getTime() - new Date(a.completed_at).getTime());
     return { rowCount: list.length, rows: list.slice(0, 1) };
   }
 
-  if (upper.includes('SELECT LESSON_ID, SCORE, COURSE_ID FROM USER_COURSE_LESSON_PROGRESS') || upper.includes('SELECT LESSON_ID, SCORE, CORRECT_COUNT, TOTAL_QUESTIONS FROM USER_COURSE_LESSON_PROGRESS')) {
+  if (upper.includes('FROM USER_COURSE_LESSON_PROGRESS')) {
+    const userId = params[0];
+    try {
+      const { data } = await supabase.from('user_course_lesson_progress').select('*').eq('user_id', userId);
+      if (data && Array.isArray(data)) {
+        data.forEach((p) => memTables.user_course_lesson_progress.set(`${p.user_id}:${p.course_id}:${p.lesson_id}`, p));
+      }
+    } catch (_) {}
     const list = Array.from(memTables.user_course_lesson_progress.values()).filter(
-      (p) => p.user_id === params[0] && (params[1] ? p.course_id === params[1] : true)
+      (p) => p.user_id === userId && (params[1] ? p.course_id === params[1] : true)
     );
     return { rowCount: list.length, rows: list };
   }
@@ -250,24 +300,25 @@ function handleMemoryQuery(sql, params = []) {
     const key = `${params[0]}:${params[1]}`;
     const item = { user_id: params[0], course_id: params[1], checkpoint_passed: params[2], checkpoint_score: params[3] };
     memTables.user_course_progress.set(key, item);
+    try {
+      await supabase.from('user_course_progress').upsert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
   if (upper.includes('SELECT CHECKPOINT_PASSED, CHECKPOINT_SCORE, FINAL_ASSESSMENT_PASSED FROM USER_COURSE_PROGRESS')) {
     const key = `${params[0]}:${params[1]}`;
-    const item = memTables.user_course_progress.get(key);
-    return { rowCount: item ? 1 : 0, rows: item ? [item] : [] };
-  }
-
-  // Reward Events
-  if (upper.includes('INSERT INTO USER_REWARD_EVENTS')) {
-    const key = `${params[0]}:${params[1]}`;
-    if (memTables.user_reward_events.has(key)) {
-      return { rowCount: 0, rows: [] };
+    let item = memTables.user_course_progress.get(key);
+    if (!item) {
+      try {
+        const { data } = await supabase.from('user_course_progress').select('*').eq('user_id', params[0]).eq('course_id', params[1]).maybeSingle();
+        if (data) {
+          item = data;
+          memTables.user_course_progress.set(key, item);
+        }
+      } catch (_) {}
     }
-    const item = { user_id: params[0], event_id: params[1], xp: params[2], gems: params[3], created_at: params[4] };
-    memTables.user_reward_events.set(key, item);
-    return { rowCount: 1, rows: [item] };
+    return { rowCount: item ? 1 : 0, rows: item ? [item] : [] };
   }
 
   // Certificates
@@ -284,17 +335,28 @@ function handleMemoryQuery(sql, params = []) {
       learning_language: params[8],
     };
     memTables.certificates.set(item.credential_id, item);
+    try {
+      await supabase.from('certificates').upsert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
-  if (upper.includes('SELECT CREDENTIAL_ID, COURSE_ID, COURSE_TITLE, SCORE, ISSUED_DATE, STATUS') || upper.includes('SELECT CREDENTIAL_ID, COURSE_ID, COURSE_TITLE, SCORE, ISSUED_DATE FROM CERTIFICATES')) {
+  if (upper.includes('FROM CERTIFICATES WHERE USER_ID =')) {
+    const userId = params[0];
+    try {
+      const { data } = await supabase.from('certificates').select('*').eq('user_id', userId);
+      if (data && Array.isArray(data)) {
+        data.forEach((c) => memTables.certificates.set(c.credential_id, c));
+      }
+    } catch (_) {}
     const list = Array.from(memTables.certificates.values()).filter(
-      (c) => c.user_id === params[0] && (params[1] ? c.course_id === params[1] : true)
+      (c) => c.user_id === userId && (params[1] ? c.course_id === params[1] : true)
     );
     list.sort((a, b) => new Date(a.issued_date).getTime() - new Date(b.issued_date).getTime());
     return { rowCount: list.length, rows: list };
   }
 
+  // League Certificates
   if (upper.includes('INSERT INTO LEAGUE_CERTIFICATES')) {
     const item = {
       credential_id: params[0],
@@ -305,10 +367,19 @@ function handleMemoryQuery(sql, params = []) {
       issued_date: params[5],
     };
     memTables.league_certificates.set(item.credential_id, item);
+    try {
+      await supabase.from('league_certificates').upsert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
-  if (upper.includes('SELECT CREDENTIAL_ID, LEAGUE, LEAGUE_TITLE, SCORE, ISSUED_DATE FROM LEAGUE_CERTIFICATES')) {
+  if (upper.includes('FROM LEAGUE_CERTIFICATES')) {
+    try {
+      const { data } = await supabase.from('league_certificates').select('*');
+      if (data && Array.isArray(data)) {
+        data.forEach((c) => memTables.league_certificates.set(c.credential_id, c));
+      }
+    } catch (_) {}
     const list = Array.from(memTables.league_certificates.values()).filter((c) => (params[0] ? c.user_id === params[0] : true));
     list.sort((a, b) => new Date(a.issued_date).getTime() - new Date(b.issued_date).getTime());
     return { rowCount: list.length, rows: list };
@@ -318,32 +389,63 @@ function handleMemoryQuery(sql, params = []) {
   if (upper.includes('INSERT INTO USER_BADGES')) {
     const item = { user_id: params[0], badge_id: params[1], unlocked_at: params[2] };
     memTables.user_badges.push(item);
+    try {
+      await supabase.from('user_badges').upsert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
   if (upper.includes('SELECT BADGE_ID FROM USER_BADGES WHERE USER_ID =')) {
-    const list = memTables.user_badges.filter((b) => b.user_id === params[0]);
+    const userId = params[0];
+    try {
+      const { data } = await supabase.from('user_badges').select('*').eq('user_id', userId);
+      if (data && Array.isArray(data)) {
+        memTables.user_badges = [...memTables.user_badges.filter((b) => b.user_id !== userId), ...data];
+      }
+    } catch (_) {}
+    const list = memTables.user_badges.filter((b) => b.user_id === userId);
     return { rowCount: list.length, rows: list };
   }
 
   // Shop Skins & Custom Preferences
   if (upper.includes('INSERT INTO USER_SKINS')) {
+    const item = { user_id: params[0], skin_id: params[1], unlocked_at: params[2] };
     const existing = memTables.user_skins.find((s) => s.user_id === params[0] && s.skin_id === params[1]);
     if (!existing) {
-      const item = { user_id: params[0], skin_id: params[1], unlocked_at: params[2] };
       memTables.user_skins.push(item);
     }
+    try {
+      await supabase.from('user_skins').upsert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [] };
   }
 
   if (upper.includes('SELECT SKIN_ID FROM USER_SKINS WHERE USER_ID =')) {
-    const list = memTables.user_skins.filter((s) => s.user_id === params[0]);
+    const userId = params[0];
+    try {
+      const { data } = await supabase.from('user_skins').select('*').eq('user_id', userId);
+      if (data && Array.isArray(data)) {
+        memTables.user_skins = [...memTables.user_skins.filter((s) => s.user_id !== userId), ...data];
+      }
+    } catch (_) {}
+    const list = memTables.user_skins.filter((s) => s.user_id === userId);
     return { rowCount: list.length, rows: list };
   }
 
   if (upper.includes('SELECT EQUIPPED_SKIN, STREAK_SAVERS FROM USER_SHOP_CUSTOM WHERE USER_ID =')) {
-    const item = memTables.user_shop_custom.get(params[0]) || { equipped_skin: 'classic', streak_savers: 0 };
-    return { rowCount: 1, rows: [item] };
+    const userId = params[0];
+    let item = memTables.user_shop_custom.get(userId);
+    if (!item) {
+      try {
+        const { data } = await supabase.from('user_shop_custom').select('*').eq('user_id', userId).maybeSingle();
+        if (data) {
+          item = data;
+          memTables.user_shop_custom.set(userId, item);
+        }
+      } catch (_) {}
+    }
+    const finalItem = item || { equipped_skin: 'classic', streak_savers: 0 };
+    return { rowCount: 1, rows: [finalItem] };
   }
 
   if (upper.includes('INSERT INTO USER_SHOP_CUSTOM') || upper.includes('UPDATE USER_SHOP_CUSTOM')) {
@@ -351,20 +453,30 @@ function handleMemoryQuery(sql, params = []) {
     const prev = memTables.user_shop_custom.get(userId) || { equipped_skin: 'classic', streak_savers: 0 };
     const equipped_skin = params[1] !== undefined ? params[1] : prev.equipped_skin;
     const streak_savers = params[2] !== undefined ? params[2] : prev.streak_savers;
-    memTables.user_shop_custom.set(userId, { equipped_skin, streak_savers });
-    return { rowCount: 1, rows: [{ equipped_skin, streak_savers }] };
+    const item = { user_id: userId, equipped_skin, streak_savers };
+    memTables.user_shop_custom.set(userId, item);
+    try {
+      await supabase.from('user_shop_custom').upsert(item);
+    } catch (_) {}
+    return { rowCount: 1, rows: [item] };
   }
 
   // Registrations & Login Events
   if (upper.includes('INSERT INTO REGISTRATIONS')) {
     const item = { id: params[0], user_id: params[1], email: params[2], name: params[3], preferred_language: params[4], education_level: params[5], created_at: params[6] };
     memTables.registrations.set(item.id, item);
+    try {
+      await supabase.from('registrations').insert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
   if (upper.includes('INSERT INTO LOGIN_EVENTS')) {
     const item = { id: params[0], user_id: params[1], email: params[2], success: params[3], ip: params[4], user_agent: params[5], created_at: params[6] };
     memTables.login_events.push(item);
+    try {
+      await supabase.from('login_events').insert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
@@ -384,25 +496,24 @@ function handleMemoryQuery(sql, params = []) {
       updated_at: params[10],
     };
     memTables.user_alphabet_writing_progress.set(item.id, item);
+    try {
+      await supabase.from('user_alphabet_writing_progress').upsert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
-  if (upper.includes('SELECT * FROM USER_ALPHABET_WRITING_PROGRESS WHERE USER_ID = $1 AND LETTER = $2 AND TYPE = $3')) {
-    const item = Array.from(memTables.user_alphabet_writing_progress.values()).find(
-      (r) => r.user_id === params[0] && r.letter === params[1] && r.type === params[2]
-    );
-    return { rowCount: item ? 1 : 0, rows: item ? [item] : [] };
-  }
-
-  if (upper.includes('SELECT LETTER, TYPE FROM USER_ALPHABET_WRITING_PROGRESS WHERE USER_ID = $1 AND COMPLETED = 1')) {
-    const list = Array.from(memTables.user_alphabet_writing_progress.values()).filter(
-      (r) => r.user_id === params[0] && Boolean(r.completed)
-    );
-    return { rowCount: list.length, rows: list };
-  }
-
-  if (upper.includes('SELECT * FROM USER_ALPHABET_WRITING_PROGRESS WHERE USER_ID =')) {
-    const list = Array.from(memTables.user_alphabet_writing_progress.values()).filter((r) => r.user_id === params[0]);
+  if (upper.includes('FROM USER_ALPHABET_WRITING_PROGRESS WHERE USER_ID =')) {
+    const userId = params[0];
+    try {
+      const { data } = await supabase.from('user_alphabet_writing_progress').select('*').eq('user_id', userId);
+      if (data && Array.isArray(data)) {
+        data.forEach((r) => memTables.user_alphabet_writing_progress.set(r.id, r));
+      }
+    } catch (_) {}
+    let list = Array.from(memTables.user_alphabet_writing_progress.values()).filter((r) => r.user_id === userId);
+    if (params[1] && params[2]) {
+      list = list.filter((r) => r.letter === params[1] && r.type === params[2]);
+    }
     return { rowCount: list.length, rows: list };
   }
 
@@ -421,10 +532,19 @@ function handleMemoryQuery(sql, params = []) {
       created_at: params[9],
     };
     memTables.community_posts.unshift(item);
+    try {
+      await supabase.from('community_posts').insert(item);
+    } catch (_) {}
     return { rowCount: 1, rows: [item] };
   }
 
-  if (upper.includes('FROM COMMUNITY_POSTS') && upper.startsWith('SELECT') && !upper.includes('WHERE ID =')) {
+  if (upper.includes('FROM COMMUNITY_POSTS') && upper.startsWith('SELECT')) {
+    try {
+      const { data } = await supabase.from('community_posts').select('*').order('created_at', { ascending: false });
+      if (data && Array.isArray(data)) {
+        memTables.community_posts = data;
+      }
+    } catch (_) {}
     const list = memTables.community_posts.map((p) => {
       const u = memTables.users.get(p.user_id);
       return { ...p, registered_user_name: u ? u.name : p.user_name };
@@ -432,116 +552,15 @@ function handleMemoryQuery(sql, params = []) {
     return { rowCount: list.length, rows: list };
   }
 
-  if (upper.includes('UPDATE COMMUNITY_POSTS SET LIKES = LIKES + 1')) {
-    const id = params[0];
-    const post = memTables.community_posts.find((p) => p.id === id);
-    if (post) {
-      post.likes = (post.likes || 0) + 1;
-      return { rowCount: 1, rows: [{ likes: post.likes }] };
-    }
-    return { rowCount: 0, rows: [] };
-  }
-
-  if (upper.includes('SELECT USER_ID FROM COMMUNITY_POSTS WHERE ID =')) {
-    const post = memTables.community_posts.find((p) => p.id === params[0]);
-    return { rowCount: post ? 1 : 0, rows: post ? [{ user_id: post.user_id }] : [] };
-  }
-
-  if (upper.includes('DELETE FROM COMMUNITY_POSTS WHERE ID =')) {
-    memTables.community_posts = memTables.community_posts.filter((p) => p.id !== params[0]);
-    return { rowCount: 1, rows: [] };
-  }
-
-  // League exams
-  if (upper.includes('SELECT DATA FROM LEAGUE_EXAMS WHERE LEAGUE = $1 AND LANG = $2')) {
-    const key = `${params[0]}_${params[1]}`;
-    const row = memTables.league_exams.get(key);
-    return { rowCount: row ? 1 : 0, rows: row ? [row] : [] };
-  }
-
-  if (upper.includes('INSERT INTO LEAGUE_EXAMS')) {
-    const key = `${params[1]}_${params[2]}`;
-    const item = { id: params[0], league: params[1], lang: params[2], data: params[3] };
-    memTables.league_exams.set(key, item);
-    return { rowCount: 1, rows: [item] };
-  }
-
-  // Admin Reminders
-  if (upper.includes('INSERT INTO ADMIN_REMINDERS')) {
-    const item = {
-      id: params[0],
-      admin_id: params[1],
-      learner_id: params[2],
-      note: params[3],
-      channel: params[4],
-      status: 'sent',
-      created_at: params[5],
-    };
-    memTables.admin_reminders.push(item);
-    return { rowCount: 1, rows: [item] };
-  }
-  if (upper.includes('SELECT * FROM ADMIN_REMINDERS WHERE ID =')) {
-    const item = memTables.admin_reminders.find((r) => r.id === params[0]);
-    return { rowCount: item ? 1 : 0, rows: item ? [item] : [] };
-  }
-  if (upper.includes('SELECT * FROM ADMIN_REMINDERS WHERE LEARNER_ID =')) {
-    const list = memTables.admin_reminders.filter((r) => r.learner_id === params[0]);
-    return { rowCount: list.length, rows: list };
-  }
-
-  // Platform Settings
-  if (upper.includes('INSERT INTO PLATFORM_SETTINGS')) {
-    memTables.platform_settings.set(params[0], params[1]);
-    return { rowCount: 1, rows: [] };
-  }
-  if (upper.includes('FROM PLATFORM_SETTINGS')) {
-    const rows = Array.from(memTables.platform_settings.entries()).map(([key, value]) => ({ key, value }));
-    return { rowCount: rows.length, rows };
-  }
-
-  // Search / Filter Queries
-  if (upper.includes('FROM USERS') && (upper.includes('ILIKE') || upper.includes('LIKE'))) {
-    const term = String(params[0] || '').replace(/%/g, '').toLowerCase();
-    let list = Array.from(memTables.users.values()).filter(
-      (u) => (u.name || '').toLowerCase().includes(term) || (u.email || '').toLowerCase().includes(term)
-    );
-    list = list.map((u) => {
-      const s = memTables.user_streaks.get(u.id);
-      return {
-        ...u,
-        streak_days: s?.current_streak || 0,
-        last_active_at: s?.last_activity || u.created_at,
-        lessons_completed: 0,
-        course_certs_count: 0,
-      };
-    });
-    if (upper.startsWith('SELECT COUNT')) {
-      return { rowCount: 1, rows: [{ total: list.length, count: list.length }] };
-    }
-    return { rowCount: list.length, rows: list };
-  }
-
   // Counts / Status
   if (upper.includes('SELECT COUNT(*) AS COUNT FROM USERS') || upper.includes('SELECT COUNT(*) AS TOTAL FROM USERS')) {
+    try {
+      const { count } = await supabase.from('users').select('*', { count: 'exact', head: true });
+      if (count !== null && count !== undefined) {
+        return { rowCount: 1, rows: [{ count, total: count }] };
+      }
+    } catch (_) {}
     return { rowCount: 1, rows: [{ count: memTables.users.size, total: memTables.users.size }] };
-  }
-  if (upper.includes('SELECT COUNT(*) AS COUNT FROM REGISTRATIONS')) {
-    return { rowCount: 1, rows: [{ count: memTables.registrations.size }] };
-  }
-  if (upper.includes('SELECT COUNT(*) AS COUNT FROM LOGIN_EVENTS')) {
-    return { rowCount: 1, rows: [{ count: memTables.login_events.length }] };
-  }
-  if (upper.includes('SELECT COUNT(*) AS COUNT FROM CERTIFICATES')) {
-    return { rowCount: 1, rows: [{ count: memTables.certificates.size }] };
-  }
-  if (upper.includes('SELECT COUNT(*) AS COUNT FROM LEAGUE_CERTIFICATES')) {
-    return { rowCount: 1, rows: [{ count: memTables.league_certificates.size }] };
-  }
-  if (upper.includes('SELECT COUNT(*) AS COUNT FROM LEAGUE_EXAMS')) {
-    return { rowCount: 1, rows: [{ count: memTables.league_exams.size }] };
-  }
-  if (upper.includes('SELECT ID, TITLE, PATH FROM COURSES')) {
-    return { rowCount: 0, rows: [] };
   }
 
   return { rowCount: 0, rows: [] };
