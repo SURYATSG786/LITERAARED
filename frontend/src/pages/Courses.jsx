@@ -7,6 +7,7 @@ import api from '../api/client';
 import { useAuth } from '../contexts/AuthContext';
 import { ProgressBar } from '../components/ui';
 import { GuideBird } from '../components/RedBird';
+import { getStaticCoursesList } from '../data/staticCourses';
 
 const DEFAULT_TITLES = {
   en: ['Reading Everyday Words', 'Understanding Everyday Sentences', 'Using Information in Daily Life', 'Reading for Understanding'],
@@ -102,42 +103,39 @@ export default function Courses() {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [data, setData] = useState(null);
+  const currentLang = user?.learningLanguage || user?.uiLanguage || i18n.language || 'en';
+  const initialStaticCourses = getStaticCoursesList(currentLang);
+
+  const [data, setData] = useState({ courses: initialStaticCourses });
   const [error, setError] = useState('');
   const [courseScores, setCourseScores] = useState({});
 
-  const currentLang = user?.learningLanguage || user?.uiLanguage || i18n.language || 'en';
-  const langKey = DEFAULT_TITLES[currentLang] ? currentLang : 'en';
-
   useEffect(() => {
     api.recommended()
-      .then(setData)
-      .catch((err) => setError(err.message));
+      .then((res) => {
+        if (res?.courses?.length > 0) {
+          setData(res);
+        }
+      })
+      .catch((err) => {
+        console.warn('Courses background sync note:', err?.message);
+      });
   }, [user?.assessment_score, currentLang]);
 
   useEffect(() => {
-    const courses = data?.courses || [];
+    const courses = data?.courses || initialStaticCourses;
     if (courses.length === 0 || user?.assessment_score == null) return;
     courses.forEach((c) => {
       api.getCourseScores(c.id).then((scores) => {
-        setCourseScores((prev) => ({ ...prev, [c.id]: scores }));
+        if (scores) {
+          setCourseScores((prev) => ({ ...prev, [c.id]: scores }));
+        }
       }).catch(() => {});
     });
   }, [data?.courses, user?.assessment_score]);
 
-  const isLocked = user?.assessment_score == null || Boolean(data?.locked);
-
-  const coursesToRender = isLocked
-    ? (data?.courses && data.courses.length > 0
-        ? data.courses
-        : DEFAULT_PATHS.map((pathKey, idx) => ({
-            id: `course-${langKey}-${pathKey}`,
-            path: pathKey,
-            title: DEFAULT_TITLES[langKey][idx],
-            lesson_count: 1,
-          }))
-      )
-    : (data?.courses || (data?.course ? [data.course] : []));
+  const isLocked = user?.assessment_score == null;
+  const coursesToRender = (data?.courses && data.courses.length > 0) ? data.courses : initialStaticCourses;
 
   return (
     <div className="w-full flex-1 flex flex-col justify-between gap-2.5 sm:gap-3 p-1 sm:p-1.5 pb-2 h-[calc(100vh-105px)] min-h-0">

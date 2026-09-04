@@ -1,0 +1,2942 @@
+{
+  "en": [
+    [
+      {
+        "id": "en_course1_q1",
+        "question": "Which word names a place where students learn?",
+        "options": [
+          "Apple",
+          "River",
+          "School",
+          "Chair"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "en_course1_q2",
+        "question": "Which word names a family member?",
+        "options": [
+          "Market",
+          "Mother",
+          "Road",
+          "Bottle"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "en_course1_q3",
+        "question": "Which word is something you can drink?",
+        "options": [
+          "Water",
+          "Table",
+          "Window",
+          "Pencil"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "en_course1_q4",
+        "question": "Which word names a part of the body?",
+        "options": [
+          "Bus",
+          "House",
+          "Garden",
+          "Hand"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "en_course1_q5",
+        "question": "Which word is an animal?",
+        "options": [
+          "Book",
+          "Door",
+          "Dog",
+          "Lamp"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "en_course1_q6",
+        "question": "Which word names a place to buy things?",
+        "options": [
+          "Cloud",
+          "Market",
+          "Flower",
+          "Shoe"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "en_course1_q7",
+        "question": "Which word is used for reading?",
+        "options": [
+          "Book",
+          "Spoon",
+          "Plate",
+          "Pillow"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "en_course1_q8",
+        "question": "Which word names a vehicle?",
+        "options": [
+          "Tree",
+          "River",
+          "Shirt",
+          "Bus"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "en_course1_q9",
+        "question": "Which word is a fruit?",
+        "options": [
+          "Bag",
+          "Clock",
+          "Banana",
+          "Road"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "en_course1_q10",
+        "question": "Which word means a place where people live?",
+        "options": [
+          "Bottle",
+          "House",
+          "Garden",
+          "Pencil"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "en_course2_q1",
+        "question": "\"Please close the door.\"\nWhat should you do?",
+        "options": [
+          "Open the door",
+          "Sit down",
+          "Run outside",
+          "Close the door"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "en_course2_q2",
+        "question": "\"The bus arrives at 8 o'clock.\"\nWhen does the bus arrive?",
+        "options": [
+          "8 o'clock",
+          "6 o'clock",
+          "10 o'clock",
+          "12 o'clock"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "en_course2_q3",
+        "question": "\"Wash your hands before eating.\"\nWhat should happen first?",
+        "options": [
+          "Eat food",
+          "Wash hands",
+          "Sleep",
+          "Walk"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "en_course2_q4",
+        "question": "\"The library is open today.\"\nWhat is open today?",
+        "options": [
+          "School",
+          "Hospital",
+          "Library",
+          "Market"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "en_course2_q5",
+        "question": "\"Keep the book on the table.\"\nWhere should the book be placed?",
+        "options": [
+          "Under the bed",
+          "In the bag",
+          "Outside",
+          "On the table"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "en_course2_q6",
+        "question": "\"The meeting starts at 3 PM.\"\nWhen does it start?",
+        "options": [
+          "3 PM",
+          "1 PM",
+          "5 PM",
+          "7 PM"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "en_course2_q7",
+        "question": "\"Drink water after exercise.\"\nWhat should you do after exercise?",
+        "options": [
+          "Sleep",
+          "Drink water",
+          "Study",
+          "Cook"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "en_course2_q8",
+        "question": "\"The teacher entered the classroom.\"\nWho entered the classroom?",
+        "options": [
+          "Doctor",
+          "Driver",
+          "Teacher",
+          "Farmer"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "en_course2_q9",
+        "question": "\"The child is reading a book.\"\nWhat is the child doing?",
+        "options": [
+          "Running",
+          "Sleeping",
+          "Eating",
+          "Reading"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "en_course2_q10",
+        "question": "\"Turn off the light before leaving.\"\nWhat should you do before leaving?",
+        "options": [
+          "Turn off the light",
+          "Open the window",
+          "Sit down",
+          "Drink water"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "en_course3_q1",
+        "question": "A bottle costs ₹20. Two bottles cost:",
+        "options": [
+          "₹40",
+          "₹30",
+          "₹50",
+          "₹60"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "en_course3_q2",
+        "question": "A shop opens at 9 AM and closes at 6 PM.\nHow long is it open?",
+        "options": [
+          "6 hours",
+          "8 hours",
+          "10 hours",
+          "9 hours"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "en_course3_q3",
+        "question": "A train leaves at 2 PM and arrives at 5 PM.\nTravel time is:",
+        "options": [
+          "2 hours",
+          "4 hours",
+          "3 hours",
+          "5 hours"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "en_course3_q4",
+        "question": "Which place would you visit to borrow a book?",
+        "options": [
+          "Bakery",
+          "Library",
+          "Pharmacy",
+          "Stadium"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "en_course3_q5",
+        "question": "You have ₹100 and spend ₹35.\nHow much remains?",
+        "options": [
+          "₹65",
+          "₹55",
+          "₹75",
+          "₹45"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "en_course3_q6",
+        "question": "Which sign usually means danger?",
+        "options": [
+          "Welcome sign",
+          "Exit sign",
+          "Information sign",
+          "Warning sign"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "en_course3_q7",
+        "question": "A class starts at 10:00 and ends at 11:30.\nHow long is the class?",
+        "options": [
+          "1 hour",
+          "2 hours",
+          "1 hour 30 minutes",
+          "30 minutes"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "en_course3_q8",
+        "question": "Which document is usually used for identification?",
+        "options": [
+          "Newspaper",
+          "ID card",
+          "Notebook",
+          "Calendar"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "en_course3_q9",
+        "question": "A medicine label says \"Take after food.\"\nWhen should it be taken?",
+        "options": [
+          "After eating",
+          "Before eating",
+          "During sleep",
+          "Before bathing"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "en_course3_q10",
+        "question": "You need to mail a letter.\nWhere should you go?",
+        "options": [
+          "Library",
+          "Cinema",
+          "Park",
+          "Post office"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "en_course4_q1",
+        "question": "Ravi leaves home at 8 AM. He reaches work at 9 AM.\nHow long did his journey take?",
+        "options": [
+          "2 hours",
+          "1 hour",
+          "30 minutes",
+          "3 hours"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "en_course4_q2",
+        "question": "A notice says:\n\"Visitors must sign in before entering.\"\nWhat must visitors do first?",
+        "options": [
+          "Enter immediately",
+          "Call someone",
+          "Sign in",
+          "Wait outside"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "en_course4_q3",
+        "question": "Mina bought three notebooks. Each notebook costs ₹25.\nHow much did she spend?",
+        "options": [
+          "₹50",
+          "₹100",
+          "₹125",
+          "₹75"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "en_course4_q4",
+        "question": "A poster says:\n\"Community Meeting – Saturday – 5 PM\"\nWhen is the meeting?",
+        "options": [
+          "Saturday at 5 PM",
+          "Sunday at 5 PM",
+          "Saturday at 3 PM",
+          "Friday at 5 PM"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "en_course4_q5",
+        "question": "A shop is closed every Monday.\nToday is Monday.\nWhat is true?",
+        "options": [
+          "The shop is open",
+          "The shop is closed",
+          "The shop opens late",
+          "Not enough information"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "en_course4_q6",
+        "question": "A bus has 40 seats. All seats are occupied.\nHow many empty seats are there?",
+        "options": [
+          "10",
+          "20",
+          "0",
+          "40"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "en_course4_q7",
+        "question": "A school trip starts at 7 AM. Students arrive at 6:45 AM.\nThe students arrived:",
+        "options": [
+          "Late",
+          "Exactly on time",
+          "After the trip",
+          "Early"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "en_course4_q8",
+        "question": "A notice says:\n\"Keep this area clean. Use the waste bin.\"\nWhat should people do?",
+        "options": [
+          "Put waste in the bin",
+          "Leave waste on the floor",
+          "Burn waste",
+          "Ignore the notice"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "en_course4_q9",
+        "question": "A family has 2 adults and 3 children.\nHow many people are there in total?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "3"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "en_course4_q10",
+        "question": "A sign says:\n\"Emergency Exit\"\nWhat is its purpose?",
+        "options": [
+          "Show where to buy tickets",
+          "Show where to park",
+          "Help people leave during emergencies",
+          "Show the office"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      }
+    ]
+  ],
+  "ta": [
+    [
+      {
+        "id": "ta_course1_q1",
+        "question": "மாணவர்கள் கற்கும் இடத்தை குறிக்கும் சொல் எது?",
+        "options": [
+          "ஆப்பிள்",
+          "ஆறு",
+          "பள்ளி",
+          "நாற்காலி"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course1_q2",
+        "question": "குடும்ப உறுப்பினரை குறிக்கும் சொல் எது?",
+        "options": [
+          "சந்தை",
+          "அம்மா",
+          "சாலை",
+          "பாட்டில்"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course1_q3",
+        "question": "குடிக்கக்கூடிய ஒன்றை குறிக்கும் சொல் எது?",
+        "options": [
+          "தண்ணீர்",
+          "மேசை",
+          "ஜன்னல்",
+          "பென்சில்"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course1_q4",
+        "question": "உடலின் ஒரு பகுதியை குறிக்கும் சொல் எது?",
+        "options": [
+          "பேருந்து",
+          "வீடு",
+          "தோட்டம்",
+          "கை"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course1_q5",
+        "question": "விலங்கை குறிக்கும் சொல் எது?",
+        "options": [
+          "புத்தகம்",
+          "கதவு",
+          "நாய்",
+          "விளக்கு"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course1_q6",
+        "question": "பொருட்கள் வாங்கும் இடத்தை குறிக்கும் சொல் எது?",
+        "options": [
+          "மேகம்",
+          "சந்தை",
+          "மலர்",
+          "காலணி"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course1_q7",
+        "question": "வாசிப்பதற்குப் பயன்படுத்தப்படும் பொருள் எது?",
+        "options": [
+          "புத்தகம்",
+          "கரண்டி",
+          "தட்டு",
+          "தலையணை"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course1_q8",
+        "question": "வாகனத்தை குறிக்கும் சொல் எது?",
+        "options": [
+          "மரம்",
+          "ஆறு",
+          "சட்டை",
+          "பேருந்து"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course1_q9",
+        "question": "பழத்தை குறிக்கும் சொல் எது?",
+        "options": [
+          "பை",
+          "கடிகாரம்",
+          "வாழைப்பழம்",
+          "சாலை"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course1_q10",
+        "question": "மக்கள் வாழும் இடத்தை குறிக்கும் சொல் எது?",
+        "options": [
+          "பாட்டில்",
+          "வீடு",
+          "தோட்டம்",
+          "பென்சில்"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "ta_course2_q1",
+        "question": "\"தயவுசெய்து கதவை மூடுங்கள்.\"\nநீங்கள் என்ன செய்ய வேண்டும்?",
+        "options": [
+          "கதவைத் திறக்க வேண்டும்",
+          "உட்கார வேண்டும்",
+          "வெளியே ஓட வேண்டும்",
+          "கதவை மூட வேண்டும்"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course2_q2",
+        "question": "\"பேருந்து 8 மணிக்கு வருகிறது.\"\nபேருந்து எப்போது வருகிறது?",
+        "options": [
+          "8 மணி",
+          "6 மணி",
+          "10 மணி",
+          "12 மணி"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course2_q3",
+        "question": "\"சாப்பிடுவதற்கு முன் கைகளை கழுவுங்கள்.\"\nமுதலில் என்ன செய்ய வேண்டும்?",
+        "options": [
+          "சாப்பிட வேண்டும்",
+          "கைகளை கழுவ வேண்டும்",
+          "தூங்க வேண்டும்",
+          "நடக்க வேண்டும்"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course2_q4",
+        "question": "\"நூலகம் இன்று திறந்திருக்கும்.\"\nஇன்று என்ன திறந்திருக்கும்?",
+        "options": [
+          "பள்ளி",
+          "மருத்துவமனை",
+          "நூலகம்",
+          "சந்தை"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course2_q5",
+        "question": "\"புத்தகத்தை மேசையின் மீது வையுங்கள்.\"\nபுத்தகத்தை எங்கே வைக்க வேண்டும்?",
+        "options": [
+          "படுக்கையின் கீழ்",
+          "பையின் உள்ளே",
+          "வெளியே",
+          "மேசையின் மீது"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course2_q6",
+        "question": "\"கூட்டம் மதியம் 3 மணிக்கு தொடங்குகிறது.\"\nகூட்டம் எப்போது தொடங்குகிறது?",
+        "options": [
+          "மதியம் 3 மணி",
+          "மதியம் 1 மணி",
+          "மாலை 5 மணி",
+          "மாலை 7 மணி"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course2_q7",
+        "question": "\"உடற்பயிற்சிக்குப் பிறகு தண்ணீர் குடியுங்கள்.\"\nஉடற்பயிற்சிக்குப் பிறகு என்ன செய்ய வேண்டும்?",
+        "options": [
+          "தூங்க வேண்டும்",
+          "தண்ணீர் குடிக்க வேண்டும்",
+          "படிக்க வேண்டும்",
+          "சமைக்க வேண்டும்"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course2_q8",
+        "question": "\"ஆசிரியர் வகுப்பறைக்குள் நுழைந்தார்.\"\nவகுப்பறைக்குள் நுழைந்தவர் யார்?",
+        "options": [
+          "மருத்துவர்",
+          "ஓட்டுநர்",
+          "ஆசிரியர்",
+          "விவசாயி"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course2_q9",
+        "question": "\"குழந்தை ஒரு புத்தகத்தைப் படிக்கிறது.\"\nகுழந்தை என்ன செய்கிறது?",
+        "options": [
+          "ஓடுகிறது",
+          "தூங்குகிறது",
+          "சாப்பிடுகிறது",
+          "படிக்கிறது"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course2_q10",
+        "question": "\"வெளியே செல்லும் முன் விளக்கை அணைக்கவும்.\"\nவெளியே செல்லும் முன் என்ன செய்ய வேண்டும்?",
+        "options": [
+          "விளக்கை அணைக்க வேண்டும்",
+          "ஜன்னலைத் திறக்க வேண்டும்",
+          "உட்கார வேண்டும்",
+          "தண்ணீர் குடிக்க வேண்டும்"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "ta_course3_q1",
+        "question": "ஒரு பாட்டிலின் விலை ₹20. இரண்டு பாட்டில்களின் விலை எவ்வளவு?",
+        "options": [
+          "₹40",
+          "₹30",
+          "₹50",
+          "₹60"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course3_q2",
+        "question": "ஒரு கடை காலை 9 மணிக்கு திறக்கிறது, மாலை 6 மணிக்கு மூடுகிறது.\nஅது எத்தனை மணி நேரம் திறந்திருக்கும்?",
+        "options": [
+          "6 மணி நேரம்",
+          "8 மணி நேரம்",
+          "10 மணி நேரம்",
+          "9 மணி நேரம்"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course3_q3",
+        "question": "ஒரு ரயில் மதியம் 2 மணிக்கு புறப்பட்டு மாலை 5 மணிக்கு சேர்கிறது.\nபயண நேரம் எவ்வளவு?",
+        "options": [
+          "2 மணி நேரம்",
+          "4 மணி நேரம்",
+          "3 மணி நேரம்",
+          "5 மணி நேரம்"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course3_q4",
+        "question": "புத்தகத்தை கடனாகப் பெற நீங்கள் எந்த இடத்திற்குச் செல்ல வேண்டும்?",
+        "options": [
+          "பேக்கரி",
+          "நூலகம்",
+          "மருந்தகம்",
+          "விளையாட்டு அரங்கம்"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course3_q5",
+        "question": "உங்களிடம் ₹100 உள்ளது. நீங்கள் ₹35 செலவிடுகிறீர்கள்.\nஎவ்வளவு பணம் மீதம் இருக்கும்?",
+        "options": [
+          "₹65",
+          "₹55",
+          "₹75",
+          "₹45"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course3_q6",
+        "question": "பொதுவாக ஆபத்தை குறிக்கும் பலகை எது?",
+        "options": [
+          "வரவேற்பு பலகை",
+          "வெளியேறும் பலகை",
+          "தகவல் பலகை",
+          "எச்சரிக்கை பலகை"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course3_q7",
+        "question": "ஒரு வகுப்பு 10:00 மணிக்கு தொடங்கி 11:30 மணிக்கு முடிகிறது.\nவகுப்பு எவ்வளவு நேரம் நடைபெற்றது?",
+        "options": [
+          "1 மணி",
+          "2 மணி",
+          "1 மணி 30 நிமிடம்",
+          "30 நிமிடம்"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course3_q8",
+        "question": "அடையாளத்தை உறுதிப்படுத்த பொதுவாக பயன்படுத்தப்படும் ஆவணம் எது?",
+        "options": [
+          "செய்தித்தாள்",
+          "அடையாள அட்டை",
+          "குறிப்பேடு",
+          "நாட்காட்டி"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course3_q9",
+        "question": "ஒரு மருந்தின் லேபலில் \"உணவுக்குப் பிறகு எடுத்துக்கொள்ளவும்\" என்று உள்ளது.\nமருந்தை எப்போது எடுத்துக்கொள்ள வேண்டும்?",
+        "options": [
+          "சாப்பிட்ட பிறகு",
+          "சாப்பிடுவதற்கு முன்",
+          "தூங்கும்போது",
+          "குளிப்பதற்கு முன்"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course3_q10",
+        "question": "ஒரு கடிதத்தை அனுப்ப நீங்கள் எங்கு செல்ல வேண்டும்?",
+        "options": [
+          "நூலகம்",
+          "திரையரங்கம்",
+          "பூங்கா",
+          "தபால் நிலையம்"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "ta_course4_q1",
+        "question": "ரவி காலை 8 மணிக்கு வீட்டை விட்டு புறப்படுகிறார். அவர் 9 மணிக்கு வேலைக்கு செல்கிறார்.\nஅவரின் பயண நேரம் எவ்வளவு?",
+        "options": [
+          "2 மணி நேரம்",
+          "1 மணி நேரம்",
+          "30 நிமிடம்",
+          "3 மணி நேரம்"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course4_q2",
+        "question": "ஒரு அறிவிப்பில்:\n\"உள்ளே செல்லும் முன் வருகையாளர்கள் பதிவு செய்ய வேண்டும்.\"\nஎன்று உள்ளது.\nமுதலில் என்ன செய்ய வேண்டும்?",
+        "options": [
+          "உடனே உள்ளே செல்ல வேண்டும்",
+          "யாரையாவது அழைக்க வேண்டும்",
+          "பதிவு செய்ய வேண்டும்",
+          "வெளியே காத்திருக்க வேண்டும்"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course4_q3",
+        "question": "மீனா மூன்று குறிப்பேடுகளை வாங்கினார். ஒவ்வொன்றின் விலை ₹25.\nஅவர் மொத்தம் எவ்வளவு செலவிட்டார்?",
+        "options": [
+          "₹50",
+          "₹100",
+          "₹125",
+          "₹75"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course4_q4",
+        "question": "ஒரு அறிவிப்பில்:\n\"சமூகக் கூட்டம் – சனிக்கிழமை – மாலை 5 மணி\"\nஎன்று உள்ளது.\nகூட்டம் எப்போது நடைபெறும்?",
+        "options": [
+          "சனிக்கிழமை மாலை 5 மணி",
+          "ஞாயிறு மாலை 5 மணி",
+          "சனிக்கிழமை மாலை 3 மணி",
+          "வெள்ளிக்கிழமை மாலை 5 மணி"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course4_q5",
+        "question": "ஒரு கடை ஒவ்வொரு திங்கட்கிழமையும் மூடப்பட்டிருக்கும்.\nஇன்று திங்கட்கிழமை.\nஎது சரி?",
+        "options": [
+          "கடை திறந்திருக்கும்",
+          "கடை மூடப்பட்டிருக்கும்",
+          "கடை தாமதமாக திறக்கும்",
+          "தகவல் போதவில்லை"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course4_q6",
+        "question": "ஒரு பேருந்தில் 40 இருக்கைகள் உள்ளன. எல்லா இருக்கைகளும் நிரம்பியுள்ளன.\nகாலி இருக்கைகள் எத்தனை?",
+        "options": [
+          "10",
+          "20",
+          "0",
+          "40"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course4_q7",
+        "question": "ஒரு பள்ளிச் சுற்றுலா காலை 7 மணிக்கு தொடங்குகிறது. மாணவர்கள் 6:45 மணிக்கு வந்துவிட்டனர்.\nமாணவர்கள்:",
+        "options": [
+          "தாமதமாக வந்தனர்",
+          "சரியான நேரத்தில் வந்தனர்",
+          "சுற்றுலாவிற்குப் பிறகு வந்தனர்",
+          "முன்னதாக வந்தனர்"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course4_q8",
+        "question": "ஒரு அறிவிப்பில்:\n\"இந்த பகுதியை சுத்தமாக வைத்திருங்கள். குப்பைத்தொட்டியைப் பயன்படுத்துங்கள்.\"\nஎன்று உள்ளது.\nமக்கள் என்ன செய்ய வேண்டும்?",
+        "options": [
+          "குப்பையை குப்பைத்தொட்டியில் போட வேண்டும்",
+          "குப்பையை தரையில் போட வேண்டும்",
+          "குப்பையை எரிக்க வேண்டும்",
+          "அறிவிப்பை புறக்கணிக்க வேண்டும்"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course4_q9",
+        "question": "ஒரு குடும்பத்தில் 2 பெரியவர்கள் மற்றும் 3 குழந்தைகள் உள்ளனர்.\nமொத்தம் எத்தனை பேர் உள்ளனர்?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "3"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ta_course4_q10",
+        "question": "ஒரு பலகையில்:\n\"அவசரகால வெளியேறும் வழி\"\nஎன்று உள்ளது.\nஇதன் நோக்கம் என்ன?",
+        "options": [
+          "டிக்கெட் வாங்கும் இடத்தைக் காட்டுவது",
+          "வாகனம் நிறுத்தும் இடத்தைக் காட்டுவது",
+          "அவசரநேரத்தில் வெளியேற உதவுவது",
+          "அலுவலகத்தைக் காட்டுவது"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      }
+    ]
+  ],
+  "te": [
+    [
+      {
+        "id": "te_course1_q1",
+        "question": "విద్యార్థులు నేర్చుకునే స్థలాన్ని సూచించే పదం ఏది?",
+        "options": [
+          "ఆపిల్",
+          "నది",
+          "పాఠశాల",
+          "కుర్చీ"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "te_course1_q2",
+        "question": "కుటుంబ సభ్యుడిని సూచించే పదం ఏది?",
+        "options": [
+          "మార్కెట్",
+          "అమ్మ",
+          "రహదారి",
+          "సీసా"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "te_course1_q3",
+        "question": "తాగడానికి ఉపయోగించే పదార్థాన్ని సూచించే పదం ఏది?",
+        "options": [
+          "నీరు",
+          "బల్ల",
+          "కిటికీ",
+          "పెన్సిల్"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "te_course1_q4",
+        "question": "శరీరంలోని ఒక భాగాన్ని సూచించే పదం ఏది?",
+        "options": [
+          "బస్సు",
+          "ఇల్లు",
+          "తోట",
+          "చెయ్యి"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "te_course1_q5",
+        "question": "జంతువును సూచించే పదం ఏది?",
+        "options": [
+          "పుస్తకం",
+          "తలుపు",
+          "కుక్క",
+          "దీపం"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "te_course1_q6",
+        "question": "వస్తువులు కొనుగోలు చేసే స్థలాన్ని సూచించే పదం ఏది?",
+        "options": [
+          "మేఘం",
+          "మార్కెట్",
+          "పువ్వు",
+          "చెప్పు"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "te_course1_q7",
+        "question": "చదవడానికి ఉపయోగించే వస్తువు ఏది?",
+        "options": [
+          "పుస్తకం",
+          "చెంచా",
+          "తట్టు",
+          "దిండు"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "te_course1_q8",
+        "question": "వాహనాన్ని సూచించే పదం ఏది?",
+        "options": [
+          "చెట్టు",
+          "నది",
+          "చొక్కా",
+          "బస్సు"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "te_course1_q9",
+        "question": "పండును సూచించే పదం ఏది?",
+        "options": [
+          "సంచి",
+          "గడియారం",
+          "అరటిపండు",
+          "రహదారి"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "te_course1_q10",
+        "question": "ప్రజలు నివసించే స్థలాన్ని సూచించే పదం ఏది?",
+        "options": [
+          "సీసా",
+          "ఇల్లు",
+          "తోట",
+          "పెన్సిల్"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "te_course2_q1",
+        "question": "\"దయచేసి తలుపు మూసండి.\"\nమీరు ఏమి చేయాలి?",
+        "options": [
+          "తలుపు తెరవాలి",
+          "కూర్చోవాలి",
+          "బయటకు పరుగెత్తాలి",
+          "తలుపు మూసాలి"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "te_course2_q2",
+        "question": "\"బస్సు 8 గంటలకు వస్తుంది.\"\nబస్సు ఎప్పుడు వస్తుంది?",
+        "options": [
+          "8 గంటలకు",
+          "6 గంటలకు",
+          "10 గంటలకు",
+          "12 గంటలకు"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "te_course2_q3",
+        "question": "\"తినే ముందు చేతులు కడుక్కోండి.\"\nముందుగా ఏమి చేయాలి?",
+        "options": [
+          "తినాలి",
+          "చేతులు కడుక్కోవాలి",
+          "నిద్రపోవాలి",
+          "నడవాలి"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "te_course2_q4",
+        "question": "\"గ్రంథాలయం ఈ రోజు తెరిచి ఉంది.\"\nఈ రోజు ఏమి తెరిచి ఉంది?",
+        "options": [
+          "పాఠశాల",
+          "ఆసుపత్రి",
+          "గ్రంథాలయం",
+          "మార్కెట్"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "te_course2_q5",
+        "question": "\"పుస్తకాన్ని బల్లపై పెట్టండి.\"\nపుస్తకాన్ని ఎక్కడ పెట్టాలి?",
+        "options": [
+          "మంచం కింద",
+          "సంచిలో",
+          "బయట",
+          "బల్లపై"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "te_course2_q6",
+        "question": "\"సమావేశం మధ్యాహ్నం 3 గంటలకు ప్రారంభమవుతుంది.\"\nసమావేశం ఎప్పుడు ప్రారంభమవుతుంది?",
+        "options": [
+          "మధ్యాహ్నం 3 గంటలకు",
+          "మధ్యాహ్నం 1 గంటకు",
+          "సాయంత్రం 5 గంటలకు",
+          "సాయంత్రం 7 గంటలకు"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "te_course2_q7",
+        "question": "\"వ్యాయామం తర్వాత నీరు తాగండి.\"\nవ్యాయామం తర్వాత ఏమి చేయాలి?",
+        "options": [
+          "నిద్రపోవాలి",
+          "నీరు తాగాలి",
+          "చదవాలి",
+          "వంట చేయాలి"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "te_course2_q8",
+        "question": "\"ఉపాధ్యాయుడు తరగతి గదిలోకి ప్రవేశించాడు.\"\nతరగతి గదిలోకి ఎవరు ప్రవేశించారు?",
+        "options": [
+          "వైద్యుడు",
+          "డ్రైవర్",
+          "ఉపాధ్యాయుడు",
+          "రైతు"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "te_course2_q9",
+        "question": "\"పిల్లవాడు ఒక పుస్తకం చదువుతున్నాడు.\"\nపిల్లవాడు ఏమి చేస్తున్నాడు?",
+        "options": [
+          "పరుగెడుతున్నాడు",
+          "నిద్రపోతున్నాడు",
+          "తింటున్నాడు",
+          "చదువుతున్నాడు"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "te_course2_q10",
+        "question": "\"బయటకు వెళ్లే ముందు దీపం ఆపండి.\"\nబయటకు వెళ్లే ముందు ఏమి చేయాలి?",
+        "options": [
+          "దీపం ఆపాలి",
+          "కిటికీ తెరవాలి",
+          "కూర్చోవాలి",
+          "నీరు తాగాలి"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "te_course3_q1",
+        "question": "ఒక సీసా ధర ₹20. రెండు సీసాల ధర ఎంత?",
+        "options": [
+          "₹40",
+          "₹30",
+          "₹50",
+          "₹60"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "te_course3_q2",
+        "question": "ఒక దుకాణం ఉదయం 9 గంటలకు తెరుస్తుంది, సాయంత్రం 6 గంటలకు మూసేస్తుంది.\nఅది ఎన్ని గంటలు తెరిచి ఉంటుంది?",
+        "options": [
+          "6 గంటలు",
+          "8 గంటలు",
+          "10 గంటలు",
+          "9 గంటలు"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "te_course3_q3",
+        "question": "ఒక రైలు మధ్యాహ్నం 2 గంటలకు బయలుదేరి సాయంత్రం 5 గంటలకు చేరుతుంది.\nప్రయాణ సమయం ఎంత?",
+        "options": [
+          "2 గంటలు",
+          "4 గంటలు",
+          "3 గంటలు",
+          "5 గంటలు"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "te_course3_q4",
+        "question": "పుస్తకం అప్పుగా తీసుకోవడానికి మీరు ఎక్కడికి వెళ్తారు?",
+        "options": [
+          "బేకరీ",
+          "గ్రంథాలయం",
+          "ఔషధశాల",
+          "క్రీడా మైదానం"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "te_course3_q5",
+        "question": "మీ దగ్గర ₹100 ఉన్నాయి. మీరు ₹35 ఖర్చు చేశారు.\nఎంత మిగులుతుంది?",
+        "options": [
+          "₹65",
+          "₹55",
+          "₹75",
+          "₹45"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "te_course3_q6",
+        "question": "సాధారణంగా ప్రమాదాన్ని సూచించే బోర్డు ఏది?",
+        "options": [
+          "స్వాగత బోర్డు",
+          "నిష్క్రమణ బోర్డు",
+          "సమాచార బోర్డు",
+          "హెచ్చరిక బోర్డు"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "te_course3_q7",
+        "question": "ఒక తరగతి 10:00 గంటలకు ప్రారంభమై 11:30 గంటలకు ముగుస్తుంది.\nతరగతి ఎంతసేపు జరిగింది?",
+        "options": [
+          "1 గంట",
+          "2 గంటలు",
+          "1 గంట 30 నిమిషాలు",
+          "30 నిమిషాలు"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "te_course3_q8",
+        "question": "గుర్తింపు కోసం సాధారణంగా ఉపయోగించే పత్రం ఏది?",
+        "options": [
+          "వార్తాపత్రిక",
+          "గుర్తింపు కార్డు",
+          "నోటుబుక్",
+          "క్యాలెండర్"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "te_course3_q9",
+        "question": "ఒక ఔషధంపై \"ఆహారం తర్వాత తీసుకోండి\" అని ఉంది.\nదానిని ఎప్పుడు తీసుకోవాలి?",
+        "options": [
+          "తిన్న తర్వాత",
+          "తినే ముందు",
+          "నిద్రపోయే సమయంలో",
+          "స్నానం చేసే ముందు"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "te_course3_q10",
+        "question": "ఒక లేఖ పంపడానికి మీరు ఎక్కడికి వెళ్లాలి?",
+        "options": [
+          "గ్రంథాలయం",
+          "సినిమా హాలు",
+          "పార్క్",
+          "తపాలా కార్యాలయం"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "te_course4_q1",
+        "question": "రవి ఉదయం 8 గంటలకు ఇంటి నుండి బయలుదేరాడు. అతను 9 గంటలకు పనికి చేరుకున్నాడు.\nఅతని ప్రయాణ సమయం ఎంత?",
+        "options": [
+          "2 గంటలు",
+          "1 గంట",
+          "30 నిమిషాలు",
+          "3 గంటలు"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "te_course4_q2",
+        "question": "ఒక ప్రకటనలో:\n\"లోపలికి ప్రవేశించే ముందు సందర్శకులు నమోదు చేసుకోవాలి.\"\nఅని ఉంది.\nముందుగా ఏమి చేయాలి?",
+        "options": [
+          "వెంటనే లోపలికి వెళ్లాలి",
+          "ఎవరినైనా పిలవాలి",
+          "నమోదు చేసుకోవాలి",
+          "బయట వేచి ఉండాలి"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "te_course4_q3",
+        "question": "మీనా మూడు నోటుబుక్లు కొనుగోలు చేసింది. ఒక్కో నోటుబుక్ ధర ₹25.\nఆమె మొత్తం ఎంత ఖర్చు చేసింది?",
+        "options": [
+          "₹50",
+          "₹100",
+          "₹125",
+          "₹75"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "te_course4_q4",
+        "question": "ఒక ప్రకటనలో:\n\"సమాజ సమావేశం – శనివారం – సాయంత్రం 5 గంటలకు\"\nఅని ఉంది.\nసమావేశం ఎప్పుడు జరుగుతుంది?",
+        "options": [
+          "శనివారం సాయంత్రం 5 గంటలకు",
+          "ఆదివారం సాయంత్రం 5 గంటలకు",
+          "శనివారం సాయంత్రం 3 గంటలకు",
+          "శుక్రవారం సాయంత్రం 5 గంటలకు"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "te_course4_q5",
+        "question": "ఒక దుకాణం ప్రతి సోమవారం మూసి ఉంటుంది.\nఈ రోజు సోమవారం.\nసరైనది ఏది?",
+        "options": [
+          "దుకాణం తెరిచి ఉంటుంది",
+          "దుకాణం మూసి ఉంటుంది",
+          "ఆలస్యంగా తెరుస్తుంది",
+          "సమాచారం సరిపోదు"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "te_course4_q6",
+        "question": "ఒక బస్సులో 40 సీట్లు ఉన్నాయి. అన్ని సీట్లు నిండిపోయాయి.\nఖాళీ సీట్లు ఎన్ని?",
+        "options": [
+          "10",
+          "20",
+          "0",
+          "40"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "te_course4_q7",
+        "question": "ఒక పాఠశాల విహారయాత్ర ఉదయం 7 గంటలకు ప్రారంభమవుతుంది. విద్యార్థులు 6:45 గంటలకు వచ్చారు.\nవిద్యార్థులు:",
+        "options": [
+          "ఆలస్యంగా వచ్చారు",
+          "సరిగ్గా సమయానికి వచ్చారు",
+          "విహారయాత్ర తర్వాత వచ్చారు",
+          "ముందుగానే వచ్చారు"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "te_course4_q8",
+        "question": "ఒక ప్రకటనలో:\n\"ఈ ప్రాంతాన్ని శుభ్రంగా ఉంచండి. చెత్త బుట్టను ఉపయోగించండి.\"\nఅని ఉంది.\nప్రజలు ఏమి చేయాలి?",
+        "options": [
+          "చెత్తను చెత్త బుట్టలో వేయాలి",
+          "చెత్తను నేలపై వేయాలి",
+          "చెత్తను కాల్చాలి",
+          "ప్రకటనను పట్టించుకోకూడదు"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "te_course4_q9",
+        "question": "ఒక కుటుంబంలో 2 పెద్దలు మరియు 3 పిల్లలు ఉన్నారు.\nమొత్తం ఎన్ని మంది ఉన్నారు?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "3"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "te_course4_q10",
+        "question": "ఒక బోర్డుపై:\n\"అత్యవసర నిష్క్రమణ మార్గం\"\nఅని ఉంది.\nదాని ప్రయోజనం ఏమిటి?",
+        "options": [
+          "టిక్కెట్లు కొనుగోలు చేసే స్థలాన్ని చూపిస్తుంది",
+          "వాహనాలు నిలిపే స్థలాన్ని చూపిస్తుంది",
+          "అత్యవసర పరిస్థితుల్లో బయటకు వెళ్లేందుకు సహాయపడుతుంది",
+          "కార్యాలయాన్ని చూపిస్తుంది"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      }
+    ]
+  ],
+  "kn": [
+    [
+      {
+        "id": "kn_course1_q1",
+        "question": "ವಿದ್ಯಾರ್ಥಿಗಳು ಕಲಿಯುವ ಸ್ಥಳವನ್ನು ಸೂಚಿಸುವ ಪದ ಯಾವುದು?",
+        "options": [
+          "ಸೇಬು",
+          "ನದಿ",
+          "ಶಾಲೆ",
+          "ಕುರ್ಚಿ"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course1_q2",
+        "question": "ಕುಟುಂಬದ ಸದಸ್ಯರನ್ನು ಸೂಚಿಸುವ ಪದ ಯಾವುದು?",
+        "options": [
+          "ಮಾರುಕಟ್ಟೆ",
+          "ತಾಯಿ",
+          "ರಸ್ತೆ",
+          "ಬಾಟಲಿ"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course1_q3",
+        "question": "ಕುಡಿಯಬಹುದಾದ ವಸ್ತುವನ್ನು ಸೂಚಿಸುವ ಪದ ಯಾವುದು?",
+        "options": [
+          "ನೀರು",
+          "ಮೇಜು",
+          "ಕಿಟಕಿ",
+          "ಪೆನ್ಸಿಲ್"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course1_q4",
+        "question": "ದೇಹದ ಒಂದು ಭಾಗವನ್ನು ಸೂಚಿಸುವ ಪದ ಯಾವುದು?",
+        "options": [
+          "ಬಸ್",
+          "ಮನೆ",
+          "ತೋಟ",
+          "ಕೈ"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course1_q5",
+        "question": "ಪ್ರಾಣಿಯನ್ನು ಸೂಚಿಸುವ ಪದ ಯಾವುದು?",
+        "options": [
+          "ಪುಸ್ತಕ",
+          "ಬಾಗಿಲು",
+          "ನಾಯಿ",
+          "ದೀಪ"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course1_q6",
+        "question": "ವಸ್ತುಗಳನ್ನು ಖರೀದಿಸುವ ಸ್ಥಳವನ್ನು ಸೂಚಿಸುವ ಪದ ಯಾವುದು?",
+        "options": [
+          "ಮೋಡ",
+          "ಮಾರುಕಟ್ಟೆ",
+          "ಹೂವು",
+          "ಚಪ್ಪಲಿ"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course1_q7",
+        "question": "ಓದಲು ಬಳಸುವ ವಸ್ತು ಯಾವುದು?",
+        "options": [
+          "ಪುಸ್ತಕ",
+          "ಚಮಚ",
+          "ತಟ್ಟೆ",
+          "ತಲೆಯಣಿಗೆ"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course1_q8",
+        "question": "ವಾಹನವನ್ನು ಸೂಚಿಸುವ ಪದ ಯಾವುದು?",
+        "options": [
+          "ಮರ",
+          "ನದಿ",
+          "ಅಂಗಿ",
+          "ಬಸ್"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course1_q9",
+        "question": "ಹಣ್ಣನ್ನು ಸೂಚಿಸುವ ಪದ ಯಾವುದು?",
+        "options": [
+          "ಚೀಲ",
+          "ಗಡಿಯಾರ",
+          "ಬಾಳೆಹಣ್ಣು",
+          "ರಸ್ತೆ"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course1_q10",
+        "question": "ಜನರು ವಾಸಿಸುವ ಸ್ಥಳವನ್ನು ಸೂಚಿಸುವ ಪದ ಯಾವುದು?",
+        "options": [
+          "ಬಾಟಲಿ",
+          "ಮನೆ",
+          "ತೋಟ",
+          "ಪೆನ್ಸಿಲ್"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "kn_course2_q1",
+        "question": "\"ದಯವಿಟ್ಟು ಬಾಗಿಲು ಮುಚ್ಚಿ.\"\nನೀವು ಏನು ಮಾಡಬೇಕು?",
+        "options": [
+          "ಬಾಗಿಲು ತೆರೆಯಬೇಕು",
+          "ಕುಳಿತುಕೊಳ್ಳಬೇಕು",
+          "ಹೊರಗೆ ಓಡಬೇಕು",
+          "ಬಾಗಿಲು ಮುಚ್ಚಬೇಕು"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course2_q2",
+        "question": "\"ಬಸ್ 8 ಗಂಟೆಗೆ ಬರುತ್ತದೆ.\"\nಬಸ್ ಯಾವಾಗ ಬರುತ್ತದೆ?",
+        "options": [
+          "8 ಗಂಟೆಗೆ",
+          "6 ಗಂಟೆಗೆ",
+          "10 ಗಂಟೆಗೆ",
+          "12 ಗಂಟೆಗೆ"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course2_q3",
+        "question": "\"ತಿನ್ನುವ ಮೊದಲು ಕೈಗಳನ್ನು ತೊಳೆಯಿರಿ.\"\nಮೊದಲು ಏನು ಮಾಡಬೇಕು?",
+        "options": [
+          "ಊಟ ಮಾಡಬೇಕು",
+          "ಕೈಗಳನ್ನು ತೊಳೆಯಬೇಕು",
+          "ನಿದ್ರಿಸಬೇಕು",
+          "ನಡೆಯಬೇಕು"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course2_q4",
+        "question": "\"ಗ್ರಂಥಾಲಯ ಇಂದು ತೆರೆದಿದೆ.\"\nಇಂದು ಯಾವುದು ತೆರೆದಿದೆ?",
+        "options": [
+          "ಶಾಲೆ",
+          "ಆಸ್ಪತ್ರೆ",
+          "ಗ್ರಂಥಾಲಯ",
+          "ಮಾರುಕಟ್ಟೆ"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course2_q5",
+        "question": "\"ಪುಸ್ತಕವನ್ನು ಮೇಜಿನ ಮೇಲೆ ಇಡಿ.\"\nಪುಸ್ತಕವನ್ನು ಎಲ್ಲಿಡಬೇಕು?",
+        "options": [
+          "ಹಾಸಿಗೆಯ ಕೆಳಗೆ",
+          "ಚೀಲದಲ್ಲಿ",
+          "ಹೊರಗೆ",
+          "ಮೇಜಿನ ಮೇಲೆ"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course2_q6",
+        "question": "\"ಸಭೆ ಮಧ್ಯಾಹ್ನ 3 ಗಂಟೆಗೆ ಆರಂಭವಾಗುತ್ತದೆ.\"\nಸಭೆ ಯಾವಾಗ ಆರಂಭವಾಗುತ್ತದೆ?",
+        "options": [
+          "ಮಧ್ಯಾಹ್ನ 3 ಗಂಟೆಗೆ",
+          "ಮಧ್ಯಾಹ್ನ 1 ಗಂಟೆಗೆ",
+          "ಸಂಜೆ 5 ಗಂಟೆಗೆ",
+          "ಸಂಜೆ 7 ಗಂಟೆಗೆ"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course2_q7",
+        "question": "\"ವ್ಯಾಯಾಮದ ನಂತರ ನೀರು ಕುಡಿಯಿರಿ.\"\nವ್ಯಾಯಾಮದ ನಂತರ ಏನು ಮಾಡಬೇಕು?",
+        "options": [
+          "ನಿದ್ರಿಸಬೇಕು",
+          "ನೀರು ಕುಡಿಯಬೇಕು",
+          "ಓದಬೇಕು",
+          "ಅಡುಗೆ ಮಾಡಬೇಕು"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course2_q8",
+        "question": "\"ಶಿಕ್ಷಕರು ತರಗತಿಗೆ ಪ್ರವೇಶಿಸಿದರು.\"\nತರಗತಿಗೆ ಯಾರು ಪ್ರವೇಶಿಸಿದರು?",
+        "options": [
+          "ವೈದ್ಯರು",
+          "ಚಾಲಕರು",
+          "ಶಿಕ್ಷಕರು",
+          "ರೈತರು"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course2_q9",
+        "question": "\"ಮಗು ಒಂದು ಪುಸ್ತಕವನ್ನು ಓದುತ್ತಿದೆ.\"\nಮಗು ಏನು ಮಾಡುತ್ತಿದೆ?",
+        "options": [
+          "ಓಡುತ್ತಿದೆ",
+          "ನಿದ್ರಿಸುತ್ತಿದೆ",
+          "ತಿನ್ನುತ್ತಿದೆ",
+          "ಓದುತ್ತಿದೆ"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course2_q10",
+        "question": "\"ಹೊರಡುವ ಮೊದಲು ದೀಪವನ್ನು ಆರಿಸಿ.\"\nಹೊರಡುವ ಮೊದಲು ಏನು ಮಾಡಬೇಕು?",
+        "options": [
+          "ದೀಪವನ್ನು ಆರಿಸಬೇಕು",
+          "ಕಿಟಕಿಯನ್ನು ತೆರೆಯಬೇಕು",
+          "ಕುಳಿತುಕೊಳ್ಳಬೇಕು",
+          "ನೀರು ಕುಡಿಯಬೇಕು"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "kn_course3_q1",
+        "question": "ಒಂದು ಬಾಟಲಿಯ ಬೆಲೆ ₹20. ಎರಡು ಬಾಟಲಿಗಳ ಬೆಲೆ ಎಷ್ಟು?",
+        "options": [
+          "₹40",
+          "₹30",
+          "₹50",
+          "₹60"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course3_q2",
+        "question": "ಒಂದು ಅಂಗಡಿ ಬೆಳಿಗ್ಗೆ 9 ಗಂಟೆಗೆ ತೆರೆಯುತ್ತದೆ ಮತ್ತು ಸಂಜೆ 6 ಗಂಟೆಗೆ ಮುಚ್ಚುತ್ತದೆ.\nಅದು ಎಷ್ಟು ಗಂಟೆಗಳ ಕಾಲ ತೆರೆದಿರುತ್ತದೆ?",
+        "options": [
+          "6 ಗಂಟೆಗಳು",
+          "8 ಗಂಟೆಗಳು",
+          "10 ಗಂಟೆಗಳು",
+          "9 ಗಂಟೆಗಳು"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course3_q3",
+        "question": "ಒಂದು ರೈಲು ಮಧ್ಯಾಹ್ನ 2 ಗಂಟೆಗೆ ಹೊರಟು ಸಂಜೆ 5 ಗಂಟೆಗೆ ತಲುಪುತ್ತದೆ.\nಪ್ರಯಾಣದ ಸಮಯ ಎಷ್ಟು?",
+        "options": [
+          "2 ಗಂಟೆಗಳು",
+          "4 ಗಂಟೆಗಳು",
+          "3 ಗಂಟೆಗಳು",
+          "5 ಗಂಟೆಗಳು"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course3_q4",
+        "question": "ಪುಸ್ತಕವನ್ನು ಸಾಲವಾಗಿ ಪಡೆಯಲು ನೀವು ಎಲ್ಲಿಗೆ ಹೋಗಬೇಕು?",
+        "options": [
+          "ಬೇಕರಿ",
+          "ಗ್ರಂಥಾಲಯ",
+          "ಔಷಧ ಅಂಗಡಿ",
+          "ಕ್ರೀಡಾಂಗಣ"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course3_q5",
+        "question": "ನಿಮ್ಮ ಬಳಿ ₹100 ಇದೆ. ನೀವು ₹35 ಖರ್ಚು ಮಾಡುತ್ತೀರಿ.\nಎಷ್ಟು ಹಣ ಉಳಿಯುತ್ತದೆ?",
+        "options": [
+          "₹65",
+          "₹55",
+          "₹75",
+          "₹45"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course3_q6",
+        "question": "ಸಾಮಾನ್ಯವಾಗಿ ಅಪಾಯವನ್ನು ಸೂಚಿಸುವ ಫಲಕ ಯಾವುದು?",
+        "options": [
+          "ಸ್ವಾಗತ ಫಲಕ",
+          "ನಿರ್ಗಮನ ಫಲಕ",
+          "ಮಾಹಿತಿ ಫಲಕ",
+          "ಎಚ್ಚರಿಕೆ ಫಲಕ"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course3_q7",
+        "question": "ಒಂದು ತರಗತಿ 10:00ಕ್ಕೆ ಆರಂಭವಾಗಿ 11:30ಕ್ಕೆ ಮುಗಿಯುತ್ತದೆ.\nತರಗತಿ ಎಷ್ಟು ಸಮಯ ನಡೆಯಿತು?",
+        "options": [
+          "1 ಗಂಟೆ",
+          "2 ಗಂಟೆ",
+          "1 ಗಂಟೆ 30 ನಿಮಿಷ",
+          "30 ನಿಮಿಷ"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course3_q8",
+        "question": "ಗುರುತಿನ ದೃಢೀಕರಣಕ್ಕೆ ಸಾಮಾನ್ಯವಾಗಿ ಬಳಸುವ ದಾಖಲೆ ಯಾವುದು?",
+        "options": [
+          "ಪತ್ರಿಕೆ",
+          "ಗುರುತಿನ ಚೀಟಿ",
+          "ನೋಟ್‌ಬುಕ್",
+          "ಕ್ಯಾಲೆಂಡರ್"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course3_q9",
+        "question": "ಒಂದು ಔಷಧದ ಲೇಬಲ್‌ನಲ್ಲಿ \"ಆಹಾರದ ನಂತರ ತೆಗೆದುಕೊಳ್ಳಿ\" ಎಂದು ಇದೆ.\nಔಷಧವನ್ನು ಯಾವಾಗ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?",
+        "options": [
+          "ಊಟದ ನಂತರ",
+          "ಊಟದ ಮೊದಲು",
+          "ನಿದ್ರೆಯ ಸಮಯದಲ್ಲಿ",
+          "ಸ್ನಾನದ ಮೊದಲು"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course3_q10",
+        "question": "ಒಂದು ಪತ್ರವನ್ನು ಕಳುಹಿಸಲು ನೀವು ಎಲ್ಲಿಗೆ ಹೋಗಬೇಕು?",
+        "options": [
+          "ಗ್ರಂಥಾಲಯ",
+          "ಚಿತ್ರಮಂದಿರ",
+          "ಉದ್ಯಾನವನ",
+          "ಅಂಚೆ ಕಚೇರಿ"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "kn_course4_q1",
+        "question": "ರವಿ ಬೆಳಿಗ್ಗೆ 8 ಗಂಟೆಗೆ ಮನೆಯಿಂದ ಹೊರಡುತ್ತಾನೆ. ಅವನು 9 ಗಂಟೆಗೆ ಕೆಲಸಕ್ಕೆ ತಲುಪುತ್ತಾನೆ.\nಅವನ ಪ್ರಯಾಣದ ಸಮಯ ಎಷ್ಟು?",
+        "options": [
+          "2 ಗಂಟೆ",
+          "1 ಗಂಟೆ",
+          "30 ನಿಮಿಷ",
+          "3 ಗಂಟೆ"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course4_q2",
+        "question": "ಒಂದು ಸೂಚನೆಯಲ್ಲಿ:\n\"ಒಳಗೆ ಪ್ರವೇಶಿಸುವ ಮೊದಲು ಸಂದರ್ಶಕರು ನೋಂದಣಿ ಮಾಡಬೇಕು.\"\nಎಂದು ಇದೆ.\nಮೊದಲು ಏನು ಮಾಡಬೇಕು?",
+        "options": [
+          "ತಕ್ಷಣ ಒಳಗೆ ಹೋಗಬೇಕು",
+          "ಯಾರನ್ನಾದರೂ ಕರೆಯಬೇಕು",
+          "ನೋಂದಣಿ ಮಾಡಬೇಕು",
+          "ಹೊರಗೆ ಕಾಯಬೇಕು"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course4_q3",
+        "question": "ಮೀನಾ ಮೂರು ನೋಟ್‌ಬುಕ್‌ಗಳನ್ನು ಖರೀದಿಸಿದಳು. ಪ್ರತಿಯೊಂದು ನೋಟ್‌ಬುಕ್‌ನ ಬೆಲೆ ₹25.\nಅವಳು ಒಟ್ಟು ಎಷ್ಟು ಖರ್ಚು ಮಾಡಿದಳು?",
+        "options": [
+          "₹50",
+          "₹100",
+          "₹125",
+          "₹75"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course4_q4",
+        "question": "ಒಂದು ಸೂಚನೆಯಲ್ಲಿ:\n\"ಸಮುದಾಯ ಸಭೆ – ಶನಿವಾರ – ಸಂಜೆ 5 ಗಂಟೆ\"\nಎಂದು ಇದೆ.\nಸಭೆ ಯಾವಾಗ ನಡೆಯುತ್ತದೆ?",
+        "options": [
+          "ಶನಿವಾರ ಸಂಜೆ 5 ಗಂಟೆಗೆ",
+          "ಭಾನುವಾರ ಸಂಜೆ 5 ಗಂಟೆಗೆ",
+          "ಶನಿವಾರ ಸಂಜೆ 3 ಗಂಟೆಗೆ",
+          "ಶುಕ್ರವಾರ ಸಂಜೆ 5 ಗಂಟೆಗೆ"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course4_q5",
+        "question": "ಒಂದು ಅಂಗಡಿ ಪ್ರತಿ ಸೋಮವಾರ ಮುಚ್ಚಿರುತ್ತದೆ.\nಇಂದು ಸೋಮವಾರ.\nಯಾವುದು ಸರಿ?",
+        "options": [
+          "ಅಂಗಡಿ ತೆರೆದಿರುತ್ತದೆ",
+          "ಅಂಗಡಿ ಮುಚ್ಚಿರುತ್ತದೆ",
+          "ಅಂಗಡಿ ತಡವಾಗಿ ತೆರೆಯುತ್ತದೆ",
+          "ಸಾಕಷ್ಟು ಮಾಹಿತಿ ಇಲ್ಲ"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course4_q6",
+        "question": "ಒಂದು ಬಸ್ಸಿನಲ್ಲಿ 40 ಆಸನಗಳಿವೆ. ಎಲ್ಲಾ ಆಸನಗಳೂ ತುಂಬಿವೆ.\nಖಾಲಿ ಆಸನಗಳು ಎಷ್ಟು?",
+        "options": [
+          "10",
+          "20",
+          "0",
+          "40"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course4_q7",
+        "question": "ಒಂದು ಶಾಲಾ ಪ್ರವಾಸ ಬೆಳಿಗ್ಗೆ 7 ಗಂಟೆಗೆ ಆರಂಭವಾಗುತ್ತದೆ. ವಿದ್ಯಾರ್ಥಿಗಳು 6:45ಕ್ಕೆ ಬಂದಿದ್ದಾರೆ.\nವಿದ್ಯಾರ್ಥಿಗಳು:",
+        "options": [
+          "ತಡವಾಗಿ ಬಂದಿದ್ದಾರೆ",
+          "ಸರಿಯಾದ ಸಮಯಕ್ಕೆ ಬಂದಿದ್ದಾರೆ",
+          "ಪ್ರವಾಸದ ನಂತರ ಬಂದಿದ್ದಾರೆ",
+          "ಮುಂಚಿತವಾಗಿ ಬಂದಿದ್ದಾರೆ"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course4_q8",
+        "question": "ಒಂದು ಸೂಚನೆಯಲ್ಲಿ:\n\"ಈ ಪ್ರದೇಶವನ್ನು ಸ್ವಚ್ಛವಾಗಿಡಿ. ಕಸದ ಬುಟ್ಟಿಯನ್ನು ಬಳಸಿ.\"\nಎಂದು ಇದೆ.\nಜನರು ಏನು ಮಾಡಬೇಕು?",
+        "options": [
+          "ಕಸವನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಹಾಕಬೇಕು",
+          "ಕಸವನ್ನು ನೆಲದ ಮೇಲೆ ಹಾಕಬೇಕು",
+          "ಕಸವನ್ನು ಸುಡಬೇಕು",
+          "ಸೂಚನೆಯನ್ನು ನಿರ್ಲಕ್ಷಿಸಬೇಕು"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course4_q9",
+        "question": "ಒಂದು ಕುಟುಂಬದಲ್ಲಿ 2 ವಯಸ್ಕರು ಮತ್ತು 3 ಮಕ್ಕಳು ಇದ್ದಾರೆ.\nಒಟ್ಟು ಎಷ್ಟು ಜನರು ಇದ್ದಾರೆ?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "3"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "kn_course4_q10",
+        "question": "ಒಂದು ಫಲಕದಲ್ಲಿ:\n\"ತುರ್ತು ನಿರ್ಗಮನ\"\nಎಂದು ಇದೆ.\nಇದರ ಉದ್ದೇಶ ಏನು?",
+        "options": [
+          "ಟಿಕೆಟ್ ಖರೀದಿಸುವ ಸ್ಥಳವನ್ನು ತೋರಿಸುವುದು",
+          "ವಾಹನ ನಿಲುಗಡೆ ಸ್ಥಳವನ್ನು ತೋರಿಸುವುದು",
+          "ತುರ್ತು ಪರಿಸ್ಥಿತಿಯಲ್ಲಿ ಹೊರಹೋಗಲು ಸಹಾಯ ಮಾಡುವುದು",
+          "ಕಚೇರಿಯನ್ನು ತೋರಿಸುವುದು"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      }
+    ]
+  ],
+  "ml": [
+    [
+      {
+        "id": "ml_course1_q1",
+        "question": "വിദ്യാർത്ഥികൾ പഠിക്കുന്ന സ്ഥലത്തെ സൂചിപ്പിക്കുന്ന വാക്ക് ഏതാണ്?",
+        "options": [
+          "ആപ്പിൾ",
+          "നദി",
+          "സ്കൂൾ",
+          "കസേര"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course1_q2",
+        "question": "കുടുംബാംഗത്തെ സൂചിപ്പിക്കുന്ന വാക്ക് ഏതാണ്?",
+        "options": [
+          "മാർക്കറ്റ്",
+          "അമ്മ",
+          "റോഡ്",
+          "കുപ്പി"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course1_q3",
+        "question": "കുടിക്കാൻ ഉപയോഗിക്കുന്ന വസ്തുവിനെ സൂചിപ്പിക്കുന്ന വാക്ക് ഏതാണ്?",
+        "options": [
+          "വെള്ളം",
+          "മേശ",
+          "ജനൽ",
+          "പെൻസിൽ"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course1_q4",
+        "question": "ശരീരഭാഗത്തെ സൂചിപ്പിക്കുന്ന വാക്ക് ഏതാണ്?",
+        "options": [
+          "ബസ്",
+          "വീട്",
+          "തോട്ടം",
+          "കൈ"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course1_q5",
+        "question": "ഒരു മൃഗത്തെ സൂചിപ്പിക്കുന്ന വാക്ക് ഏതാണ്?",
+        "options": [
+          "പുസ്തകം",
+          "വാതിൽ",
+          "നായ",
+          "വിളക്ക്"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course1_q6",
+        "question": "സാധനങ്ങൾ വാങ്ങുന്ന സ്ഥലത്തെ സൂചിപ്പിക്കുന്ന വാക്ക് ഏതാണ്?",
+        "options": [
+          "മേഘം",
+          "മാർക്കറ്റ്",
+          "പൂവ്",
+          "ചെരുപ്പ്"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course1_q7",
+        "question": "വായിക്കാൻ ഉപയോഗിക്കുന്ന വസ്തു ഏതാണ്?",
+        "options": [
+          "പുസ്തകം",
+          "കരണ്ടി",
+          "തട്ട്",
+          "തലയണ"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course1_q8",
+        "question": "വാഹനത്തെ സൂചിപ്പിക്കുന്ന വാക്ക് ഏതാണ്?",
+        "options": [
+          "മരം",
+          "നദി",
+          "ഷർട്ട്",
+          "ബസ്"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course1_q9",
+        "question": "ഒരു പഴത്തെ സൂചിപ്പിക്കുന്ന വാക്ക് ഏതാണ്?",
+        "options": [
+          "ബാഗ്",
+          "ഘടികാരം",
+          "വാഴപ്പഴം",
+          "റോഡ്"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course1_q10",
+        "question": "ആളുകൾ താമസിക്കുന്ന സ്ഥലത്തെ സൂചിപ്പിക്കുന്ന വാക്ക് ഏതാണ്?",
+        "options": [
+          "കുപ്പി",
+          "വീട്",
+          "തോട്ടം",
+          "പെൻസിൽ"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "ml_course2_q1",
+        "question": "\"ദയവായി വാതിൽ അടയ്ക്കുക.\"\nനിങ്ങൾ എന്ത് ചെയ്യണം?",
+        "options": [
+          "വാതിൽ തുറക്കണം",
+          "ഇരിക്കണം",
+          "പുറത്തേക്ക് ഓടണം",
+          "വാതിൽ അടയ്ക്കണം"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course2_q2",
+        "question": "\"ബസ് 8 മണിക്ക് എത്തും.\"\nബസ് എപ്പോഴാണ് എത്തുന്നത്?",
+        "options": [
+          "8 മണിക്ക്",
+          "6 മണിക്ക്",
+          "10 മണിക്ക്",
+          "12 മണിക്ക്"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course2_q3",
+        "question": "\"ഭക്ഷണം കഴിക്കുന്നതിന് മുമ്പ് കൈ കഴുകുക.\"\nആദ്യം എന്ത് ചെയ്യണം?",
+        "options": [
+          "ഭക്ഷണം കഴിക്കണം",
+          "കൈ കഴുകണം",
+          "ഉറങ്ങണം",
+          "നടക്കണം"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course2_q4",
+        "question": "\"ലൈബ്രറി ഇന്ന് തുറന്നിരിക്കുന്നു.\"\nഇന്ന് എന്താണ് തുറന്നിരിക്കുന്നത്?",
+        "options": [
+          "സ്കൂൾ",
+          "ആശുപത്രി",
+          "ലൈബ്രറി",
+          "മാർക്കറ്റ്"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course2_q5",
+        "question": "\"പുസ്തകം മേശപ്പുറത്ത് വെക്കുക.\"\nപുസ്തകം എവിടെ വെക്കണം?",
+        "options": [
+          "കട്ടിലിന് താഴെ",
+          "ബാഗിൽ",
+          "പുറത്തു",
+          "മേശപ്പുറത്ത്"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course2_q6",
+        "question": "\"യോഗം ഉച്ചയ്ക്ക് 3 മണിക്ക് ആരംഭിക്കും.\"\nയോഗം എപ്പോഴാണ് ആരംഭിക്കുന്നത്?",
+        "options": [
+          "ഉച്ചയ്ക്ക് 3 മണിക്ക്",
+          "ഉച്ചയ്ക്ക് 1 മണിക്ക്",
+          "വൈകിട്ട് 5 മണിക്ക്",
+          "വൈകിട്ട് 7 മണിക്ക്"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course2_q7",
+        "question": "\"വ്യായാമത്തിന് ശേഷം വെള്ളം കുടിക്കുക.\"\nവ്യായാമത്തിന് ശേഷം എന്ത് ചെയ്യണം?",
+        "options": [
+          "ഉറങ്ങണം",
+          "വെള്ളം കുടിക്കണം",
+          "വായിക്കണം",
+          "പാചകം ചെയ്യണം"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course2_q8",
+        "question": "\"അധ്യാപകൻ ക്ലാസ് മുറിയിലേക്ക് പ്രവേശിച്ചു.\"\nആരാണ് ക്ലാസ് മുറിയിലേക്ക് പ്രവേശിച്ചത്?",
+        "options": [
+          "ഡോക്ടർ",
+          "ഡ്രൈവർ",
+          "അധ്യാപകൻ",
+          "കർഷകൻ"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course2_q9",
+        "question": "\"കുട്ടി ഒരു പുസ്തകം വായിക്കുന്നു.\"\nകുട്ടി എന്താണ് ചെയ്യുന്നത്?",
+        "options": [
+          "ഓടുന്നു",
+          "ഉറങ്ങുന്നു",
+          "ഭക്ഷണം കഴിക്കുന്നു",
+          "വായിക്കുന്നു"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course2_q10",
+        "question": "\"പുറത്തേക്ക് പോകുന്നതിന് മുമ്പ് ലൈറ്റ് ഓഫ് ചെയ്യുക.\"\nപുറത്തേക്ക് പോകുന്നതിന് മുമ്പ് എന്ത് ചെയ്യണം?",
+        "options": [
+          "ലൈറ്റ് ഓഫ് ചെയ്യണം",
+          "ജനൽ തുറക്കണം",
+          "ഇരിക്കണം",
+          "വെള്ളം കുടിക്കണം"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "ml_course3_q1",
+        "question": "ഒരു കുപ്പിയുടെ വില ₹20 ആണ്. രണ്ട് കുപ്പികളുടെ വില എത്ര?",
+        "options": [
+          "₹40",
+          "₹30",
+          "₹50",
+          "₹60"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course3_q2",
+        "question": "ഒരു കട രാവിലെ 9 മണിക്ക് തുറക്കുകയും വൈകിട്ട് 6 മണിക്ക് അടക്കുകയും ചെയ്യുന്നു.\nഎത്ര മണിക്കൂർ അത് തുറന്നിരിക്കും?",
+        "options": [
+          "6 മണിക്കൂർ",
+          "8 മണിക്കൂർ",
+          "10 മണിക്കൂർ",
+          "9 മണിക്കൂർ"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course3_q3",
+        "question": "ഒരു ട്രെയിൻ ഉച്ചയ്ക്ക് 2 മണിക്ക് പുറപ്പെട്ടു വൈകിട്ട് 5 മണിക്ക് എത്തുന്നു.\nയാത്രാസമയം എത്ര?",
+        "options": [
+          "2 മണിക്കൂർ",
+          "4 മണിക്കൂർ",
+          "3 മണിക്കൂർ",
+          "5 മണിക്കൂർ"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course3_q4",
+        "question": "ഒരു പുസ്തകം വായനയ്ക്കായി കടം വാങ്ങാൻ നിങ്ങൾ എവിടെ പോകണം?",
+        "options": [
+          "ബേക്കറി",
+          "ലൈബ്രറി",
+          "മെഡിക്കൽ ഷോപ്പ്",
+          "കളിസ്ഥലം"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course3_q5",
+        "question": "നിങ്ങളുടെ കൈവശം ₹100 ഉണ്ട്. നിങ്ങൾ ₹35 ചെലവഴിച്ചു.\nഎത്ര രൂപ ബാക്കി?",
+        "options": [
+          "₹65",
+          "₹55",
+          "₹75",
+          "₹45"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course3_q6",
+        "question": "സാധാരണയായി അപകടസൂചന നൽകുന്ന ബോർഡ് ഏതാണ്?",
+        "options": [
+          "സ്വാഗത ബോർഡ്",
+          "പുറത്തേക്കുള്ള വഴി ബോർഡ്",
+          "വിവര ബോർഡ്",
+          "മുന്നറിയിപ്പ് ബോർഡ്"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course3_q7",
+        "question": "ഒരു ക്ലാസ് 10:00 ന് ആരംഭിച്ച് 11:30 ന് അവസാനിക്കുന്നു.\nക്ലാസ് എത്ര നേരം നീണ്ടു?",
+        "options": [
+          "1 മണിക്കൂർ",
+          "2 മണിക്കൂർ",
+          "1 മണിക്കൂർ 30 മിനിറ്റ്",
+          "30 മിനിറ്റ്"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course3_q8",
+        "question": "തിരിച്ചറിയലിന് സാധാരണയായി ഉപയോഗിക്കുന്ന രേഖ ഏതാണ്?",
+        "options": [
+          "പത്രം",
+          "തിരിച്ചറിയൽ കാർഡ്",
+          "നോട്ട്‌ബുക്ക്",
+          "കലണ്ടർ"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course3_q9",
+        "question": "ഒരു മരുന്നിൽ \"ഭക്ഷണത്തിന് ശേഷം കഴിക്കുക\" എന്ന് എഴുതിയിരിക്കുന്നു.\nമരുന്ന് എപ്പോൾ കഴിക്കണം?",
+        "options": [
+          "ഭക്ഷണത്തിന് ശേഷം",
+          "ഭക്ഷണത്തിന് മുമ്പ്",
+          "ഉറങ്ങുമ്പോൾ",
+          "കുളിക്കുന്നതിന് മുമ്പ്"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course3_q10",
+        "question": "ഒരു കത്ത് അയയ്ക്കാൻ നിങ്ങൾ എവിടെ പോകണം?",
+        "options": [
+          "ലൈബ്രറി",
+          "സിനിമാ തിയേറ്റർ",
+          "പാർക്ക്",
+          "തപാൽ ഓഫീസ്"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "ml_course4_q1",
+        "question": "രവി രാവിലെ 8 മണിക്ക് വീട്ടിൽ നിന്ന് പുറപ്പെട്ടു. അവൻ 9 മണിക്ക് ജോലിസ്ഥലത്ത് എത്തി.\nഅവന്റെ യാത്രാസമയം എത്ര?",
+        "options": [
+          "2 മണിക്കൂർ",
+          "1 മണിക്കൂർ",
+          "30 മിനിറ്റ്",
+          "3 മണിക്കൂർ"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course4_q2",
+        "question": "ഒരു അറിയിപ്പിൽ:\n\"അകത്ത് പ്രവേശിക്കുന്നതിന് മുമ്പ് സന്ദർശകർ രജിസ്റ്റർ ചെയ്യണം.\"\nഎന്ന് എഴുതിയിരിക്കുന്നു.\nആദ്യം എന്ത് ചെയ്യണം?",
+        "options": [
+          "ഉടൻ അകത്ത് കടക്കണം",
+          "ആരെയെങ്കിലും വിളിക്കണം",
+          "രജിസ്റ്റർ ചെയ്യണം",
+          "പുറത്തു കാത്തിരിക്കണം"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course4_q3",
+        "question": "മീന മൂന്ന് നോട്ട്‌ബുക്കുകൾ വാങ്ങി. ഓരോന്നിന്റെയും വില ₹25 ആണ്.\nആകെ എത്ര രൂപ ചെലവായി?",
+        "options": [
+          "₹50",
+          "₹100",
+          "₹125",
+          "₹75"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course4_q4",
+        "question": "ഒരു അറിയിപ്പിൽ:\n\"സമൂഹ യോഗം – ശനി – വൈകിട്ട് 5 മണി\"\nഎന്ന് എഴുതിയിരിക്കുന്നു.\nയോഗം എപ്പോഴാണ്?",
+        "options": [
+          "ശനിയാഴ്ച വൈകിട്ട് 5 മണിക്ക്",
+          "ഞായറാഴ്ച വൈകിട്ട് 5 മണിക്ക്",
+          "ശനിയാഴ്ച വൈകിട്ട് 3 മണിക്ക്",
+          "വെള്ളിയാഴ്ച വൈകിട്ട് 5 മണിക്ക്"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course4_q5",
+        "question": "ഒരു കട എല്ലാ തിങ്കളാഴ്ചയും അടഞ്ഞിരിക്കും.\nഇന്ന് തിങ്കളാഴ്ചയാണ്.\nശരിയായത് ഏത്?",
+        "options": [
+          "കട തുറന്നിരിക്കും",
+          "കട അടഞ്ഞിരിക്കും",
+          "കട വൈകി തുറക്കും",
+          "വിവരങ്ങൾ മതിയല്ല"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course4_q6",
+        "question": "ഒരു ബസിൽ 40 സീറ്റുകളുണ്ട്. എല്ലാ സീറ്റുകളും നിറഞ്ഞിരിക്കുന്നു.\nഒഴിഞ്ഞ സീറ്റുകൾ എത്ര?",
+        "options": [
+          "10",
+          "20",
+          "0",
+          "40"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course4_q7",
+        "question": "ഒരു സ്കൂൾ വിനോദയാത്ര രാവിലെ 7 മണിക്ക് ആരംഭിക്കുന്നു. വിദ്യാർത്ഥികൾ 6:45 ന് എത്തി.\nവിദ്യാർത്ഥികൾ:",
+        "options": [
+          "വൈകി എത്തി",
+          "കൃത്യസമയത്ത് എത്തി",
+          "യാത്ര കഴിഞ്ഞ് എത്തി",
+          "നേരത്തെ എത്തി"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course4_q8",
+        "question": "ഒരു അറിയിപ്പിൽ:\n\"ഈ പ്രദേശം വൃത്തിയായി സൂക്ഷിക്കുക. മാലിന്യപ്പെട്ടി ഉപയോഗിക്കുക.\"\nഎന്ന് എഴുതിയിരിക്കുന്നു.\nആളുകൾ എന്ത് ചെയ്യണം?",
+        "options": [
+          "മാലിന്യം മാലിന്യപ്പെട്ടിയിൽ ഇടണം",
+          "നിലത്ത് എറിയണം",
+          "കത്തിക്കണം",
+          "അറിയിപ്പ് അവഗണിക്കണം"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course4_q9",
+        "question": "ഒരു കുടുംബത്തിൽ 2 മുതിർന്നവരും 3 കുട്ടികളും ഉണ്ട്.\nആകെ എത്ര പേർ?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "3"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "ml_course4_q10",
+        "question": "ഒരു ബോർഡിൽ:\n\"അടിയന്തര പുറപ്പെടൽ വഴി\"\nഎന്ന് എഴുതിയിരിക്കുന്നു.\nഇതിന്റെ ഉദ്ദേശം എന്താണ്?",
+        "options": [
+          "ടിക്കറ്റ് വാങ്ങുന്ന സ്ഥലം കാണിക്കുന്നു",
+          "വാഹന പാർക്കിംഗ് സ്ഥലം കാണിക്കുന്നു",
+          "അടിയന്തര സാഹചര്യത്തിൽ പുറത്തേക്ക് പോകാൻ സഹായിക്കുന്നു",
+          "ഓഫീസ് കാണിക്കുന്നു"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      }
+    ]
+  ],
+  "hi": [
+    [
+      {
+        "id": "hi_course1_q1",
+        "question": "विद्यार्थी जहाँ पढ़ते हैं, उस स्थान को कौन-सा शब्द दर्शाता है?",
+        "options": [
+          "सेब",
+          "नदी",
+          "स्कूल",
+          "कुर्सी"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course1_q2",
+        "question": "परिवार के सदस्य को कौन-सा शब्द दर्शाता है?",
+        "options": [
+          "बाज़ार",
+          "माँ",
+          "सड़क",
+          "बोतल"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course1_q3",
+        "question": "पीने की वस्तु को कौन-सा शब्द दर्शाता है?",
+        "options": [
+          "पानी",
+          "मेज़",
+          "खिड़की",
+          "पेंसिल"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course1_q4",
+        "question": "शरीर के एक भाग को कौन-सा शब्द दर्शाता है?",
+        "options": [
+          "बस",
+          "घर",
+          "बगीचा",
+          "हाथ"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course1_q5",
+        "question": "जानवर को कौन-सा शब्द दर्शाता है?",
+        "options": [
+          "किताब",
+          "दरवाज़ा",
+          "कुत्ता",
+          "दीपक"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course1_q6",
+        "question": "सामान खरीदने की जगह को कौन-सा शब्द दर्शाता है?",
+        "options": [
+          "बादल",
+          "बाज़ार",
+          "फूल",
+          "जूता"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course1_q7",
+        "question": "पढ़ने के लिए उपयोग की जाने वाली वस्तु कौन-सी है?",
+        "options": [
+          "किताब",
+          "चम्मच",
+          "थाली",
+          "तकिया"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course1_q8",
+        "question": "वाहन को कौन-सा शब्द दर्शाता है?",
+        "options": [
+          "पेड़",
+          "नदी",
+          "शर्ट",
+          "बस"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course1_q9",
+        "question": "फल को कौन-सा शब्द दर्शाता है?",
+        "options": [
+          "बैग",
+          "घड़ी",
+          "केला",
+          "सड़क"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course1_q10",
+        "question": "लोग जहाँ रहते हैं, उस स्थान को कौन-सा शब्द दर्शाता है?",
+        "options": [
+          "बोतल",
+          "घर",
+          "बगीचा",
+          "पेंसिल"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "hi_course2_q1",
+        "question": "\"कृपया दरवाज़ा बंद करें।\"\nआपको क्या करना चाहिए?",
+        "options": [
+          "दरवाज़ा खोलना चाहिए",
+          "बैठना चाहिए",
+          "बाहर दौड़ना चाहिए",
+          "दरवाज़ा बंद करना चाहिए"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course2_q2",
+        "question": "\"बस 8 बजे आती है।\"\nबस कब आती है?",
+        "options": [
+          "8 बजे",
+          "6 बजे",
+          "10 बजे",
+          "12 बजे"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course2_q3",
+        "question": "\"खाना खाने से पहले हाथ धोएँ।\"\nसबसे पहले क्या करना चाहिए?",
+        "options": [
+          "खाना खाना चाहिए",
+          "हाथ धोने चाहिए",
+          "सोना चाहिए",
+          "चलना चाहिए"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course2_q4",
+        "question": "\"पुस्तकालय आज खुला है।\"\nआज क्या खुला है?",
+        "options": [
+          "स्कूल",
+          "अस्पताल",
+          "पुस्तकालय",
+          "बाज़ार"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course2_q5",
+        "question": "\"किताब को मेज़ पर रखो।\"\nकिताब कहाँ रखनी चाहिए?",
+        "options": [
+          "बिस्तर के नीचे",
+          "बैग में",
+          "बाहर",
+          "मेज़ पर"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course2_q6",
+        "question": "\"बैठक दोपहर 3 बजे शुरू होती है।\"\nबैठक कब शुरू होती है?",
+        "options": [
+          "दोपहर 3 बजे",
+          "दोपहर 1 बजे",
+          "शाम 5 बजे",
+          "शाम 7 बजे"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course2_q7",
+        "question": "\"व्यायाम के बाद पानी पिएँ।\"\nव्यायाम के बाद क्या करना चाहिए?",
+        "options": [
+          "सोना चाहिए",
+          "पानी पीना चाहिए",
+          "पढ़ना चाहिए",
+          "खाना बनाना चाहिए"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course2_q8",
+        "question": "\"शिक्षक कक्षा में प्रवेश किया।\"\nकक्षा में कौन प्रवेश किया?",
+        "options": [
+          "डॉक्टर",
+          "चालक",
+          "शिक्षक",
+          "किसान"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course2_q9",
+        "question": "\"बच्चा एक किताब पढ़ रहा है।\"\nबच्चा क्या कर रहा है?",
+        "options": [
+          "दौड़ रहा है",
+          "सो रहा है",
+          "खा रहा है",
+          "पढ़ रहा है"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course2_q10",
+        "question": "\"बाहर जाने से पहले बत्ती बंद करें।\"\nबाहर जाने से पहले क्या करना चाहिए?",
+        "options": [
+          "बत्ती बंद करनी चाहिए",
+          "खिड़की खोलनी चाहिए",
+          "बैठना चाहिए",
+          "पानी पीना चाहिए"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "hi_course3_q1",
+        "question": "एक बोतल की कीमत ₹20 है। दो बोतलों की कीमत कितनी होगी?",
+        "options": [
+          "₹40",
+          "₹30",
+          "₹50",
+          "₹60"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course3_q2",
+        "question": "एक दुकान सुबह 9 बजे खुलती है और शाम 6 बजे बंद होती है।\nदुकान कितने घंटे खुली रहती है?",
+        "options": [
+          "6 घंटे",
+          "8 घंटे",
+          "10 घंटे",
+          "9 घंटे"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course3_q3",
+        "question": "एक ट्रेन दोपहर 2 बजे चलती है और शाम 5 बजे पहुँचती है।\nयात्रा का समय कितना है?",
+        "options": [
+          "2 घंटे",
+          "4 घंटे",
+          "3 घंटे",
+          "5 घंटे"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course3_q4",
+        "question": "किताब उधार लेने के लिए आपको कहाँ जाना चाहिए?",
+        "options": [
+          "बेकरी",
+          "पुस्तकालय",
+          "दवा की दुकान",
+          "खेल मैदान"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course3_q5",
+        "question": "आपके पास ₹100 हैं। आप ₹35 खर्च करते हैं।\nकितने रुपये बचेंगे?",
+        "options": [
+          "₹65",
+          "₹55",
+          "₹75",
+          "₹45"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course3_q6",
+        "question": "आमतौर पर खतरे को कौन-सा संकेत दर्शाता है?",
+        "options": [
+          "स्वागत संकेत",
+          "निकास संकेत",
+          "सूचना संकेत",
+          "चेतावनी संकेत"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course3_q7",
+        "question": "एक कक्षा 10:00 बजे शुरू होती है और 11:30 बजे समाप्त होती है।\nकक्षा कितनी देर चली?",
+        "options": [
+          "1 घंटा",
+          "2 घंटे",
+          "1 घंटा 30 मिनट",
+          "30 मिनट"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course3_q8",
+        "question": "पहचान के लिए सामान्यतः कौन-सा दस्तावेज़ उपयोग किया जाता है?",
+        "options": [
+          "समाचार पत्र",
+          "पहचान पत्र",
+          "नोटबुक",
+          "कैलेंडर"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course3_q9",
+        "question": "एक दवा के लेबल पर लिखा है: \"भोजन के बाद लें।\"\nदवा कब लेनी चाहिए?",
+        "options": [
+          "भोजन के बाद",
+          "भोजन से पहले",
+          "सोते समय",
+          "स्नान से पहले"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course3_q10",
+        "question": "एक पत्र भेजने के लिए आपको कहाँ जाना चाहिए?",
+        "options": [
+          "पुस्तकालय",
+          "सिनेमा घर",
+          "पार्क",
+          "डाकघर"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      }
+    ],
+    [
+      {
+        "id": "hi_course4_q1",
+        "question": "रवि सुबह 8 बजे घर से निकलता है। वह 9 बजे काम पर पहुँचता है।\nउसकी यात्रा में कितना समय लगा?",
+        "options": [
+          "2 घंटे",
+          "1 घंटा",
+          "30 मिनट",
+          "3 घंटे"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course4_q2",
+        "question": "एक सूचना में लिखा है:\n\"अंदर प्रवेश करने से पहले आगंतुकों को पंजीकरण करना होगा।\"\nसबसे पहले क्या करना चाहिए?",
+        "options": [
+          "तुरंत अंदर जाना चाहिए",
+          "किसी को बुलाना चाहिए",
+          "पंजीकरण करना चाहिए",
+          "बाहर प्रतीक्षा करनी चाहिए"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course4_q3",
+        "question": "मीना ने तीन नोटबुक खरीदीं। प्रत्येक नोटबुक की कीमत ₹25 है।\nउसने कुल कितना खर्च किया?",
+        "options": [
+          "₹50",
+          "₹100",
+          "₹125",
+          "₹75"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course4_q4",
+        "question": "एक सूचना में लिखा है:\n\"सामुदायिक बैठक – शनिवार – शाम 5 बजे\"\nबैठक कब है?",
+        "options": [
+          "शनिवार शाम 5 बजे",
+          "रविवार शाम 5 बजे",
+          "शनिवार शाम 3 बजे",
+          "शुक्रवार शाम 5 बजे"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course4_q5",
+        "question": "एक दुकान हर सोमवार बंद रहती है।\nआज सोमवार है।\nसही कथन कौन-सा है?",
+        "options": [
+          "दुकान खुली है",
+          "दुकान बंद है",
+          "दुकान देर से खुलेगी",
+          "पर्याप्त जानकारी नहीं है"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course4_q6",
+        "question": "एक बस में 40 सीटें हैं। सभी सीटें भरी हुई हैं।\nखाली सीटें कितनी हैं?",
+        "options": [
+          "10",
+          "20",
+          "0",
+          "40"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course4_q7",
+        "question": "एक स्कूल यात्रा सुबह 7 बजे शुरू होती है। विद्यार्थी 6:45 बजे पहुँच गए।\nविद्यार्थी:",
+        "options": [
+          "देर से पहुँचे",
+          "ठीक समय पर पहुँचे",
+          "यात्रा के बाद पहुँचे",
+          "समय से पहले पहुँचे"
+        ],
+        "correct_index": 3,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course4_q8",
+        "question": "एक सूचना में लिखा है:\n\"इस क्षेत्र को साफ रखें। कूड़ेदान का उपयोग करें।\"\nलोगों को क्या करना चाहिए?",
+        "options": [
+          "कचरा कूड़ेदान में डालना चाहिए",
+          "कचरा ज़मीन पर फेंकना चाहिए",
+          "कचरा जलाना चाहिए",
+          "सूचना को अनदेखा करना चाहिए"
+        ],
+        "correct_index": 0,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course4_q9",
+        "question": "एक परिवार में 2 वयस्क और 3 बच्चे हैं।\nकुल कितने लोग हैं?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "3"
+        ],
+        "correct_index": 1,
+        "explanation": ""
+      },
+      {
+        "id": "hi_course4_q10",
+        "question": "एक बोर्ड पर लिखा है:\n\"आपातकालीन निकास\"\nइसका उद्देश्य क्या है?",
+        "options": [
+          "टिकट खरीदने का स्थान दिखाना",
+          "वाहन पार्किंग का स्थान दिखाना",
+          "आपातकाल में बाहर निकलने में सहायता करना",
+          "कार्यालय दिखाना"
+        ],
+        "correct_index": 2,
+        "explanation": ""
+      }
+    ]
+  ]
+}

@@ -12,15 +12,19 @@ import { QuestionImage } from '../components/QuestionImage';
 import { SpeakButton } from '../components/SpeakButton';
 import { VoicePractice } from '../components/VoicePractice';
 import { speakText } from '../audio';
+import { getStaticCourseById } from '../data/staticCourses';
 
 export default function CoursePlayer() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
-  const { refreshUser } = useAuth();
+  const { user, refreshUser } = useAuth();
   const navigate = useNavigate();
 
-  const [course, setCourse] = useState(null);
-  const [progress, setProgress] = useState(null);
+  const currentLang = user?.learningLanguage || user?.uiLanguage || i18n.language || 'en';
+  const initialCourse = getStaticCourseById(id, currentLang);
+
+  const [course, setCourse] = useState(initialCourse);
+  const [progress, setProgress] = useState(user?.course_progress || { lessons_completed: [], completion_percent: 0 });
   const [lessonIndex, setLessonIndex] = useState(0);
   const [qIndex, setQIndex] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -32,21 +36,12 @@ export default function CoursePlayer() {
   useEffect(() => {
     api.getCourse(id)
       .then((res) => {
-        setCourse(res.course);
-        setProgress(res.progress);
-        const completed = res.progress?.lessons_completed || [];
-        let start = 0;
-        for (let i = 0; i < (res.course?.lessons?.length || 0); i += 1) {
-          if (!completed.includes(i)) {
-            start = i;
-            break;
-          }
-          start = Math.min(i, (res.course?.lessons?.length || 1) - 1);
-        }
-        if (completed.length >= (res.course?.lessons?.length || 0)) start = Math.max(0, (res.course?.lessons?.length || 1) - 1);
-        setLessonIndex(start);
+        if (res?.course) setCourse(res.course);
+        if (res?.progress) setProgress(res.progress);
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => {
+        console.warn('CoursePlayer background sync note:', err?.message);
+      });
   }, [id]);
 
   const [completionData, setCompletionData] = useState(null);
