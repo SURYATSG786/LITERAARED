@@ -33,7 +33,11 @@ body {
   font-family: var(--font-body);
   color: #000000;
   background-color: #f5fffa;
-  background: #f5fffa;
+  background-image: url('/assets/app_background.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
 

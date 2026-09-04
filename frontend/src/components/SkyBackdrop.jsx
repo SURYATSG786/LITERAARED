@@ -1,21 +1,18 @@
-import { useLocation } from 'react-router-dom';
-
-/** Shows the illustrated backdrop on public entry pages and the tint after sign-in. */
+/** Shows the illustrated background across the entire application */
 export default function SkyBackdrop() {
-  const { pathname } = useLocation();
-  const isAuthPage = ['/', '/login', '/register', '/mentor-login'].includes(pathname);
-
   return (
     <div
       className="fixed inset-0 -z-10 pointer-events-none"
       style={{
         backgroundColor: '#f5fffa',
-        backgroundImage: isAuthPage ? "url('/assets/auth_background.png')" : 'none',
+        backgroundImage: "url('/assets/app_background.png')",
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
       }}
       aria-hidden="true"
     />
   );
 }
+
