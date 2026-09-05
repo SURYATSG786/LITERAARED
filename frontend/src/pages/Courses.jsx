@@ -283,7 +283,7 @@ export default function Courses() {
                         type="button"
                         onClick={() => navigate(`/course/${course.id}`)}
                       >
-                        <span>{completedLessons >= totalLessons && completedLessons > 0 ? t('reviewCourse', 'Review Course 🔁') : t('startCourse', 'Start Course')}</span>
+                        <span>{completedLessons >= totalLessons && completedLessons > 0 ? (t('reviewCourse') || 'Review Course 🔁') : t('startCourse')}</span>
                       </button>
 
                       {completedLessons >= totalLessons && completedLessons > 0 && (
@@ -292,7 +292,7 @@ export default function Courses() {
                           type="button"
                           onClick={() => navigate('/certificate')}
                         >
-                          <span>🎓 Certificate</span>
+                          <span>🎓 {t('certificate')}</span>
                         </button>
                       )}
                     </div>
