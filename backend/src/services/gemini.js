@@ -150,11 +150,15 @@ Progress JSON: ${JSON.stringify({
   preferred_language: lang,
 })}`;
 
-    const result = await model.generateContent(prompt);
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('AI Coach timeout')), 2500)
+    );
+
+    const result = await Promise.race([model.generateContent(prompt), timeoutPromise]);
     const message = result.response.text().trim().slice(0, 400);
     return { message: message || fallback, source: 'gemini' };
   } catch (err) {
-    console.warn('Coach advice failed:', err.message);
+    console.warn('Coach advice fallback used:', err.message);
     return { message: fallback, source: 'static', reason: err.message };
   }
 }

@@ -76,13 +76,20 @@ export default function Dashboard() {
   }, [user?.name, lessonsDone, t]);
 
   async function setGoal(goal) {
-    setBusy(true);
+    if (!user) return;
+    const prevStreak = user.streak;
+    
+    // Instantaneous UI update & celebration (0ms perceived latency)
+    refreshUser({ ...user, streak: { ...(user.streak || {}), goal } });
+    confetti({ particleCount: 40, spread: 50, origin: { y: 0.7 } });
+    
+    // Sync to backend asynchronously
     try {
       const { user: next } = await api.updateMe({ streak_goal: goal });
-      refreshUser(next);
-      confetti({ particleCount: 40, spread: 50, origin: { y: 0.7 } });
-    } finally {
-      setBusy(false);
+      if (next) refreshUser(next);
+    } catch (err) {
+      console.warn('Failed to sync streak goal, rolling back:', err);
+      refreshUser({ ...user, streak: prevStreak });
     }
   }
 

@@ -5,6 +5,7 @@ import { VoiceGuideListener } from './components/VoiceGuideListener';
 import SkyBackdrop from './components/SkyBackdrop';
 import Landing from './pages/Landing';
 import Welcome from './pages/Welcome';
+import Prologue from './pages/Prologue';
 import Register from './pages/Register';
 import MentorLogin from './pages/MentorLogin';
 import AdminPortal from './pages/AdminPortal';
@@ -33,7 +34,9 @@ export default function App() {
         <BrowserRouter>
           <SkyBackdrop />
           <Routes>
-            <Route path="/" element={<Welcome />} />
+            <Route path="/" element={<Prologue />} />
+            <Route path="/welcome" element={<Welcome />} />
+            <Route path="/language" element={<Welcome />} />
             <Route path="/login" element={<Landing />} />
             <Route path="/mentor-login" element={<MentorLogin />} />
             <Route path="/register" element={<Register />} />

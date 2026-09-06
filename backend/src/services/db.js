@@ -59,8 +59,8 @@ export function getPool() {
       connectionString: DATABASE_URL,
       ssl: isLocalhost ? false : { rejectUnauthorized: false },
       max: 10,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 15000,
+      idleTimeoutMillis: 10000,
+      connectionTimeoutMillis: 2500,
     });
 
     poolInstance.on('error', (err) => {
