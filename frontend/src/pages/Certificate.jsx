@@ -74,9 +74,6 @@ export default function Certificate() {
     : "en";
   const labels = CERT_LABELS[lang] || CERT_LABELS.en;
 
-  // Screen state: 'welcome' | 'directory'
-  const [screen, setScreen] = useState("welcome");
-
   // Fetch latest user profile and clear any legacy client-side cached certificates
   useEffect(() => {
     try {
@@ -376,159 +373,24 @@ export default function Certificate() {
 
   return (
     <div className="w-full flex-1 flex flex-col justify-between gap-2 p-1 sm:p-1.5 pb-2 h-[calc(100vh-110px)] min-h-0">
-      {/* ── 1. INITIAL LANDING / WELCOME SCREEN (Exact Same Height & Proportion as Voice Practice) */}
-      {screen === "welcome" && (
-        <>
-          {/* Top Banner Guide */}
-          <div className="flex items-center justify-end shrink-0">
-            <GuideBird
-              message={labels.landingSubtitle}
-              mood="cheer"
-              size={42}
-            />
-          </div>
+      <motion.div
+        className="space-y-4"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Top Header */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <PageTitle title={labels.title} subtitle={labels.subtitle || labels.lockedMsg} />
 
-          <motion.div
-            className="w-full rounded-3xl p-5 sm:p-8 lg:p-10 shadow-2xl border-2 border-indigo-300/40 flex-1 flex flex-col justify-center h-full min-h-0 relative overflow-hidden"
-            style={{
-              boxShadow:
-                "0 24px 48px -10px rgba(99, 102, 241, 0.18), 0 12px 28px -6px rgba(16, 185, 129, 0.16)",
-            }}
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-            <video
-              className="absolute inset-0 z-0 h-full w-full object-cover"
-              src="/assets/certificate_landing.mp4?v=1"
-              autoPlay
-              loop
-              playsInline
-              preload="auto"
-              aria-hidden="true"
-            />
+          <GuideBird
+            message={activeCert?.isUnlocked ? labels.victorySpeech : labels.lockedMsg}
+            mood={activeCert?.isUnlocked ? "cheer" : "think"}
+            size={46}
+          />
+        </div>
 
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-end h-full max-w-6xl mx-auto w-full">
-              {/* Right Column: Hero Content & Action */}
-              <div className="w-full md:w-[54%] lg:w-[50%] md:ml-auto space-y-3.5 sm:space-y-4.5 text-center md:text-left">
-                <div className="space-y-2">
-                  <h2 className="display text-2xl sm:text-3xl lg:text-4xl font-black text-black leading-tight">
-                    {labels.landingTitle}
-                  </h2>
-                  <p className="text-xs sm:text-sm font-bold text-black/85 leading-relaxed max-w-md">
-                    {labels.landingSubtitle}
-                  </p>
-                </div>
-
-                {/* Language selection info pill */}
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
-                  <span className="text-xs sm:text-sm font-black text-black uppercase tracking-wider">
-                    {labels.selectedLang}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/90 text-black font-black text-xs sm:text-sm border-2 border-indigo-400/80 shadow-xs backdrop-blur-sm">
-                    {lang.toUpperCase()}
-                  </span>
-                </div>
-
-                {/* Rewards / Feature Showcase Cards */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  <div
-                    className="rounded-2xl p-2.5 sm:p-3 border-2 border-amber-300/80 flex flex-col items-center text-center shadow-sm backdrop-blur-md"
-                    style={{
-                      background:
-                        "linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(254, 243, 199, 0.85) 100%)",
-                    }}
-                  >
-                    <BookOpen className="text-amber-600 mb-1" size={20} />
-                    <span className="text-xs sm:text-sm font-black text-black">
-                      {labels.landingCoursesChip}
-                    </span>
-                    <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-wider text-black/70 mt-0.5">
-                      {labels.landingCoursesSub}
-                    </span>
-                  </div>
-
-                  <div
-                    className="rounded-2xl p-2.5 sm:p-3 border-2 border-emerald-300/80 flex flex-col items-center text-center shadow-sm backdrop-blur-md"
-                    style={{
-                      background:
-                        "linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(236, 253, 245, 0.85) 100%)",
-                    }}
-                  >
-                    <Trophy className="text-amber-600 mb-1" size={20} />
-                    <span className="text-xs sm:text-sm font-black text-black">
-                      {labels.landingLeagueChip}
-                    </span>
-                    <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-wider text-black/70 mt-0.5">
-                      {labels.landingLeagueSub}
-                    </span>
-                  </div>
-
-                  <div
-                    className="rounded-2xl p-2.5 sm:p-3 border-2 border-indigo-300/80 flex flex-col items-center text-center shadow-sm backdrop-blur-md"
-                    style={{
-                      background:
-                        "linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(238, 242, 255, 0.85) 100%)",
-                    }}
-                  >
-                    <Award className="text-amber-600 mb-1" size={20} />
-                    <span className="text-xs sm:text-sm font-black text-black">
-                      {labels.landingCertChip}
-                    </span>
-                    <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-wider text-black/70 mt-0.5">
-                      {labels.landingCertSub}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Start / Explore CTA Button */}
-                <div className="pt-1">
-                  <button
-                    type="button"
-                    className="btn-primary w-full sm:w-auto px-8 py-3 text-sm sm:text-base font-black flex items-center justify-center gap-2.5 shadow-xl hover:scale-102 transition-all cursor-pointer text-black"
-                    onClick={() => setScreen("directory")}
-                  >
-                    <Award size={18} />
-                    <span>{labels.exploreCertsBtn}</span>
-                    <ArrowRight size={18} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </>
-      )}
-
-      {/* ── 2. INTERACTIVE DIRECTORY & CERTIFICATE PREVIEW SCREEN ── */}
-      {screen === "directory" && (
-        <motion.div
-          className="space-y-4"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {/* Top Header with Back Button */}
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => setScreen("welcome")}
-                className="btn-ghost py-2 px-3 text-xs font-black flex items-center gap-1.5 text-black border border-slate-300 rounded-xl hover:bg-white transition cursor-pointer"
-              >
-                <ArrowLeft size={15} />
-                <span>{labels.backToOverview}</span>
-              </button>
-              <PageTitle title={labels.title} subtitle={labels.subtitle || labels.lockedMsg} />
-            </div>
-
-            <GuideBird
-              message={activeCert?.isUnlocked ? labels.victorySpeech : labels.lockedMsg}
-              mood={activeCert?.isUnlocked ? "cheer" : "think"}
-              size={46}
-            />
-          </div>
-
-          {error ? <div className="mb-2 font-bold text-[#7a1f1f] text-center">{error}</div> : null}
+        {error ? <div className="mb-2 font-bold text-[#7a1f1f] text-center">{error}</div> : null}
 
           {/* Active Certificate Parchment Display */}
           {activeCert && (
@@ -887,7 +749,6 @@ export default function Certificate() {
             </div>
           </div>
         </motion.div>
-      )}
     </div>
   );
 }
