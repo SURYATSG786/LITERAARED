@@ -894,21 +894,6 @@ export async function rowToUser(row) {
     if (memCerts.length > 0) certRows = memCerts;
   }
 
-  if ((lessons_completed.length > 0 || (row.xp && Number(row.xp) > 0) || row.assessment_score != null) && certRows.length === 0) {
-    const autoCert = {
-      issued: true,
-      status: 'unlocked',
-      credential_id: 'LIT-FOUNDATION-' + row.id.slice(0, 6).toUpperCase(),
-      course_id: String(activeCourse || '0'),
-      course_title: 'Course 1: Reading Everyday Words',
-      score: 100,
-      issued_date: new Date().toISOString(),
-      ui_language: row.ui_language || 'en',
-      learning_language: row.learning_language || 'en',
-    };
-    certRows = [autoCert];
-  }
-
   const certificates = certRows.map((c) => ({
     issued: true,
     status: c.status || 'unlocked',

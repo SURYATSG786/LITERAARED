@@ -254,31 +254,6 @@ export default function Certificate() {
           (item.stage === 3 && (String(c.course_id).includes('intermediate') || String(c.course_id) === '2' || c.course_title?.toLowerCase().includes('using information in daily life'))) ||
           (item.stage === 4 && (String(c.course_id).includes('advanced') || String(c.course_id) === '3' || c.course_title?.toLowerCase().includes('reading for understanding')))
       );
-
-      // Auto-unlock if user has completed course or has lessons/xp in progress
-      if (!earnedMatch) {
-        const prog = user?.course_progress;
-        const done = prog?.lessons_completed || [];
-        const isProgMatch =
-          (item.stage === 1 && (prog?.course_id === '0' || prog?.course_id === 0 || String(prog?.course_id || '').includes('foundation') || done.length > 0 || (user?.xp || 0) > 0 || user?.assessment_score != null)) ||
-          (item.stage === 2 && (prog?.course_id === '1' || prog?.course_id === 1 || String(prog?.course_id || '').includes('beginner'))) ||
-          (item.stage === 3 && (prog?.course_id === '2' || prog?.course_id === 2 || String(prog?.course_id || '').includes('intermediate'))) ||
-          (item.stage === 4 && (prog?.course_id === '3' || prog?.course_id === 3 || String(prog?.course_id || '').includes('advanced')));
-
-        if (isProgMatch && (done.length > 0 || (item.stage === 1 && ((user?.xp || 0) > 0 || user?.assessment_score != null)))) {
-          earnedMatch = {
-            issued: true,
-            status: 'unlocked',
-            credential_id: `LIT-COURSE${item.stage}-${user?.id?.slice(0, 6)?.toUpperCase() || 'PASS'}`,
-            course_id: String(item.courseId),
-            course_title: item.title,
-            score: prog?.lesson_scores?.[0] || 100,
-            issued_date: new Date().toISOString(),
-            ui_language: user?.uiLanguage || 'en',
-            learning_language: user?.learningLanguage || 'en',
-          };
-        }
-      }
     } else if (item.type === "league") {
       earnedMatch = userLeagueCerts.find(
         (c) => c.league?.toLowerCase() === item.league?.toLowerCase()

@@ -147,13 +147,16 @@ export async function markLessonProgress(req, res) {
     const certificate = await maybeIssueCertificate(user, course, course_id, progress, lessonScore);
     const refreshed = await findUserById(user.id);
 
+    const totalCourseLessons = course.lessons?.length || 1;
+    const completionPercent = Math.min(100, Math.round((completed.size / totalCourseLessons) * 100));
+
     res.json({
       message: 'Lesson completed',
       xp_gained: xpGained,
       gems_gained: gemsGained,
       score: lessonScore,
       lessons_completed: Array.from(completed),
-      completion_percent: 100,
+      completion_percent: completionPercent,
       certificate,
       user: sanitizeUser(refreshed || updated),
       uiLanguage: user.uiLanguage,
@@ -169,6 +172,9 @@ export function submitCheckpoint(req, res) {
 }
 
 async function maybeIssueCertificate(user, course, courseId, progress, score = 100) {
+  if (!isCourseCertificateEligible(course, progress)) {
+    return null;
+  }
   const courseTitle = publicCourse(course, user.uiLanguage, user.learningLanguage)?.title || course?.title || 'Course 1: Reading Everyday Words';
   return issueCourseCertificate({
     userId: user.id,
