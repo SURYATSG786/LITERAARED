@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'motion/react';
@@ -106,33 +106,84 @@ export default function Courses() {
   const currentLang = user?.learningLanguage || user?.uiLanguage || i18n.language || 'en';
   const initialStaticCourses = getStaticCoursesList(currentLang);
 
+  const initialCourseScores = useMemo(() => {
+    const map = {};
+    // 1. From local storage cache if available
+    try {
+      const cached = localStorage.getItem(`literaai_scores_${user?.id || 'guest'}`);
+      if (cached) {
+        Object.assign(map, JSON.parse(cached));
+      }
+    } catch {}
+
+    // 2. From user.course_progress
+    if (user?.course_progress?.course_id) {
+      const cp = user.course_progress;
+      const completed = cp.lessons_completed || [];
+      const lessonScores = completed.map((li) => ({
+        lesson_id: li,
+        score: cp.lesson_scores?.[li] ?? 100,
+      }));
+      const allScores = lessonScores.map((l) => l.score);
+      const avg = allScores.length > 0 ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length) : 0;
+      map[cp.course_id] = {
+        lessons: lessonScores,
+        checkpoint_score: null,
+        course_average: avg,
+      };
+    }
+
+    // 3. From user.certificates (if course is certified/completed)
+    if (Array.isArray(user?.certificates)) {
+      user.certificates.forEach((cert) => {
+        if (cert.course_id) {
+          if (!map[cert.course_id] || !map[cert.course_id]?.lessons?.length) {
+            map[cert.course_id] = {
+              lessons: [{ lesson_id: 0, score: cert.score || 100 }],
+              checkpoint_score: cert.score || 100,
+              course_average: cert.score || 100,
+            };
+          }
+        }
+      });
+    }
+
+    return map;
+  }, [user]);
+
   const [data, setData] = useState({ courses: initialStaticCourses });
   const [error, setError] = useState('');
-  const [courseScores, setCourseScores] = useState({});
+  const [courseScores, setCourseScores] = useState(initialCourseScores);
 
   useEffect(() => {
+    setCourseScores((prev) => ({ ...initialCourseScores, ...prev }));
+  }, [initialCourseScores]);
+
+  useEffect(() => {
+    let alive = true;
     api.recommended()
       .then((res) => {
+        if (!alive) return;
         if (res?.courses?.length > 0) {
           setData(res);
+        }
+        if (res?.scores_by_id) {
+          setCourseScores((prev) => {
+            const next = { ...prev, ...res.scores_by_id };
+            try {
+              localStorage.setItem(`literaai_scores_${user?.id || 'guest'}`, JSON.stringify(next));
+            } catch {}
+            return next;
+          });
         }
       })
       .catch((err) => {
         console.warn('Courses background sync note:', err?.message);
       });
-  }, [user?.assessment_score, currentLang]);
-
-  useEffect(() => {
-    const courses = data?.courses || initialStaticCourses;
-    if (courses.length === 0 || user?.assessment_score == null) return;
-    courses.forEach((c) => {
-      api.getCourseScores(c.id).then((scores) => {
-        if (scores) {
-          setCourseScores((prev) => ({ ...prev, [c.id]: scores }));
-        }
-      }).catch(() => {});
-    });
-  }, [data?.courses, user?.assessment_score]);
+    return () => {
+      alive = false;
+    };
+  }, [user?.assessment_score, currentLang, user?.id]);
 
   const isLocked = user?.assessment_score == null;
   const coursesToRender = (data?.courses && data.courses.length > 0) ? data.courses : initialStaticCourses;
@@ -172,9 +223,8 @@ export default function Courses() {
                 borderColor: theme.borderColor,
                 boxShadow: theme.glow,
               }}
-              initial={{ opacity: 0, y: 14 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
               whileHover={{ y: -3 }}
             >
               {isLocked && <LockedChainsOverlay />}

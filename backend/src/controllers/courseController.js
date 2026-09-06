@@ -59,10 +59,21 @@ export async function getRecommended(req, res) {
     );
     const rec = publicCourseSummary(recommendedFull, uiLanguage);
 
+    const scoresById = {};
+    await Promise.all(
+      userCourses.map(async (c) => {
+        try {
+          const s = await getCourseScoresDb(user.id, c.id);
+          if (s) scoresById[c.id] = s;
+        } catch {}
+      })
+    );
+
     res.json({
       path,
       recommended: (rec && rec.title) ? rec : (userCourses[0] || null),
       courses: userCourses,
+      scores_by_id: scoresById,
       uiLanguage,
       learningLanguage,
     });

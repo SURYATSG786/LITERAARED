@@ -109,6 +109,22 @@ export default function CoursePlayer() {
       if (res?.lessons_completed) {
         setProgress({ ...progress, lessons_completed: res.lessons_completed, completion_percent: res.completion_percent });
       }
+
+      try {
+        const cacheKey = `literaai_scores_${user?.id || 'guest'}`;
+        const currentScores = JSON.parse(localStorage.getItem(cacheKey) || '{}');
+        const prevCourse = currentScores[id] || { lessons: [] };
+        const existingLessons = (prevCourse.lessons || []).filter((l) => String(l.lesson_id) !== String(lessonIndex));
+        existingLessons.push({ lesson_id: lessonIndex, score: lessonScore });
+        const all = existingLessons.map((l) => l.score);
+        const avg = all.length > 0 ? Math.round(all.reduce((a, b) => a + b, 0) / all.length) : lessonScore;
+        currentScores[id] = {
+          lessons: existingLessons,
+          checkpoint_score: isLastLesson ? lessonScore : (prevCourse.checkpoint_score || null),
+          course_average: avg,
+        };
+        localStorage.setItem(cacheKey, JSON.stringify(currentScores));
+      } catch (_) {}
     } catch (err) {
       console.warn('Lesson progress network note:', err?.message);
     }
