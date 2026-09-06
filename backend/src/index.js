@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
@@ -8,8 +8,11 @@ import routes from './routes/index.js';
 import { assertStoreWritable, ensureDbInitialized, getDbStatus, initDb } from './services/db.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config();
+
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Fast background DB initialization without blocking incoming serverless requests
 let dbInitStarted = false;
