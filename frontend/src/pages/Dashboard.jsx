@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'motion/react';
@@ -32,8 +32,70 @@ export default function Dashboard() {
   const [coach, setCoach] = useState('');
   const [busy, setBusy] = useState(false);
 
-  const lessonsDone = user?.course_progress?.lessons_completed?.length || 0;
-  const lessonScores = user?.course_progress?.lesson_scores || {};
+  const currentUiLang = user?.uiLanguage || user?.preferred_language || 'en';
+  const currentLearningLang = user?.learningLanguage || user?.preferred_language || currentUiLang;
+
+  const [courseScores, setCourseScores] = useState(() => {
+    try {
+      const cached = localStorage.getItem(`literaai_scores_${user?.id || 'guest'}_${currentLearningLang}`);
+      return cached ? JSON.parse(cached) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  useEffect(() => {
+    try {
+      const cached = localStorage.getItem(`literaai_scores_${user?.id || 'guest'}_${currentLearningLang}`);
+      setCourseScores(cached ? JSON.parse(cached) : {});
+    } catch {}
+  }, [currentLearningLang, user?.id]);
+
+  useEffect(() => {
+    let alive = true;
+    api.recommended()
+      .then((res) => {
+        if (!alive) return;
+        if (res?.scores_by_id) {
+          setCourseScores(res.scores_by_id);
+          try {
+            localStorage.setItem(`literaai_scores_${user?.id || 'guest'}_${currentLearningLang}`, JSON.stringify(res.scores_by_id));
+          } catch {}
+        }
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [user?.assessment_score, currentUiLang, currentLearningLang, user?.id]);
+
+  const lessonsDone = useMemo(() => {
+    const scoredCourses = Object.values(courseScores || {});
+    if (scoredCourses.length > 0) {
+      return scoredCourses.filter((s) => (s?.lessons?.length || 0) > 0).length;
+    }
+    if (Array.isArray(user?.certificates)) {
+      const certCount = user.certificates.filter((c) => (c.learning_language || 'en') === currentLearningLang).length;
+      if (certCount > 0) return certCount;
+    }
+    if (user?.course_progress?.course_id && user.course_progress.learning_language === currentLearningLang) {
+      return user.course_progress.lessons_completed?.length || 0;
+    }
+    return 0;
+  }, [courseScores, user?.certificates, user?.course_progress, currentLearningLang]);
+
+  const lessonScores = useMemo(() => {
+    const map = {};
+    Object.entries(courseScores || {}).forEach(([cid, s]) => {
+      if (Array.isArray(s?.lessons)) {
+        s.lessons.forEach((l) => {
+          map[`${cid}_${l.lesson_id}`] = l.score || 0;
+        });
+      }
+    });
+    return map;
+  }, [courseScores]);
+
   const scoreValues = Object.values(lessonScores).filter((v) => v > 0);
   const avgScore =
     scoreValues.length > 0

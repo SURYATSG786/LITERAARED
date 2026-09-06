@@ -141,6 +141,8 @@ export async function markLessonProgress(req, res) {
       course_progress: {
         ...current,
         course_id,
+        learning_language: user.learningLanguage || 'en',
+        ui_language: user.uiLanguage || 'en',
         lessons_completed: Array.from(completed),
         lesson_scores: newLessonScores,
         lesson_correct_counts: { [lessonIndex]: correctCount },
