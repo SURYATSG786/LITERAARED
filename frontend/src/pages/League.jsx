@@ -19,7 +19,8 @@ const LEAGUE_CONFIG = {
 export default function League() {
   const { t, i18n } = useTranslation();
   const { user, refreshUser } = useAuth();
-  const currentLang = user?.learningLanguage || user?.preferred_language || user?.uiLanguage || i18n.language || 'en';
+  const currentUiLang = user?.uiLanguage || user?.preferred_language || i18n.language || 'en';
+  const currentLearningLang = user?.learningLanguage || user?.preferred_language || currentUiLang;
   const [screen, setScreen] = useState('welcome');
   const [status, setStatus] = useState(null);
   const [leaderboard, setLeaderboard] = useState([]);
@@ -54,7 +55,7 @@ export default function League() {
     setError('');
     const rawTier = (user?.league || status?.current_league || 'bronze').toLowerCase();
     const cleanLeague = rawTier.includes('gold') ? 'gold' : rawTier.includes('silver') ? 'silver' : 'bronze';
-    const fallbackExam = buildLeagueExam(cleanLeague, currentLang, currentLang) || buildLeagueExam('bronze', 'en', 'en');
+    const fallbackExam = buildLeagueExam(cleanLeague, currentUiLang, currentLearningLang) || buildLeagueExam('bronze', 'en', 'en');
 
     api.getLeagueExam()
       .then((data) => {
@@ -105,7 +106,7 @@ export default function League() {
           // Fallback scoring if offline
           const totalQ = exam?.questions?.length || 3;
           let localCorrect = 0;
-          const canonical = buildLeagueExam((user?.league || 'bronze').toLowerCase(), currentLang, currentLang);
+          const canonical = buildLeagueExam((user?.league || 'bronze').toLowerCase(), currentUiLang, currentLearningLang);
           const rawQ = canonical?.questions || [];
           nextAnswers.forEach((ans, idx) => {
             if (rawQ[idx] && ans === rawQ[idx].correct_index) localCorrect += 1;
@@ -200,7 +201,7 @@ export default function League() {
                   {t('selectedLanguage', 'Selected Language')}:
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/90 text-black font-black text-xs sm:text-sm border-2 border-emerald-400/80 shadow-xs backdrop-blur-sm">
-                  {currentLang.toUpperCase()}
+                  {currentLearningLang.toUpperCase()}
                 </span>
               </div>
 

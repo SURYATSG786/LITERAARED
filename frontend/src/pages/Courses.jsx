@@ -103,8 +103,8 @@ export default function Courses() {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const currentLang = user?.learningLanguage || user?.uiLanguage || i18n.language || 'en';
-  const initialStaticCourses = getStaticCoursesList(currentLang);
+  const currentUiLang = user?.uiLanguage || user?.preferred_language || i18n.language || 'en';
+  const initialStaticCourses = getStaticCoursesList(currentUiLang);
 
   const initialCourseScores = useMemo(() => {
     const map = {};
@@ -156,6 +156,10 @@ export default function Courses() {
   const [courseScores, setCourseScores] = useState(initialCourseScores);
 
   useEffect(() => {
+    setData({ courses: getStaticCoursesList(currentUiLang) });
+  }, [currentUiLang]);
+
+  useEffect(() => {
     setCourseScores((prev) => ({ ...initialCourseScores, ...prev }));
   }, [initialCourseScores]);
 
@@ -183,7 +187,7 @@ export default function Courses() {
     return () => {
       alive = false;
     };
-  }, [user?.assessment_score, currentLang, user?.id]);
+  }, [user?.assessment_score, currentUiLang, user?.learningLanguage, user?.id]);
 
   const isLocked = user?.assessment_score == null;
   const coursesToRender = (data?.courses && data.courses.length > 0) ? data.courses : initialStaticCourses;

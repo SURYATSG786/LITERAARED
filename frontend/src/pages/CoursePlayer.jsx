@@ -20,8 +20,9 @@ export default function CoursePlayer() {
   const { user, refreshUser } = useAuth();
   const navigate = useNavigate();
 
-  const currentLang = user?.learningLanguage || user?.uiLanguage || i18n.language || 'en';
-  const initialCourse = getStaticCourseById(id, currentLang);
+  const currentUiLang = user?.uiLanguage || user?.preferred_language || i18n.language || 'en';
+  const currentLearningLang = user?.learningLanguage || user?.preferred_language || currentUiLang;
+  const initialCourse = getStaticCourseById(id, currentUiLang, currentLearningLang);
 
   const [course, setCourse] = useState(initialCourse);
   const [progress, setProgress] = useState(user?.course_progress || { lessons_completed: [], completion_percent: 0 });
@@ -34,15 +35,24 @@ export default function CoursePlayer() {
   const [finishing, setFinishing] = useState(false);
 
   useEffect(() => {
+    setCourse(getStaticCourseById(id, currentUiLang, currentLearningLang));
+  }, [id, currentUiLang, currentLearningLang]);
+
+  useEffect(() => {
+    let alive = true;
     api.getCourse(id)
       .then((res) => {
+        if (!alive) return;
         if (res?.course) setCourse(res.course);
         if (res?.progress) setProgress(res.progress);
       })
       .catch((err) => {
         console.warn('CoursePlayer background sync note:', err?.message);
       });
-  }, [id]);
+    return () => {
+      alive = false;
+    };
+  }, [id, currentUiLang, currentLearningLang]);
 
   const [completionData, setCompletionData] = useState(null);
 

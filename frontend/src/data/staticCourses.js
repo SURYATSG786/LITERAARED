@@ -50,8 +50,8 @@ export const COURSE_OBJECTIVES = {
   ],
 };
 
-export function getStaticCoursesList(lang = 'en') {
-  const safeLang = COURSE_TITLES[lang] ? lang : 'en';
+export function getStaticCoursesList(uiLang = 'en') {
+  const safeLang = COURSE_TITLES[uiLang] ? uiLang : 'en';
   return COURSE_PATHS.map((pathKey, idx) => ({
     id: String(idx),
     path: pathKey,
@@ -61,9 +61,11 @@ export function getStaticCoursesList(lang = 'en') {
   }));
 }
 
-export function getStaticCourseById(courseId, lang = 'en') {
-  const safeLang = COURSE_TITLES[lang] ? lang : 'en';
-  const langQuestions = rawVerified[safeLang] || rawVerified.en || [];
+export function getStaticCourseById(courseId, uiLang = 'en', learningLang = uiLang) {
+  const safeUi = COURSE_TITLES[uiLang] ? uiLang : 'en';
+  const safeLearning = COURSE_TITLES[learningLang] ? learningLang : safeUi;
+  const uiQuestionsList = rawVerified[safeUi] || rawVerified.en || [];
+  const learningQuestionsList = rawVerified[safeLearning] || rawVerified.en || [];
 
   let idx = 0;
   if (/^\d+$/.test(String(courseId))) {
@@ -79,14 +81,26 @@ export function getStaticCourseById(courseId, lang = 'en') {
   }
 
   const pathKey = COURSE_PATHS[idx];
-  const questions = langQuestions[idx] || [];
-  const title = COURSE_TITLES[safeLang]?.[idx] || `Course ${idx + 1}`;
-  const objective = COURSE_OBJECTIVES[safeLang]?.[idx] || 'Master foundational literacy skills.';
+  const uiQuestions = uiQuestionsList[idx] || [];
+  const learningQuestions = learningQuestionsList[idx] || [];
+
+  const questions = learningQuestions.map((learningQ, qIdx) => {
+    const uiQ = uiQuestions[qIdx] || learningQ;
+    return {
+      ...learningQ,
+      question: uiQ.question || learningQ.question,
+      explanation: uiQ.explanation || learningQ.explanation || '',
+    };
+  });
+
+  const title = COURSE_TITLES[safeUi]?.[idx] || `Course ${idx + 1}`;
+  const objective = COURSE_OBJECTIVES[safeUi]?.[idx] || 'Master foundational literacy skills.';
 
   return {
     id: String(idx),
     path: pathKey,
-    lang: safeLang,
+    lang: safeLearning,
+    ui_lang: safeUi,
     title,
     objective,
     certificate_criteria: { min_score_percent: 70 },
@@ -98,7 +112,7 @@ export function getStaticCourseById(courseId, lang = 'en') {
         learning_goal: objective,
         teaching_content: `Practice reading and understanding words for ${title}.`,
         image_key: 'book',
-        practice_questions: questions,
+        practice_questions: questions.length > 0 ? questions : uiQuestions,
       },
     ],
   };
