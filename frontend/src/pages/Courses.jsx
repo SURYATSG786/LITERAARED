@@ -99,6 +99,21 @@ const COURSE_THEMES = [
   },
 ];
 
+function getScoresForCourse(course, courseScores) {
+  if (!course || !courseScores) return null;
+  return (
+    courseScores[course.id] ||
+    courseScores[course.path] ||
+    courseScores[`${course.path}_en`] ||
+    courseScores[`${course.path}_ta`] ||
+    courseScores[`${course.path}_te`] ||
+    courseScores[`${course.path}_kn`] ||
+    courseScores[`${course.path}_ml`] ||
+    courseScores[`${course.path}_hi`] ||
+    null
+  );
+}
+
 export default function Courses() {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
@@ -108,11 +123,33 @@ export default function Courses() {
 
   const initialCourseScores = useMemo(() => {
     const map = {};
+
+    const registerScores = (rawId, scoreObj) => {
+      if (!rawId || !scoreObj) return;
+      const strId = String(rawId).toLowerCase();
+      map[strId] = scoreObj;
+      map[rawId] = scoreObj;
+      if (strId.includes('foundation') || strId === '0') {
+        map['0'] = scoreObj;
+        map['foundation'] = scoreObj;
+      } else if (strId.includes('beginner') || strId === '1') {
+        map['1'] = scoreObj;
+        map['beginner'] = scoreObj;
+      } else if (strId.includes('intermediate') || strId === '2') {
+        map['2'] = scoreObj;
+        map['intermediate'] = scoreObj;
+      } else if (strId.includes('advanced') || strId === '3') {
+        map['3'] = scoreObj;
+        map['advanced'] = scoreObj;
+      }
+    };
+
     // 1. From local storage cache if available
     try {
       const cached = localStorage.getItem(`literaai_scores_${user?.id || 'guest'}`);
       if (cached) {
-        Object.assign(map, JSON.parse(cached));
+        const parsed = JSON.parse(cached);
+        Object.entries(parsed).forEach(([k, v]) => registerScores(k, v));
       }
     } catch {}
 
@@ -126,24 +163,22 @@ export default function Courses() {
       }));
       const allScores = lessonScores.map((l) => l.score);
       const avg = allScores.length > 0 ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length) : 0;
-      map[cp.course_id] = {
+      registerScores(cp.course_id, {
         lessons: lessonScores,
         checkpoint_score: null,
         course_average: avg,
-      };
+      });
     }
 
     // 3. From user.certificates (if course is certified/completed)
     if (Array.isArray(user?.certificates)) {
       user.certificates.forEach((cert) => {
         if (cert.course_id) {
-          if (!map[cert.course_id] || !map[cert.course_id]?.lessons?.length) {
-            map[cert.course_id] = {
-              lessons: [{ lesson_id: 0, score: cert.score || 100 }],
-              checkpoint_score: cert.score || 100,
-              course_average: cert.score || 100,
-            };
-          }
+          registerScores(cert.course_id, {
+            lessons: [{ lesson_id: 0, score: cert.score || 100 }],
+            checkpoint_score: cert.score || 100,
+            course_average: cert.score || 100,
+          });
         }
       });
     }
@@ -212,7 +247,7 @@ export default function Courses() {
       {/* 2x2 Balanced Grid (2 in each row) filling 100% of the page perfectly */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 lg:gap-5 items-stretch flex-1 min-h-0 p-1">
         {coursesToRender.map((course, i) => {
-          const scores = courseScores[course.id];
+          const scores = getScoresForCourse(course, courseScores);
           const hasScores = scores?.lessons?.length > 0;
           const completedLessons = scores?.lessons?.length || 0;
           const totalLessons = course.lesson_count || 1;
