@@ -99,62 +99,26 @@ const COURSE_THEMES = [
   },
 ];
 
-function getScoresForCourse(course, courseScores) {
-  if (!course || !courseScores) return null;
-  return (
-    courseScores[course.id] ||
-    courseScores[course.path] ||
-    courseScores[`${course.path}_en`] ||
-    courseScores[`${course.path}_ta`] ||
-    courseScores[`${course.path}_te`] ||
-    courseScores[`${course.path}_kn`] ||
-    courseScores[`${course.path}_ml`] ||
-    courseScores[`${course.path}_hi`] ||
-    null
-  );
-}
-
 export default function Courses() {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const navigate = useNavigate();
   const currentUiLang = user?.uiLanguage || user?.preferred_language || i18n.language || 'en';
+  const currentLearningLang = user?.learningLanguage || user?.preferred_language || currentUiLang;
   const initialStaticCourses = getStaticCoursesList(currentUiLang);
 
   const initialCourseScores = useMemo(() => {
     const map = {};
-
-    const registerScores = (rawId, scoreObj) => {
-      if (!rawId || !scoreObj) return;
-      const strId = String(rawId).toLowerCase();
-      map[strId] = scoreObj;
-      map[rawId] = scoreObj;
-      if (strId.includes('foundation') || strId === '0') {
-        map['0'] = scoreObj;
-        map['foundation'] = scoreObj;
-      } else if (strId.includes('beginner') || strId === '1') {
-        map['1'] = scoreObj;
-        map['beginner'] = scoreObj;
-      } else if (strId.includes('intermediate') || strId === '2') {
-        map['2'] = scoreObj;
-        map['intermediate'] = scoreObj;
-      } else if (strId.includes('advanced') || strId === '3') {
-        map['3'] = scoreObj;
-        map['advanced'] = scoreObj;
-      }
-    };
-
-    // 1. From local storage cache if available
+    // 1. From local storage cache strictly scoped to this learning language
     try {
-      const cached = localStorage.getItem(`literaai_scores_${user?.id || 'guest'}`);
+      const cached = localStorage.getItem(`literaai_scores_${user?.id || 'guest'}_${currentLearningLang}`);
       if (cached) {
-        const parsed = JSON.parse(cached);
-        Object.entries(parsed).forEach(([k, v]) => registerScores(k, v));
+        Object.assign(map, JSON.parse(cached));
       }
     } catch {}
 
-    // 2. From user.course_progress
-    if (user?.course_progress?.course_id) {
+    // 2. From user.course_progress (only if matching current learning language)
+    if (user?.course_progress?.course_id && (!user.course_progress.learning_language || user.course_progress.learning_language === currentLearningLang)) {
       const cp = user.course_progress;
       const completed = cp.lessons_completed || [];
       const lessonScores = completed.map((li) => ({
@@ -163,28 +127,31 @@ export default function Courses() {
       }));
       const allScores = lessonScores.map((l) => l.score);
       const avg = allScores.length > 0 ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length) : 0;
-      registerScores(cp.course_id, {
+      map[cp.course_id] = {
         lessons: lessonScores,
         checkpoint_score: null,
         course_average: avg,
-      });
+      };
     }
 
-    // 3. From user.certificates (if course is certified/completed)
+    // 3. From user.certificates (strictly matching the learning language)
     if (Array.isArray(user?.certificates)) {
       user.certificates.forEach((cert) => {
-        if (cert.course_id) {
-          registerScores(cert.course_id, {
-            lessons: [{ lesson_id: 0, score: cert.score || 100 }],
-            checkpoint_score: cert.score || 100,
-            course_average: cert.score || 100,
-          });
+        const certLang = cert.learning_language || 'en';
+        if (cert.course_id && certLang === currentLearningLang) {
+          if (!map[cert.course_id] || !map[cert.course_id]?.lessons?.length) {
+            map[cert.course_id] = {
+              lessons: [{ lesson_id: 0, score: cert.score || 100 }],
+              checkpoint_score: cert.score || 100,
+              course_average: cert.score || 100,
+            };
+          }
         }
       });
     }
 
     return map;
-  }, [user]);
+  }, [user, currentLearningLang]);
 
   const [data, setData] = useState({ courses: initialStaticCourses });
   const [error, setError] = useState('');
@@ -195,8 +162,8 @@ export default function Courses() {
   }, [currentUiLang]);
 
   useEffect(() => {
-    setCourseScores((prev) => ({ ...initialCourseScores, ...prev }));
-  }, [initialCourseScores]);
+    setCourseScores(initialCourseScores);
+  }, [initialCourseScores, currentLearningLang]);
 
   useEffect(() => {
     let alive = true;
@@ -210,7 +177,7 @@ export default function Courses() {
           setCourseScores((prev) => {
             const next = { ...prev, ...res.scores_by_id };
             try {
-              localStorage.setItem(`literaai_scores_${user?.id || 'guest'}`, JSON.stringify(next));
+              localStorage.setItem(`literaai_scores_${user?.id || 'guest'}_${currentLearningLang}`, JSON.stringify(next));
             } catch {}
             return next;
           });
@@ -222,7 +189,7 @@ export default function Courses() {
     return () => {
       alive = false;
     };
-  }, [user?.assessment_score, currentUiLang, user?.learningLanguage, user?.id]);
+  }, [user?.assessment_score, currentUiLang, currentLearningLang, user?.id]);
 
   const isLocked = user?.assessment_score == null;
   const coursesToRender = (data?.courses && data.courses.length > 0) ? data.courses : initialStaticCourses;
@@ -247,7 +214,7 @@ export default function Courses() {
       {/* 2x2 Balanced Grid (2 in each row) filling 100% of the page perfectly */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 lg:gap-5 items-stretch flex-1 min-h-0 p-1">
         {coursesToRender.map((course, i) => {
-          const scores = getScoresForCourse(course, courseScores);
+          const scores = courseScores[course.id];
           const hasScores = scores?.lessons?.length > 0;
           const completedLessons = scores?.lessons?.length || 0;
           const totalLessons = course.lesson_count || 1;

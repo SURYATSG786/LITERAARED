@@ -25,16 +25,7 @@ const resources = {
   ml: { translation: ml },
 };
 
-const savedUser = (() => {
-  try {
-    const raw = localStorage.getItem('literaai_user');
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
-})();
-
-const saved = savedUser?.uiLanguage || savedUser?.preferred_language || localStorage.getItem('literaai_lang') || 'en';
+const saved = localStorage.getItem('literaai_lang') || 'en';
 const initial = SUPPORTED_LANGS.some((l) => l.code === saved) ? saved : 'en';
 
 i18n.use(initReactI18next).init({

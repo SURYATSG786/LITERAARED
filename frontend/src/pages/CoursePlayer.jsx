@@ -121,7 +121,7 @@ export default function CoursePlayer() {
       }
 
       try {
-        const cacheKey = `literaai_scores_${user?.id || 'guest'}`;
+        const cacheKey = `literaai_scores_${user?.id || 'guest'}_${currentLearningLang}`;
         const currentScores = JSON.parse(localStorage.getItem(cacheKey) || '{}');
         const prevCourse = currentScores[id] || { lessons: [] };
         const existingLessons = (prevCourse.lessons || []).filter((l) => String(l.lesson_id) !== String(lessonIndex));
