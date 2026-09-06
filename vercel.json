@@ -2,38 +2,10 @@
   "version": 2,
   "services": {
     "frontend": {
-      "root": "frontend",
-      "framework": "vite"
+      "root": "frontend"
     },
     "backend": {
-      "root": "backend",
-      "entrypoint": "src/index.js"
+      "root": "backend"
     }
-  },
-  "experimentalServices": {
-    "frontend": {
-      "root": "frontend",
-      "entrypoint": "frontend",
-      "routePrefix": "/"
-    },
-    "backend": {
-      "root": "backend",
-      "entrypoint": "backend",
-      "routePrefix": "/api"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": {
-        "service": "backend"
-      }
-    },
-    {
-      "source": "/(.*)",
-      "destination": {
-        "service": "frontend"
-      }
-    }
-  ]
+  }
 }
