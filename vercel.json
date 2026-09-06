@@ -6,17 +6,22 @@
     },
     "backend": {
       "root": "backend",
-      "entrypoint": "backend/src/index.js"
+      "framework": "express",
+      "entrypoint": "src/index.js"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/backend/api/$1"
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "backend"
+      }
     },
     {
-      "src": "/(.*)",
-      "dest": "/frontend/$1"
+      "source": "/(.*)",
+      "destination": {
+        "service": "frontend"
+      }
     }
   ]
 }
