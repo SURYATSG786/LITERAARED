@@ -92,7 +92,7 @@ const isDirectExecution = Boolean(
    process.argv[1].endsWith('src/index.js'))
 );
 
-if (isDirectExecution && !process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME && process.env.NODE_ENV !== 'test') {
+if (isDirectExecution && !process.env.AWS_LAMBDA_FUNCTION_NAME && process.env.NODE_ENV !== 'test') {
   startServer();
 }
 
