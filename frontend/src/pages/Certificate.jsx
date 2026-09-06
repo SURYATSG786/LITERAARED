@@ -77,40 +77,29 @@ export default function Certificate() {
   // Screen state: 'welcome' | 'directory'
   const [screen, setScreen] = useState("welcome");
 
-  // Fetch latest user certificates from API on mount
+  // Fetch latest user profile and clear any legacy client-side cached certificates
   useEffect(() => {
+    try {
+      const keysToRemove = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && (key.startsWith('literaai_cert') || key.startsWith('literaai_completed'))) {
+          keysToRemove.push(key);
+        }
+      }
+      keysToRemove.forEach((k) => localStorage.removeItem(k));
+    } catch (_) {}
+
     api.me().then((res) => {
       if (res?.user) refreshUser(res.user);
     }).catch(() => {});
   }, []);
 
-  // Parse user earned course certificates from user context and all local storage keys
-  const localCerts = (() => {
-    try {
-      const allFound = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && (key.startsWith('literaai_cert') || key.startsWith('literaai_completed'))) {
-          try {
-            const parsed = JSON.parse(localStorage.getItem(key) || 'null');
-            if (Array.isArray(parsed)) allFound.push(...parsed);
-            else if (parsed && typeof parsed === 'object') allFound.push(parsed);
-          } catch (_) {}
-        }
-      }
-      return allFound;
-    } catch (_) {
-      return [];
-    }
-  })();
-
   const rawUserCerts = Array.isArray(user?.certificates) && user.certificates.length > 0
     ? user.certificates.filter((c) => c.issued)
-    : user?.certificate?.issued
-    ? [user.certificate]
     : [];
 
-  const userCourseCerts = [...rawUserCerts, ...localCerts];
+  const userCourseCerts = rawUserCerts;
 
   // Parse user earned league certificates
   const userLeagueCerts = Array.isArray(user?.league_certificates)
