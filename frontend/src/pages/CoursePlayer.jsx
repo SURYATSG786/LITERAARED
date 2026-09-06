@@ -163,11 +163,12 @@ export default function CoursePlayer() {
     }
 
     confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+    const activeVoiceLang = currentUiLang || i18n.language || 'en';
     speakText(
       isLastLesson
         ? t('courseCompletedSpeech', 'Congratulations! You have completed the course and earned your official certificate!')
-        : t('lessonCompletedSpeech', `Awesome job! Lesson score: ${lessonScore} percent.`),
-      i18n.language
+        : t('lessonCompletedSpeech', { score: lessonScore, defaultValue: `Awesome job! Lesson score: ${lessonScore} percent.` }),
+      activeVoiceLang
     ).catch(() => {});
 
     setCompletionData({
@@ -215,15 +216,15 @@ export default function CoursePlayer() {
           {/* Heading */}
           <div className="space-y-1">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-900 font-black text-xs border border-amber-500/40 uppercase tracking-wider">
-              {isCourse ? '🏆 Course Mastered' : `🌟 Lesson ${completionData.lessonIndex + 1} Completed`}
+              {isCourse ? `🏆 ${t('courseMastered', 'Course Mastered')}` : `🌟 ${t('lessonCompleted', { index: completionData.lessonIndex + 1, defaultValue: `Lesson ${completionData.lessonIndex + 1} Completed` })}`}
             </span>
             <h1 className="display text-2xl sm:text-3xl font-black text-[#032038]">
-              {isCourse ? course?.title || 'Course Completed!' : lesson?.title || 'Lesson Finished!'}
+              {isCourse ? course?.title || t('courseCompleted', 'Course Completed!') : lesson?.title || t('lessonFinished', 'Lesson Finished!')}
             </h1>
             <p className="text-xs sm:text-sm font-bold text-[#032038]/70">
               {isCourse
-                ? 'All lessons conquered! Your official literacy certificate is ready.'
-                : 'Great job practicing! Ready for the next lesson?'}
+                ? t('courseCompletedDesc', 'All lessons conquered! Your official literacy certificate is ready.')
+                : t('lessonCompletedDesc', 'Great job practicing! Ready for the next lesson?')}
             </p>
           </div>
 
@@ -231,23 +232,25 @@ export default function CoursePlayer() {
           <div className="grid grid-cols-3 gap-3 w-full max-w-lg">
             {/* Score */}
             <div className="rounded-2xl bg-white/90 p-3 sm:p-4 border-2 border-[#032038]/15 shadow-sm flex flex-col items-center justify-center">
-              <span className="text-[10px] sm:text-xs font-black text-[#032038]/60 uppercase tracking-wider">Score</span>
+              <span className="text-[10px] sm:text-xs font-black text-[#032038]/60 uppercase tracking-wider">{t('scoreLabel', 'Score')}</span>
               <span className="text-xl sm:text-2xl font-black text-emerald-600">{completionData.score}%</span>
-              <span className="text-[10px] font-bold text-gray-500">{completionData.correctCount} / {completionData.totalQuestions} correct</span>
+              <span className="text-[10px] font-bold text-gray-500">
+                {t('correctOutOf', { correct: completionData.correctCount, total: completionData.totalQuestions, defaultValue: `${completionData.correctCount} / ${completionData.totalQuestions} correct` })}
+              </span>
             </div>
 
             {/* XP Gained */}
             <div className="rounded-2xl bg-amber-50/90 p-3 sm:p-4 border-2 border-amber-300 shadow-sm flex flex-col items-center justify-center">
-              <span className="text-[10px] sm:text-xs font-black text-amber-900/70 uppercase tracking-wider">XP Earned</span>
+              <span className="text-[10px] sm:text-xs font-black text-amber-900/70 uppercase tracking-wider">{t('xpEarned', 'XP Earned')}</span>
               <span className="text-xl sm:text-2xl font-black text-amber-600">+{completionData.xpEarned}</span>
-              <span className="text-[10px] font-bold text-amber-800">⚡ Experience</span>
+              <span className="text-[10px] font-bold text-amber-800">⚡ {t('experienceLabel', 'Experience')}</span>
             </div>
 
             {/* Gems */}
             <div className="rounded-2xl bg-sky-50/90 p-3 sm:p-4 border-2 border-sky-300 shadow-sm flex flex-col items-center justify-center">
-              <span className="text-[10px] sm:text-xs font-black text-sky-900/70 uppercase tracking-wider">Gems</span>
+              <span className="text-[10px] sm:text-xs font-black text-sky-900/70 uppercase tracking-wider">{t('gemsLabel', 'Gems')}</span>
               <span className="text-xl sm:text-2xl font-black text-sky-600">+{completionData.gemsEarned}</span>
-              <span className="text-[10px] font-bold text-sky-800">💎 Rewards</span>
+              <span className="text-[10px] font-bold text-sky-800">💎 {t('rewardsLabel', 'Rewards')}</span>
             </div>
           </div>
 
@@ -260,15 +263,15 @@ export default function CoursePlayer() {
                 </div>
                 <div>
                   <h4 className="font-black text-xs sm:text-sm text-[#032038]">
-                    {completionData.certificate.course_title || 'Foundational Literacy Certificate'}
+                    {completionData.certificate.course_title || t('foundationalCertificate', 'Foundational Literacy Certificate')}
                   </h4>
                   <p className="text-[10px] sm:text-xs font-mono font-bold text-[#032038]/70">
-                    ID: {completionData.certificate.credential_id} • Status: Unlocked ✅
+                    ID: {completionData.certificate.credential_id} • {t('statusUnlocked', 'Status: Unlocked')} ✅
                   </p>
                 </div>
               </div>
               <span className="text-[10px] uppercase font-black bg-emerald-600 text-white px-2.5 py-1 rounded-full shrink-0 shadow-xs">
-                Allotted
+                {t('allotted', 'Allotted')}
               </span>
             </div>
           )}
@@ -282,7 +285,7 @@ export default function CoursePlayer() {
                   onClick={() => navigate('/certificate')}
                   className="btn-primary w-full py-3.5 text-sm sm:text-base font-black shadow-xl cursor-pointer flex items-center justify-center gap-2 hover:scale-102 transition-all"
                 >
-                  <span>View Certificate 🎓</span>
+                  <span>{t('viewCertificateBtn', 'View Certificate 🎓')}</span>
                   <ArrowRight size={18} />
                 </button>
                 <button
@@ -290,7 +293,7 @@ export default function CoursePlayer() {
                   onClick={() => navigate('/courses')}
                   className="w-full py-3.5 px-4 rounded-2xl font-black text-xs sm:text-sm bg-white/80 hover:bg-white text-[#032038] border-2 border-[#032038]/20 transition shadow-sm cursor-pointer"
                 >
-                  All Courses 📚
+                  {t('allCoursesBtn', 'All Courses 📚')}
                 </button>
               </>
             ) : (
@@ -300,7 +303,7 @@ export default function CoursePlayer() {
                   onClick={handleContinueNextLesson}
                   className="btn-primary w-full py-3.5 text-sm sm:text-base font-black shadow-xl cursor-pointer flex items-center justify-center gap-2 hover:scale-102 transition-all"
                 >
-                  <span>Start Lesson {completionData.lessonIndex + 2} 🚀</span>
+                  <span>{t('startLessonBtn', { index: completionData.lessonIndex + 2, defaultValue: `Start Lesson ${completionData.lessonIndex + 2} 🚀` })}</span>
                   <ArrowRight size={18} />
                 </button>
                 <button
@@ -308,7 +311,7 @@ export default function CoursePlayer() {
                   onClick={() => navigate('/courses')}
                   className="w-full py-3.5 px-4 rounded-2xl font-black text-xs sm:text-sm bg-white/80 hover:bg-white text-[#032038] border-2 border-[#032038]/20 transition shadow-sm cursor-pointer"
                 >
-                  Back to Courses 📚
+                  {t('backToCoursesBtn', 'Back to Courses 📚')}
                 </button>
               </>
             )}
