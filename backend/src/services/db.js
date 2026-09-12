@@ -1,3 +1,14 @@
+import 'dotenv/config';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config();
+
 import { randomUUID } from 'crypto';
 import pg from 'pg';
 import { createClient } from '@supabase/supabase-js';
@@ -5,11 +16,17 @@ import { buildLeagueExam, LEAGUE_EXAMS } from '../data/leagueExams.js';
 
 const { Pool } = pg;
 
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://qpszdjgagfyhqsjceynm.supabase.co';
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || 'sb_publishable_Tz8DSDRzPBXu-3-jstBwmw_R1xTbu20';
-const DATABASE_URL = process.env.DATABASE_URL || '';
+function getSupabaseUrl() {
+  return process.env.SUPABASE_URL || 'https://szflnvnychymjlzxtchp.supabase.co';
+}
+function getSupabaseAnonKey() {
+  return process.env.SUPABASE_ANON_KEY || 'sb_publishable_aEQVEcGJoYloxt9RF3YmzQ_sTKn9TKU';
+}
+function getDatabaseUrl() {
+  return process.env.DATABASE_URL || '';
+}
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient(getSupabaseUrl(), getSupabaseAnonKey());
 
 let poolInstance = null;
 let useMemoryStore = false;
@@ -40,31 +57,47 @@ const memTables = {
 };
 
 function hasLiveDatabaseUrl() {
+  const url = getDatabaseUrl();
   return Boolean(
-    DATABASE_URL &&
-    !DATABASE_URL.includes('[YOUR-PASSWORD]') &&
-    (DATABASE_URL.startsWith('postgres://') || DATABASE_URL.startsWith('postgresql://'))
+    url &&
+    !url.includes('[YOUR-PASSWORD]') &&
+    !url.includes('[YOUR-PROJECT-REF]') &&
+    (url.startsWith('postgres://') || url.startsWith('postgresql://'))
   );
 }
 
 export function getPool() {
-  if (!hasLiveDatabaseUrl() || process.env.NODE_ENV === 'test' || useMemoryStore) {
-    useMemoryStore = true;
+  if (process.env.NODE_ENV === 'test') {
+    return createMemoryPool();
+  }
+
+  if (!hasLiveDatabaseUrl()) {
+    if (!useMemoryStore) {
+      console.error(
+        '\x1b[31m[DATABASE CRITICAL ERROR] Live DATABASE_URL is missing, placeholder, or invalid. Falling back to IN-MEMORY store! User registrations and data WILL NOT be persisted to PostgreSQL.\x1b[0m'
+      );
+      useMemoryStore = true;
+    }
+    return createMemoryPool();
+  }
+
+  if (useMemoryStore) {
     return createMemoryPool();
   }
 
   if (!poolInstance) {
-    const isLocalhost = DATABASE_URL.includes('localhost') || DATABASE_URL.includes('127.0.0.1');
+    const dbUrl = getDatabaseUrl();
+    const isLocalhost = dbUrl.includes('localhost') || dbUrl.includes('127.0.0.1');
     poolInstance = new Pool({
-      connectionString: DATABASE_URL,
+      connectionString: dbUrl,
       ssl: isLocalhost ? false : { rejectUnauthorized: false },
       max: 10,
       idleTimeoutMillis: 10000,
-      connectionTimeoutMillis: 2500,
+      connectionTimeoutMillis: 10000,
     });
 
     poolInstance.on('error', (err) => {
-      console.warn('Postgres connection note:', err.message);
+      console.error('[POSTGRES POOL ERROR]:', err.message);
     });
   }
   return poolInstance;
@@ -782,7 +815,7 @@ export async function initDb() {
     await seedLeagueExamsHelper();
     isInitialized = true;
   } catch (err) {
-    console.warn('Database initialization note:', err.message);
+    console.error('[DB initDb ERROR] Database initialization failed:', err.message);
   }
 }
 
@@ -984,17 +1017,18 @@ export async function getDbStatus() {
 
     return {
       ok: true,
-      engine: 'supabase-postgresql',
-      url: SUPABASE_URL,
+      engine: useMemoryStore ? 'in-memory-fallback' : 'supabase-postgresql',
+      url: getSupabaseUrl(),
       users: parseInt(userRes.rows[0]?.count || 0, 10),
       registrations: parseInt(regRes.rows[0]?.count || 0, 10),
       login_events: parseInt(loginRes.rows[0]?.count || 0, 10),
     };
   } catch (err) {
+    console.error('[DB getDbStatus ERROR]:', err.message);
     return {
       ok: false,
-      engine: 'supabase-postgresql',
-      url: SUPABASE_URL,
+      engine: useMemoryStore ? 'in-memory-fallback' : 'supabase-postgresql',
+      url: getSupabaseUrl(),
       error: err.message,
     };
   }
@@ -1087,7 +1121,15 @@ export async function createUser(data) {
 
     await client.query('COMMIT');
   } catch (err) {
-    await client.query('ROLLBACK');
+    console.error('[DB createUser ERROR] Failed to insert user into PostgreSQL:', {
+      message: err.message,
+      code: err.code,
+      detail: err.detail,
+      table: err.table,
+      constraint: err.constraint,
+      schema: err.schema,
+    });
+    await client.query('ROLLBACK').catch(() => {});
     throw err;
   } finally {
     client.release();

@@ -1,15 +1,17 @@
+import 'dotenv/config';
 import dotenv from 'dotenv';
-import express from 'express';
-import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fs from 'fs';
-import routes from './routes/index.js';
-import { assertStoreWritable, ensureDbInitialized, getDbStatus, initDb } from './services/db.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 dotenv.config();
+
+import express from 'express';
+import cors from 'cors';
+import fs from 'fs';
+import routes from './routes/index.js';
+import { assertStoreWritable, ensureDbInitialized, getDbStatus, initDb } from './services/db.js';
 
 const app = express();
 const PORT = process.env.PORT || 5001;
