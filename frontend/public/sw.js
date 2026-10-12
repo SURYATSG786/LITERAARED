@@ -1,7 +1,8 @@
-const CACHE_NAME = 'litera-ai-v4';
+const CACHE_NAME = 'litera-ai-v5';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/landing.html',
   '/manifest.webmanifest',
   '/favicon.svg',
   '/icon-192.png',
