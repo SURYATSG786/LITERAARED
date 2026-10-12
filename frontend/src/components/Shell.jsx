@@ -80,9 +80,9 @@ export default function Shell({ children }) {
   const lessonsCount = user?.course_progress?.lessons_completed?.length || 0;
 
   return (
-    <div className="min-h-[100dvh] flex flex-col text-[#032038] relative">
+    <div className="app-shell min-h-[100dvh] flex flex-col text-[#032038] relative">
       {/* 🌟 PURE GLASS TOP HEADERBAR */}
-      <header className="sticky top-0 z-40 px-2 sm:px-4 pt-2">
+      <header className="app-header sticky top-0 z-40 px-2 sm:px-4 pt-2">
         <div className="mx-auto flex w-full max-w-[1700px] items-center justify-between gap-1.5 sm:gap-2 rounded-2xl glass-header px-2.5 sm:px-4 py-2">
           {/* Left: Mobile Menu Button + Brand Logo */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
@@ -91,8 +91,10 @@ export default function Shell({ children }) {
               type="button"
               id="student-mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(true)}
-              className="xl:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-white/30 hover:bg-white/50 text-[#032038] border-2 border-[#032038]/30 transition shadow-sm cursor-pointer active:scale-95"
+              className="xl:hidden flex items-center justify-center w-11 h-11 rounded-xl bg-white/30 hover:bg-white/50 text-[#032038] border-2 border-[#032038]/30 transition shadow-sm cursor-pointer active:scale-95"
               aria-label="Open Navigation Menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="student-mobile-navigation"
             >
               <Menu size={20} className="text-[#032038]" />
             </button>
@@ -163,7 +165,7 @@ export default function Shell({ children }) {
             <button
               type="button"
               onClick={() => navigate('/profile')}
-              className="flex items-center justify-center w-8 h-8 rounded-full overflow-hidden border-2 border-amber-400 shadow-xs hover:scale-105 transition cursor-pointer bg-amber-50"
+              className="flex items-center justify-center w-11 h-11 rounded-full overflow-hidden border-2 border-amber-400 shadow-xs hover:scale-105 transition cursor-pointer bg-amber-50"
               title="Go to Profile"
             >
               <video
@@ -211,6 +213,7 @@ export default function Shell({ children }) {
 
             {/* Slide-out Sidebar Panel */}
             <motion.aside
+              id="student-mobile-navigation"
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
@@ -235,7 +238,7 @@ export default function Shell({ children }) {
                   <button
                     type="button"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-9 h-9 rounded-xl bg-sky-100/80 hover:bg-sky-200/80 text-[#032038] flex items-center justify-center border border-white/80 transition cursor-pointer"
+                    className="w-11 h-11 rounded-xl bg-sky-100/80 hover:bg-sky-200/80 text-[#032038] flex items-center justify-center border border-white/80 transition cursor-pointer"
                     aria-label="Close Navigation"
                   >
                     <X size={18} />
@@ -364,7 +367,7 @@ export default function Shell({ children }) {
       </AnimatePresence>
 
       {/* Main Page Container (Fills the whole page, no overlapping elements) */}
-      <main className="flex-1 w-full max-w-[1700px] mx-auto px-3 sm:px-6 pt-2 pb-3">
+      <main className="app-content flex-1 w-full max-w-[1700px] mx-auto px-3 sm:px-6 pt-2 pb-3">
         {children}
       </main>
 

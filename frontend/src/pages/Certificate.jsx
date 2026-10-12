@@ -372,7 +372,7 @@ export default function Certificate() {
   const unlockedCount = certificatesList.filter((c) => c.isUnlocked).length;
 
   return (
-    <div className="w-full flex-1 flex flex-col justify-between gap-2 p-1 sm:p-1.5 pb-2 h-[calc(100vh-110px)] min-h-0">
+    <div className="w-full flex-1 flex flex-col justify-between gap-2 p-1 sm:p-1.5 pb-2 lg:h-[calc(100dvh-110px)] min-h-0">
       <motion.div
         className="space-y-4"
         initial={{ opacity: 0, y: 16 }}
@@ -395,7 +395,7 @@ export default function Certificate() {
           {/* Active Certificate Parchment Display */}
           {activeCert && (
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-[#06304f]/75 flex items-center gap-1.5">
                   <Award size={16} className="text-[#0b6fb8]" />
                   <span>
@@ -419,7 +419,7 @@ export default function Certificate() {
               <motion.div
                 ref={certRef}
                 key={activeCert.id}
-                className="relative mx-auto w-full max-w-4xl aspect-[16/9]"
+                className="certificate-preview relative mx-auto w-full max-w-4xl aspect-[16/9]"
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}

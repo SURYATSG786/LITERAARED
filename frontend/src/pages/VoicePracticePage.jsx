@@ -229,7 +229,7 @@ export default function VoicePracticePage() {
   };
 
   return (
-    <div className="w-full flex-1 flex flex-col justify-between gap-2 p-1 sm:p-1.5 pb-2 h-[calc(100vh-110px)] min-h-0">
+    <div className="w-full flex-1 flex flex-col justify-between gap-2 p-1 sm:p-1.5 pb-2 lg:h-[calc(100dvh-110px)] min-h-0">
       {/* Top Banner Guide */}
       <div className="flex items-center justify-end shrink-0">
         <GuideBird
@@ -253,7 +253,7 @@ export default function VoicePracticePage() {
       {/* 1. WELCOME INITIAL SCREEN */}
       {screen === 'welcome' && (
         <motion.div
-          className="w-full rounded-3xl p-5 sm:p-8 lg:p-10 shadow-2xl border-2 border-indigo-300/40 flex-1 flex flex-col justify-center h-full min-h-0 relative overflow-hidden"
+          className="practice-intro w-full rounded-3xl p-5 sm:p-8 lg:p-10 shadow-2xl border-2 border-indigo-300/40 flex-1 flex flex-col justify-center h-full min-h-0 relative overflow-hidden"
           style={{
             boxShadow: '0 24px 48px -10px rgba(99, 102, 241, 0.18), 0 12px 28px -6px rgba(16, 185, 129, 0.16)',
           }}
@@ -265,6 +265,7 @@ export default function VoicePracticePage() {
             className="absolute inset-0 z-0 h-full w-full object-cover"
             src="/assets/voice_landing.mp4?v=1"
             autoPlay
+            muted
             loop
             playsInline
             preload="auto"

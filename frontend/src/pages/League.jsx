@@ -154,7 +154,7 @@ export default function League() {
   }
 
   return (
-    <div className={`w-full flex flex-col justify-between gap-3 p-1 sm:p-1.5 ${screen === 'welcome' ? 'h-[calc(100vh-110px)] min-h-0 pb-2' : 'pb-6'}`}>
+    <div className={`w-full flex flex-col justify-between gap-3 p-1 sm:p-1.5 ${screen === 'welcome' ? 'lg:h-[calc(100dvh-110px)] min-h-0 pb-2' : 'pb-6'}`}>
       {/* Top Banner Guide */}
       <div className="flex items-center justify-end shrink-0">
         <GuideBird message={t('birdGuideLeague', 'Compete and level up your league rank!')} mood="cheer" size={42} />
@@ -165,7 +165,7 @@ export default function League() {
       {/* 1. WELCOME INITIAL SCREEN (Using Uploaded Custom League Illustrated Banner) */}
       {screen === 'welcome' && (
         <motion.div
-          className="w-full rounded-3xl p-5 sm:p-8 lg:p-10 shadow-2xl border-2 border-rose-300/40 flex-1 flex flex-col justify-center h-full min-h-0 relative overflow-hidden"
+          className="practice-intro w-full rounded-3xl p-5 sm:p-8 lg:p-10 shadow-2xl border-2 border-rose-300/40 flex-1 flex flex-col justify-center h-full min-h-0 relative overflow-hidden"
           style={{
             boxShadow: '0 24px 48px -10px rgba(239, 68, 68, 0.18), 0 12px 28px -6px rgba(16, 185, 129, 0.16)',
           }}
@@ -177,6 +177,7 @@ export default function League() {
             className="absolute inset-0 h-full w-full object-cover"
             src="/assets/league_landing.mp4"
             autoPlay
+            muted
             loop
             playsInline
             aria-hidden="true"

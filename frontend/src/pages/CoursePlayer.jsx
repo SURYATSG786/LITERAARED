@@ -337,7 +337,7 @@ export default function CoursePlayer() {
   const imageKey = question?.image || lesson.image_key || 'book';
 
   return (
-    <div className="w-full flex-1 flex flex-col justify-between space-y-3 pb-1 h-[calc(100vh-105px)] min-h-[520px]">
+    <div className="w-full flex-1 flex flex-col justify-between space-y-3 pb-1 lg:h-[calc(100dvh-105px)] lg:min-h-[520px]">
       <div className="flex flex-wrap items-center justify-between gap-2 shrink-0">
         <div>
           <PageTitle
@@ -377,7 +377,7 @@ export default function CoursePlayer() {
                   {t('practice')} · {t('questionOf', { current: qIndex + 1, total: lesson.practice_questions.length })}
                 </div>
 
-                <div className="rounded-2xl bg-white/80 p-4 border-2 border-[#032038]/15 shadow-xs flex items-center justify-between gap-3 shrink-0">
+                <div className="question-prompt rounded-2xl bg-white/80 p-4 border-2 border-[#032038]/15 shadow-xs flex items-start justify-between gap-3 shrink-0">
                   <h2
                     className="display cursor-pointer text-lg sm:text-xl md:text-2xl font-black leading-snug text-[#032038] hover:text-[#055f9e]"
                     onClick={() => speakText(question.question, i18n.language)}

@@ -56,7 +56,7 @@ export default function AdminPortal() {
   }, []);
 
   return (
-    <div className="min-h-[100dvh] flex flex-col pb-8 text-[#032038] relative">
+    <div className="admin-shell min-h-[100dvh] flex flex-col pb-8 text-[#032038] relative">
       {/* Floating Glass Top Navigation Bar */}
       <AdminTopNav
         activeTab={activeTab}
@@ -66,7 +66,7 @@ export default function AdminPortal() {
       />
 
       {/* Main Container */}
-      <main className="mx-auto w-full max-w-[1700px] px-3 sm:px-6 lg:px-8 pt-4 sm:pt-5">
+      <main className="admin-content mx-auto w-full max-w-[1700px] px-3 sm:px-6 lg:px-8 pt-4 sm:pt-5">
         <AnimatePresence mode="wait">
           {activeTab === 'dashboard' && (
             <motion.div

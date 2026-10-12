@@ -800,3 +800,108 @@ html, body {
   width: 100%;
 }
 
+
+/* Shared responsive layout: content follows the device width and scrolls vertically. */
+.app-content, .admin-content { min-width: 0; }
+.app-content :where(.grid, .flex) > *, .admin-content :where(.grid, .flex) > * { min-width: 0; }
+.app-content :where(h1, h2, h3, p), .admin-content :where(h1, h2, h3, p),
+.sky-status-err, .banner-err { overflow-wrap: anywhere; }
+.app-content .overflow-x-auto, .admin-content .overflow-x-auto { max-width: 100%; overscroll-behavior-x: contain; }
+.app-content canvas { max-width: 100%; }
+.app-content :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea), .admin-content :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) { max-width: 100%; }
+
+@media screen and (max-width: 1023px) {
+  .app-content { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+  .app-content > div { gap: 1rem; }
+  .app-content > div > .grid { align-items: start; }
+}
+
+@media screen and (max-width: 767px) {
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { background-attachment: scroll; }
+  .app-content, .admin-content { padding-inline: max(0.75rem, env(safe-area-inset-left)) max(0.75rem, env(safe-area-inset-right)); }
+  .app-content :where(button, a.btn-primary, a.btn-ghost),
+  .admin-content :where(button, a.btn-primary, a.btn-ghost),
+  .app-header button { min-height: 44px; }
+  .app-content :where(button, .btn-primary, .btn-ghost), .admin-content button { white-space: normal; }
+  .app-content :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea), .admin-content :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea),
+  .sky-input, .sky-select { font-size: 16px; min-height: 48px; }
+  .app-content .guide-bird { width: 100%; justify-content: flex-end; }
+  .guide-bird .speech-bubble { min-width: 0; overflow-wrap: anywhere; }
+  .app-content > div > .grid { gap: 1rem; }
+  .app-content .grid > .h-full { height: auto; }
+  .app-content .glass-card { border-radius: 1.25rem; }
+  .app-content .glass-card.p-6 { padding: 1rem; }
+  .app-content [class~='md:col-span-5'] > [class*='min-h-'] { min-height: 220px; }
+  .practice-intro { padding: 0 !important; background: rgba(255,255,255,.95); }
+  .practice-intro > video { position: relative; display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: left center; }
+  .practice-intro > .relative { padding: 1.25rem; height: auto; }
+  .practice-intro p { margin-inline: auto; }
+  .practice-intro .grid-cols-3 { gap: .5rem; }
+  .practice-intro .grid-cols-3 > div { padding: .75rem .4rem; }
+  .practice-intro .grid-cols-3 p { font-size: .72rem; line-height: 1.4; }
+  .auth-page { padding: max(1rem, env(safe-area-inset-top)) max(.75rem, env(safe-area-inset-left)) max(1.5rem, env(safe-area-inset-bottom)); }
+  .auth-layout { max-width: 32rem; gap: 1rem; }
+  .auth-showcase .sky-title { font-size: clamp(2.25rem, 10vw, 3rem); }
+  .auth-showcase .sky-tagline { font-size: 1.1rem; }
+  .auth-card { max-height: none; padding: 1.1rem; border-radius: 1.4rem; }
+  .auth-card :where(input, select, button) { min-height: 48px; }
+  .auth-card .auth-field-grid { grid-template-columns: minmax(0, 1fr); }
+  .auth-card .auth-heading { font-size: 1.65rem; }
+  .role-page { padding-inline: .75rem; padding-bottom: max(1.25rem, env(safe-area-inset-bottom)); }
+  .role-card { padding: 1.25rem 1rem; border-radius: 1.4rem; }
+  .role-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+  .role-option { padding: .8rem .5rem; min-height: 10rem; }
+  .role-option-title { font-size: 1.1rem; }
+  .certificate-preview { aspect-ratio: auto; min-height: 480px; }
+  .certificate-preview > .absolute { position: relative; }
+  .certificate-preview > .absolute > div > div > .relative { padding: 1.5rem .75rem 1rem; text-align: center; }
+  .certificate-preview h2 { font-size: 1.25rem; letter-spacing: .025em; }
+  .certificate-preview h1 { font-size: 1.5rem; }
+  .certificate-preview .grid-cols-3 { grid-template-columns: 1fr; gap: 1rem; margin-top: 1.25rem; }
+  .certificate-preview .grid-cols-3 > div { text-align: center; justify-content: center; }
+  .certificate-preview .grid-cols-3 .flex { justify-content: center; }
+  .certificate-preview [class*='text-[8px]'], .certificate-preview [class*='text-[9px]'] { font-size: .7rem; }
+  .certificate-preview .w-40 { max-width: 100%; }
+  .certificate-preview .flex > .w-8 { display: none; }
+}
+
+@media screen and (max-width: 374px) {
+  .app-header .glass-header { gap: .25rem; padding-inline: .5rem; flex-wrap: wrap; }
+  .app-header .glass-header > .shrink-0 { gap: .25rem; }
+  .role-bird { align-items: center; }
+  .role-bird > svg { width: 64px; height: 64px; flex-shrink: 0; }
+  .role-speech { padding: .65rem; font-size: .8rem; }
+  .app-content .grid-cols-3:not([class*='sm:grid-cols']):not([class*='md:grid-cols']) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media screen and (max-width: 767px) {
+  .practice-actions > div { width: 100%; display: flex; }
+  .practice-actions button { flex: 1; justify-content: center; overflow-wrap: normal; }
+  .practice-actions svg { flex-shrink: 0; }
+  .app-content .grid-cols-2 > div > .flex .truncate { white-space: normal; overflow: visible; }
+}
+
+@media screen and (max-width: 767px) {
+  .question-prompt > h2 { flex: 1; font-size: 1.1rem; line-height: 1.5; }
+  .question-prompt > button { width: 44px; padding: .5rem; justify-content: center; flex-shrink: 0; }
+  .question-prompt > button svg { flex-shrink: 0; }
+  .app-header .glass-header { flex-wrap: wrap; row-gap: .5rem; }
+  .admin-content .overflow-x-auto table { min-width: 480px; }
+}
+
+@media screen and (max-width: 1023px) {
+  .auth-layout { grid-template-columns: minmax(0, 1fr); max-width: 34rem; min-height: auto; }
+  .auth-card { max-height: none; justify-self: center; }
+  .auth-showcase .sky-title { font-size: clamp(2.25rem, 6vw, 3.25rem); }
+  .auth-feature-grid, .auth-social { display: none; }
+}
+@media screen and (max-width: 767px) {
+  .app-content button svg, .admin-content button svg { flex-shrink: 0; }
+}
+
+@media screen and (max-width: 767px) {
+  .admin-shell .fixed :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea),
+  .app-shell .fixed :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) { font-size: 16px; min-height: 48px; max-width: 100%; }
+  .admin-shell .fixed button, .app-shell .fixed button { min-height: 44px; }
+}

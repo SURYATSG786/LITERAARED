@@ -195,7 +195,7 @@ export default function Courses() {
   const coursesToRender = (data?.courses && data.courses.length > 0) ? data.courses : initialStaticCourses;
 
   return (
-    <div className="w-full flex-1 flex flex-col justify-between gap-2.5 sm:gap-3 p-1 sm:p-1.5 pb-2 h-[calc(100vh-105px)] min-h-0">
+    <div className="w-full flex-1 flex flex-col justify-between gap-2.5 sm:gap-3 p-1 sm:p-1.5 pb-2 lg:h-[calc(100dvh-105px)] min-h-0">
       {/* Top Banner Guide */}
       <div className="flex items-center justify-end shrink-0">
         <GuideBird

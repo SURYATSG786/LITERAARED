@@ -227,12 +227,12 @@ export default function Community() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div className="flex items-center justify-between border-b-2 border-[#032038]/12 pb-4 mb-5">
+          <div className="flex items-start justify-between gap-3 border-b-2 border-[#032038]/12 pb-4 mb-5">
             <div className="flex items-center gap-2">
               <Sparkles className="text-amber-500" size={22} />
               <h2 className="text-xl font-black text-[#032038]">{t('createPost')}</h2>
             </div>
-            <span className="text-xs font-black px-3.5 py-1 rounded-full bg-[#055f9e]/15 text-[#055f9e] uppercase border border-[#055f9e]/30">
+            <span className="shrink-0 text-xs font-black px-3.5 py-1 rounded-full bg-[#055f9e]/15 text-[#055f9e] uppercase border border-[#055f9e]/30">
               {i18n.language?.toUpperCase() || 'EN'}
             </span>
           </div>

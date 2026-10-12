@@ -33,7 +33,7 @@ export function SpeakButton({ text, label, className = '', language }) {
       aria-label={speaking ? t('stop', 'Stop') : (label || t('listen'))}
     >
       {speaking ? <Square size={16} /> : <Volume2 size={16} />}
-      {speaking ? t('stop', 'Stop') : (label || t('listen'))}
+      {label !== '' && (speaking ? t('stop', 'Stop') : (label || t('listen')))}
     </button>
   );
 }

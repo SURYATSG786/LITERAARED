@@ -158,7 +158,7 @@ export default function Dashboard() {
   const firstName = user?.name?.split(' ')[0] || 'Learner';
 
   return (
-    <div className="w-full flex-1 flex flex-col justify-between gap-2 sm:gap-2.5 p-1 sm:p-1.5 pb-2 h-[calc(100vh-105px)] min-h-0">
+    <div className="w-full flex-1 flex flex-col justify-between gap-2 sm:gap-2.5 p-1 sm:p-1.5 pb-2 lg:h-[calc(100dvh-105px)] min-h-0">
       {/* 1. Personalized Welcome Banner with Guide Bird (Sunshine Multicolor Gradient) */}
       <motion.div
         className="relative overflow-hidden rounded-3xl p-3.5 sm:p-4 border-2 shrink-0"
@@ -299,7 +299,7 @@ export default function Dashboard() {
         {/* League (Gold-to-Amber Multicolor Gradient) */}
         <div
           onClick={() => navigate('/league')}
-          className="rounded-2xl p-3 border-2 border-[#f59e0b]/60 flex items-center justify-between cursor-pointer hover:scale-102 transition-transform"
+          className="col-span-2 sm:col-span-1 rounded-2xl p-3 border-2 border-[#f59e0b]/60 flex items-center justify-between cursor-pointer hover:scale-102 transition-transform"
           style={{
             background: 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 40%, #fde68a 75%, #fed7aa 100%)',
             boxShadow: '0 14px 28px -6px rgba(0, 0, 0, 0.12), 0 6px 14px -3px rgba(217, 119, 6, 0.25)',

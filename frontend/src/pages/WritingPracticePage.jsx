@@ -459,7 +459,7 @@ export default function WritingPracticePage() {
   }
 
   return (
-    <div className="w-full flex-1 flex flex-col justify-between gap-2.5 p-1 sm:p-1.5 pb-2 h-[calc(100vh-110px)] min-h-0">
+    <div className="w-full flex-1 flex flex-col justify-between gap-2.5 p-1 sm:p-1.5 pb-2 lg:h-[calc(100dvh-110px)] min-h-0">
       {/* Top Banner Guide */}
       <div className="flex items-center justify-end shrink-0">
         <GuideBird
@@ -482,7 +482,7 @@ export default function WritingPracticePage() {
       {/* 1. WELCOME SCREEN (Using Uploaded Custom Writing Illustrated Banner) */}
       {screen === 'welcome' && (
         <motion.div
-          className="w-full rounded-3xl p-5 sm:p-8 lg:p-10 shadow-2xl border-2 border-purple-300/40 flex-1 flex flex-col justify-center h-full min-h-0 relative overflow-hidden"
+          className="practice-intro w-full rounded-3xl p-5 sm:p-8 lg:p-10 shadow-2xl border-2 border-purple-300/40 flex-1 flex flex-col justify-center h-full min-h-0 relative overflow-hidden"
           style={{
             boxShadow: '0 24px 48px -10px rgba(147, 51, 234, 0.18), 0 12px 28px -6px rgba(16, 185, 129, 0.16)',
           }}
@@ -494,6 +494,7 @@ export default function WritingPracticePage() {
             className="absolute inset-0 h-full w-full object-cover"
             src="/assets/writing_landing.mp4"
             autoPlay
+            muted
             loop
             playsInline
             aria-hidden="true"
@@ -946,7 +947,7 @@ export default function WritingPracticePage() {
                 
 
                 {/* Control Action Buttons Bar */}
-                <div className="flex items-center justify-between gap-2 pt-0.5 shrink-0">
+                <div className="practice-actions flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-2 pt-0.5 shrink-0">
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
@@ -1017,7 +1018,7 @@ export default function WritingPracticePage() {
       {/* 3. SESSION COMPLETED SCREEN */}
       {screen === 'completed' && (
         <motion.div
-          className="w-full rounded-3xl p-4 sm:p-8 lg:p-10 shadow-2xl border-2 border-emerald-300/60 flex-1 flex flex-col justify-center h-full min-h-0 relative overflow-hidden"
+          className="practice-intro w-full rounded-3xl p-4 sm:p-8 lg:p-10 shadow-2xl border-2 border-emerald-300/60 flex-1 flex flex-col justify-center h-full min-h-0 relative overflow-hidden"
           style={{
             boxShadow: '0 24px 48px -10px rgba(16, 185, 129, 0.25), 0 12px 28px -6px rgba(147, 51, 234, 0.18)',
           }}
@@ -1028,6 +1029,7 @@ export default function WritingPracticePage() {
             className="absolute inset-0 h-full w-full object-cover"
             src="/assets/writing_completion_bird.mp4"
             autoPlay
+            muted
             loop
             playsInline
             aria-hidden="true"

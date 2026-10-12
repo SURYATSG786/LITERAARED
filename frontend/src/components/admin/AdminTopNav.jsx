@@ -70,7 +70,7 @@ export default function AdminTopNav({
   const adminName = user?.name || (user?.email ? user.email.split('@')[0] : 'Administrator');
 
   return (
-    <header className="sticky top-0 z-40 px-2 sm:px-4 pt-2">
+    <header className="app-header sticky top-0 z-40 px-2 sm:px-4 pt-2">
       <div className="mx-auto flex w-full max-w-[1700px] items-center justify-between gap-2 rounded-2xl glass-header px-3 sm:px-5 py-2.5 shadow-xl border border-white/60">
         {/* Left: Mobile Menu Toggle + Brand */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -79,8 +79,10 @@ export default function AdminTopNav({
             type="button"
             id="admin-mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-white/30 hover:bg-white/50 text-[#032038] border border-white/60 transition shadow-sm cursor-pointer active:scale-95"
+            className="lg:hidden flex items-center justify-center w-11 h-11 rounded-xl bg-white/30 hover:bg-white/50 text-[#032038] border border-white/60 transition shadow-sm cursor-pointer active:scale-95"
             aria-label="Open Admin Navigation Menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="admin-mobile-navigation"
           >
             <Menu size={22} className="text-[#032038]" />
           </button>
@@ -202,6 +204,7 @@ export default function AdminTopNav({
 
             {/* Slide-out Admin Drawer */}
             <motion.aside
+              id="admin-mobile-navigation"
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
@@ -226,7 +229,7 @@ export default function AdminTopNav({
                   <button
                     type="button"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-9 h-9 rounded-xl bg-sky-100/80 hover:bg-sky-200/80 text-[#032038] flex items-center justify-center border border-white/80 transition cursor-pointer"
+                    className="w-11 h-11 rounded-xl bg-sky-100/80 hover:bg-sky-200/80 text-[#032038] flex items-center justify-center border border-white/80 transition cursor-pointer"
                     aria-label="Close Navigation"
                   >
                     <X size={18} />

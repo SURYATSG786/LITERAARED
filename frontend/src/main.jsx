@@ -10,7 +10,7 @@ createRoot(document.getElementById('root')).render(
 );
 
 // Register Service Worker for PWA
-if ('serviceWorker' in navigator) {
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/sw.js')
@@ -23,3 +23,10 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+
+// Development previews must always reflect the latest layout changes.
+if (import.meta.env.DEV && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    registrations.forEach((registration) => registration.unregister());
+  });
+}
