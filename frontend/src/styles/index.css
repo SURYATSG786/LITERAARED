@@ -891,7 +891,7 @@ html, body {
 }
 
 @media screen and (max-width: 1023px) {
-  .auth-layout { grid-template-columns: minmax(0, 1fr); max-width: 34rem; min-height: auto; }
+  .auth-page .auth-layout { grid-template-columns: minmax(0, 1fr); max-width: 34rem; min-height: auto; }
   .auth-card { max-height: none; justify-self: center; }
   .auth-showcase .sky-title { font-size: clamp(2.25rem, 6vw, 3.25rem); }
   .auth-feature-grid, .auth-social { display: none; }
