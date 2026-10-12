@@ -363,7 +363,7 @@ export const speakText = (input, lang, forceNativeOnly = false, isAuto = false) 
       }
 
       // Fetch authentic native pronunciation from backend Google TTS proxy
-      const token = typeof localStorage !== 'undefined' ? localStorage.getItem('literaai_token') : null;
+      const token = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('literaai_token') : null;
       fetch('/api/ai/tts', {
         method: 'POST',
         headers: {

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
@@ -11,13 +11,13 @@ const MENTOR_CODE_PATTERN = /^redmentor\d+$/;
 
 export default function MentorLogin() {
   const { t, i18n } = useTranslation();
-  const { user, mentorLogin } = useAuth();
+  const { mentorLogin, logout } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', mentorCode: '', uiLanguage: (i18n.language || 'en').split('-')[0] });
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
-  if (user) return <Navigate to={user.role === 'mentor' ? '/mentor-dashboard' : '/dashboard'} replace />;
+  useEffect(() => { logout(); }, [logout]);
 
   function setField(key, value) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -37,7 +37,7 @@ export default function MentorLogin() {
     setBusy(true);
     try {
       await mentorLogin(form);
-      navigate('/mentor-dashboard');
+      navigate('/mentor-dashboard', { replace: true });
     } catch (err) {
       setError(err.message || t('mentorLoginError'));
     } finally {

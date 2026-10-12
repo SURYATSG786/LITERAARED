@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'motion/react';
 import { useAuth } from '../contexts/AuthContext';
@@ -23,7 +23,7 @@ const FEATURES = [
 
 export default function Register() {
   const { t, i18n } = useTranslation();
-  const { user, register } = useAuth();
+  const { register, logout } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
@@ -37,7 +37,7 @@ export default function Register() {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
-  if (user) return <Navigate to="/dashboard" replace />;
+  useEffect(() => { logout(); }, [logout]);
 
   function setField(key, value) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -49,7 +49,7 @@ export default function Register() {
     setError('');
     try {
       await register(form);
-      navigate('/dashboard');
+      navigate('/dashboard', { replace: true });
     } catch (err) {
       setError(err.message || t('error'));
     } finally {

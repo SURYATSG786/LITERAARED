@@ -1,17 +1,20 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
 import api from '../api/client';
+import { initializeSession, writeSessionToken, clearSessionToken } from '../auth/session';
 import { setAppLanguage } from '../i18n';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(() => localStorage.getItem('literaai_token'));
+  const [token, setToken] = useState(() => initializeSession(window.location.pathname));
   const [loading, setLoading] = useState(true);
+  const sessionVersion = useRef(0);
   const [justLoggedIn, setJustLoggedIn] = useState(false);
 
   useEffect(() => {
     let alive = true;
+    const version = sessionVersion.current;
     async function boot() {
       if (!token) {
         setLoading(false);
@@ -19,13 +22,14 @@ export function AuthProvider({ children }) {
       }
       try {
         const { user: me } = await api.me();
-        if (!alive) return;
+        if (!alive || version !== sessionVersion.current) return;
         setUser(me);
         if (me.uiLanguage || me.preferred_language) {
           await setAppLanguage(me.uiLanguage || me.preferred_language);
         }
       } catch {
-        localStorage.removeItem('literaai_token');
+        if (!alive || version !== sessionVersion.current) return;
+        clearSessionToken();
         setToken(null);
         setUser(null);
       } finally {
@@ -38,7 +42,8 @@ export function AuthProvider({ children }) {
 
   async function login(email, password, languagePair = {}) {
     const data = await api.login({ email, password, ...languagePair });
-    localStorage.setItem('literaai_token', data.token);
+    sessionVersion.current += 1;
+    writeSessionToken(data.token);
     setToken(data.token);
     setUser(data.user);
     if (data.user.uiLanguage || data.user.preferred_language) {
@@ -50,7 +55,8 @@ export function AuthProvider({ children }) {
 
   async function register(payload) {
     const data = await api.register(payload);
-    localStorage.setItem('literaai_token', data.token);
+    sessionVersion.current += 1;
+    writeSessionToken(data.token);
     setToken(data.token);
     setUser(data.user);
     await setAppLanguage(data.user.uiLanguage || payload.uiLanguage || payload.preferred_language);
@@ -60,7 +66,8 @@ export function AuthProvider({ children }) {
 
   async function mentorLogin(payload) {
     const data = await api.mentorLogin(payload);
-    localStorage.setItem('literaai_token', data.token);
+    sessionVersion.current += 1;
+    writeSessionToken(data.token);
     setToken(data.token);
     setUser(data.user);
     await setAppLanguage(data.user.uiLanguage || payload.uiLanguage);
@@ -68,19 +75,22 @@ export function AuthProvider({ children }) {
     return data.user;
   }
 
-  function logout() {
-    localStorage.removeItem('literaai_token');
+  const logout = useCallback(() => {
+    sessionVersion.current += 1;
+    clearSessionToken();
     setToken(null);
     setUser(null);
     setJustLoggedIn(false);
-  }
+    setLoading(false);
+  }, []);
 
   function refreshUser(next) {
     if (next && typeof next === 'object') {
       setUser(next);
     } else {
+      const version = sessionVersion.current;
       api.me().then((res) => {
-        if (res?.user) setUser(res.user);
+        if (version === sessionVersion.current && res?.user) setUser(res.user);
       }).catch(() => {});
     }
   }

@@ -1,7 +1,8 @@
+import { readSessionToken } from '../auth/session';
 const API_BASE = import.meta.env.VITE_API_URL || '';
 
 function getToken() {
-  return localStorage.getItem('literaai_token');
+  return readSessionToken();
 }
 
 async function request(path, options = {}) {
@@ -10,7 +11,7 @@ async function request(path, options = {}) {
     ...(options.headers || {}),
   };
   const token = getToken();
-  if (token) headers.Authorization = `Bearer ${token}`;
+  if (token && !path.startsWith('/api/auth/')) headers.Authorization = `Bearer ${token}`;
 
   let res;
   try {

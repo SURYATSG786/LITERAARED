@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'motion/react';
 import { useAuth } from '../contexts/AuthContext';
@@ -9,7 +9,7 @@ import BackendStatus from '../components/BackendStatus';
 
 export default function Landing() {
   const { t, i18n } = useTranslation();
-  const { user, login } = useAuth();
+  const { login, logout } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,17 +18,15 @@ export default function Landing() {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
-  if (user) {
-    return <Navigate to={user.role === 'mentor' ? '/mentor-dashboard' : '/dashboard'} replace />;
-  }
+  useEffect(() => { logout(); }, [logout]);
 
   async function onSubmit(e) {
     e.preventDefault();
     setBusy(true);
     setError('');
     try {
-      await login(email, password, { uiLanguage, learningLanguage });
-      navigate('/dashboard');
+      const signedInUser = await login(email, password, { uiLanguage, learningLanguage });
+      navigate(signedInUser.role === 'mentor' || signedInUser.role === 'admin' ? '/mentor-dashboard' : '/dashboard', { replace: true });
     } catch (err) {
       setError(err.message || t('error'));
     } finally {
