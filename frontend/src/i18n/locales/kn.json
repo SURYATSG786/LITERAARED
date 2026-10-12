@@ -429,5 +429,7 @@
   "actionFailed": "ಕ್ರಿಯೆ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಪುನಃ ಪ್ರಯತ್ನಿಸಿ.",
   "streakAndGoal": "ಸರಣಿ ಮತ್ತು ಸರಣಿ ಗುರಿ",
   "currentStreak": "ಪ್ರಸ್ತುತ ಸರಣಿ",
-  "setStreakGoal": "ಸರಣಿ ಗುರಿಯನ್ನು ಹೊಂದಿಸಿ"
+  "setStreakGoal": "ಸರಣಿ ಗುರಿಯನ್ನು ಹೊಂದಿಸಿ",
+  "voiceWordsLabel": "ಪದಗಳು",
+  "voiceSentencesLabel": "ವಾಕ್ಯಗಳು"
 }

@@ -44,7 +44,7 @@ export default function Landing() {
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.55 }}
-            className="auth-showcase flex flex-col justify-center"
+            className="auth-showcase auth-compact-brand flex flex-col justify-center"
           >
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-4">
               <motion.div

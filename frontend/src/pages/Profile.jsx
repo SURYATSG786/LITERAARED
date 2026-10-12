@@ -263,7 +263,7 @@ export default function Profile() {
                       onClick={() => navigate('/writing-practice')}
                       className="btn-primary w-full py-1 px-1 text-[9.5px] sm:text-[10px] font-black flex items-center justify-center gap-1 shadow-xs cursor-pointer text-black !rounded-lg"
                     >
-                      <span className="truncate">{t('startWriting') || 'Start Writing'}</span>
+                      <span className="sm:truncate">{t('startWriting') || 'Start Writing'}</span>
                       <ArrowRight size={10} className="shrink-0" />
                     </button>
                   )}
@@ -321,7 +321,7 @@ export default function Profile() {
                       onClick={() => navigate('/voice-practice')}
                       className="btn-primary w-full py-1 px-1 text-[9.5px] sm:text-[10px] font-black flex items-center justify-center gap-1 shadow-xs cursor-pointer text-black !rounded-lg"
                     >
-                      <span className="truncate">{t('startSpeaking') || 'Start Speaking'}</span>
+                      <span className="sm:truncate">{t('startSpeaking') || 'Start Speaking'}</span>
                       <ArrowRight size={10} className="shrink-0" />
                     </button>
                   )}

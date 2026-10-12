@@ -558,7 +558,7 @@ export default function Dashboard() {
             </div>
 
             {/* Bottom Navigation Buttons */}
-            <div className="pt-2 flex items-center gap-2.5 border-t border-slate-200/70 mt-1.5 shrink-0">
+            <div className="dashboard-actions pt-2 flex items-center gap-2.5 border-t border-slate-200/70 mt-1.5 shrink-0">
               <button
                 className="btn-primary py-2.5 px-6 text-xs sm:text-sm font-black flex items-center justify-center gap-2 shadow-md cursor-pointer hover:scale-101 transition-all text-black"
                 type="button"

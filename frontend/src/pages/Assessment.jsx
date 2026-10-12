@@ -161,7 +161,7 @@ export default function Assessment() {
           {q ? (
             <motion.div
               key={q.id}
-              className="glass-card rounded-3xl p-6 sm:p-8 border-2 border-[#032038]/20 shadow-xl flex-1 flex flex-col justify-between h-full"
+              className="lesson-panel glass-card rounded-3xl p-6 sm:p-8 border-2 border-[#032038]/20 shadow-xl flex-1 flex flex-col justify-between h-full"
               initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -24 }}
@@ -181,14 +181,14 @@ export default function Assessment() {
                       <SpeakButton text={q.question} label="" className="shrink-0 p-2.5 rounded-xl border border-[#032038]/20 hover:bg-white cursor-pointer" />
                     </div>
 
-                    <div className="flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[200px]">
+                    <div className="lesson-illustration flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[200px]">
                       <QuestionImage imageKey={q.image} question={q.question} questionId={q.id} className="w-full h-full flex-1 border-2 border-[#032038]/15" />
                     </div>
                   </div>
 
                   {/* Right Column: 4 Options & Action Button */}
                   <div className="md:col-span-7 flex flex-col justify-between h-full space-y-3 py-2">
-                    <div className="grid gap-3 flex-1">
+                    <div className="lesson-options grid gap-3 flex-1">
                       {q.options.map((opt, optIndex) => (
                         <button
                           key={`${q.id}-${optIndex}`}

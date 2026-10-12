@@ -229,7 +229,7 @@ export default function VoicePracticePage() {
   };
 
   return (
-    <div className="w-full flex-1 flex flex-col justify-between gap-2 p-1 sm:p-1.5 pb-2 lg:h-[calc(100dvh-110px)] min-h-0">
+    <div className="voice-page w-full flex-1 flex flex-col justify-between gap-2 p-1 sm:p-1.5 pb-2 lg:h-[calc(100dvh-110px)] min-h-0">
       {/* Top Banner Guide */}
       <div className="flex items-center justify-end shrink-0">
         <GuideBird
@@ -380,7 +380,7 @@ export default function VoicePracticePage() {
       {/* 2. INTERACTIVE PRACTICE SCREEN (2-Column Filled Layout Matching Writing Practice) */}
       {screen === 'practice' && (
         <motion.div
-          className="glass-card rounded-3xl p-3.5 sm:p-4 shadow-xl border-2 border-[#032038]/20 flex-1 flex flex-col justify-between space-y-2 h-full min-h-0 overflow-hidden"
+          className="practice-panel glass-card rounded-3xl p-3.5 sm:p-4 shadow-xl border-2 border-[#032038]/20 flex-1 flex flex-col justify-between space-y-2 h-full min-h-0 overflow-hidden"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           key={`${voiceLevel}_${currentIndex}_${currentLang}`}
@@ -388,15 +388,17 @@ export default function VoicePracticePage() {
           {/* Top Roadmap / Quick Navigation Tabs (For Structured 2-Levels: Words -> Sentences) */}
           {isStructured && (
             <div className="shrink-0 space-y-1.5 border-b border-black/10 pb-2">
-              <div className="flex items-center justify-between text-xs font-black text-black">
-                <span className="inline-flex items-center rounded-full bg-indigo-100 text-indigo-900 px-3 py-0.5 font-black text-[11px] border border-indigo-300 shadow-xs">
-                  {voiceLevel === 'word' &&
+              <div className="practice-status flex items-center justify-between text-xs font-black text-black">
+                <span className="practice-status-title inline-flex items-center rounded-full bg-indigo-100 text-indigo-900 px-3 py-0.5 font-black text-[11px] border border-indigo-300 shadow-xs">
+                  <span className="sm:hidden">{voiceLevel === 'word' ? currentItem?.word : t('level2Badge', 'Level 2 • Sentence Fluency')} · {currentIndex + 1}/{activeItems.length}</span>
+                  <span className="hidden sm:inline">
+                    {voiceLevel === 'word' &&
                     t('wordSoundHeader', { word: currentItem?.word, current: currentIndex + 1, total: activeItems.length, defaultValue: `Word ${currentItem?.word} (${currentIndex + 1} of ${activeItems.length}): Vocabulary Sound` })}
                   {voiceLevel === 'sentence' &&
-                    t('sentenceFluencyHeader', { current: currentIndex + 1, total: activeItems.length, defaultValue: `Sentence ${currentIndex + 1} of ${activeItems.length}: Fluency Practice` })}
+                    t('sentenceFluencyHeader', { current: currentIndex + 1, total: activeItems.length, defaultValue: `Sentence ${currentIndex + 1} of ${activeItems.length}: Fluency Practice` })}</span>
                 </span>
 
-                <div className="flex items-center gap-2">
+                <div className="practice-status-meta flex items-center gap-2">
                   <span className="text-xs font-black text-black">
                     {currentIndex + 1} / {activeItems.length} {t('completed', 'Done')}
                   </span>
@@ -407,7 +409,7 @@ export default function VoicePracticePage() {
               </div>
 
               {/* 2 Level Stepper Tabs (Words -> Sentences) */}
-              <div className="grid grid-cols-2 gap-2 shrink-0">
+              <div className="practice-tabs grid grid-cols-2 gap-2 shrink-0">
                 <button
                   type="button"
                   onClick={() => handleLevelChange('word')}
@@ -418,7 +420,7 @@ export default function VoicePracticePage() {
                   }`}
                 >
                   <Volume2 size={15} />
-                  <span>{t('voiceLevel2Tab', { count: isEnglish ? 26 : 10, defaultValue: `1. Words (${isEnglish ? 26 : 10}) 🗣️` })}</span>
+                  <span className="sm:hidden">{t('voiceWordsLabel', 'Words')}</span><span className="hidden sm:inline">{t('voiceLevel2Tab', { count: isEnglish ? 26 : 10, defaultValue: `1. Words (${isEnglish ? 26 : 10}) 🗣️` })}</span>
                 </button>
 
                 <button
@@ -431,13 +433,13 @@ export default function VoicePracticePage() {
                   }`}
                 >
                   <Languages size={15} />
-                  <span>{t('voiceLevel3Tab', { count: 10, defaultValue: '2. Sentences (10) 💬' })}</span>
+                  <span className="sm:hidden">{t('voiceSentencesLabel', 'Sentences')}</span><span className="hidden sm:inline">{t('voiceLevel3Tab', { count: 10, defaultValue: '2. Sentences (10) 💬' })}</span>
                 </button>
               </div>
 
               {/* Quick Navigation Carousel for Word level */}
               {voiceLevel === 'word' && (
-                <div className="flex items-center gap-1.5 overflow-x-auto py-1 no-scrollbar scroll-smooth">
+                <div className="practice-carousel flex items-center gap-1.5 overflow-x-auto py-1 no-scrollbar scroll-smooth">
                   {activeItems.map((item, idx) => {
                     const isCurrent = currentIndex === idx;
                     const itemResult = results[`${voiceLevel}_${idx}`];
@@ -495,8 +497,8 @@ export default function VoicePracticePage() {
           {/* 2-Column Balanced Layout */}
           <div className="grid gap-4 md:grid-cols-12 flex-1 h-full items-stretch min-h-0 py-1">
             {/* Left Column (5/12): Target Information Card ABOVE + Picture Box BELOW */}
-            <div className="md:col-span-5 flex flex-col h-full gap-2.5 min-h-0 justify-between">
-              <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.14em] text-indigo-900 bg-indigo-100 px-3 py-1 rounded-full border border-indigo-300 self-start shrink-0">
+            <div className="practice-context md:col-span-5 flex flex-col h-full gap-2.5 min-h-0 justify-between">
+              <div className="practice-phase inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.14em] text-indigo-900 bg-indigo-100 px-3 py-1 rounded-full border border-indigo-300 self-start shrink-0">
                 <Mic size={12} />
                 <span>
                   {voiceLevel === 'word'
@@ -506,7 +508,7 @@ export default function VoicePracticePage() {
               </div>
 
               {/* Target Text / Question Card placed ABOVE the picture */}
-              <div className="rounded-2xl bg-white/95 p-3 sm:p-4 border-2 border-black/15 shadow-xs flex items-center justify-between gap-3 shrink-0">
+              <div className="practice-target rounded-2xl bg-white/95 p-3 sm:p-4 border-2 border-black/15 shadow-xs flex items-center justify-between gap-3 shrink-0">
                 <div className="text-left flex-1 min-w-0">
                   <span className="text-[10px] font-black uppercase text-slate-500 block mb-0.5">
                     {t('targetToSay', 'Say this out loud:')}
@@ -527,7 +529,7 @@ export default function VoicePracticePage() {
               </div>
 
               {/* 3D Animated Emoji Picture Box placed BELOW the question card */}
-              <div className="relative flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[150px] bg-gradient-to-br from-[#fdfbf7] via-[#f8f5ee] to-[#f3ece0] border-2 border-black/15 items-center justify-center">
+              <div className="practice-illustration relative flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[150px] bg-gradient-to-br from-[#fdfbf7] via-[#f8f5ee] to-[#f3ece0] border-2 border-black/15 items-center justify-center">
                 <motion.div
                   className="absolute w-36 h-36 rounded-full pointer-events-none blur-xl"
                   style={{ background: 'rgba(235, 210, 165, 0.45)' }}
@@ -565,7 +567,7 @@ export default function VoicePracticePage() {
 
             {/* Right Column (7/12): Microphone Speaking & Accuracy Feedback */}
             <div className="md:col-span-7 flex flex-col justify-between h-full space-y-2 min-h-0">
-              <div className="relative rounded-2xl bg-white border-2 border-[#032038]/25 shadow-inner p-4 flex flex-col items-center justify-center text-center flex-1 min-h-[220px]">
+              <div className="voice-recorder relative rounded-2xl bg-white border-2 border-[#032038]/25 shadow-inner p-4 flex flex-col items-center justify-center text-center flex-1 min-h-[220px]">
                 {!isSupported ? (
                   <div className="rounded-2xl bg-amber-500/20 p-3 text-center text-xs font-black text-amber-900 border-2 border-amber-500/40">
                     {t('micNotSupported', 'Browser speech recognition is not supported in this browser. Please use Chrome or Edge.')}
@@ -584,6 +586,7 @@ export default function VoicePracticePage() {
                       <button
                         type="button"
                         onClick={toggleListen}
+                        aria-label={listening ? t('listeningMic', 'Listening... Speak now!') : t('tapMic', 'Start speaking')}
                         className={`relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full flex flex-col items-center justify-center shadow-xl transition-all cursor-pointer ${
                           listening
                             ? 'bg-red-500 text-white scale-105 ring-4 ring-red-300 animate-pulse'
@@ -594,7 +597,7 @@ export default function VoicePracticePage() {
                       </button>
                     </div>
 
-                    <span className="text-xs sm:text-sm font-black text-black">
+                    <span className="voice-recorder-prompt text-xs sm:text-sm font-black text-black">
                       {listening
                         ? t('listeningMic', 'Listening... Speak now!')
                         : t('tapToSpeak', 'Tap mic to start speaking')}

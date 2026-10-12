@@ -443,5 +443,7 @@
   "actionFailed": "செயல் தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.",
   "streakAndGoal": "தொடர்ச்சி & தொடர் இலக்கு",
   "currentStreak": "தற்போதைய தொடர்ச்சி",
-  "setStreakGoal": "தொடர் இலக்கை அமைக்கவும்"
+  "setStreakGoal": "தொடர் இலக்கை அமைக்கவும்",
+  "voiceWordsLabel": "சொற்கள்",
+  "voiceSentencesLabel": "வாக்கியங்கள்"
 }

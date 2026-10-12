@@ -365,7 +365,7 @@ export default function CoursePlayer() {
         <AnimatePresence mode="wait">
           <motion.section
             key={`${lessonIndex}-${qIndex}`}
-            className="glass-card w-full rounded-3xl p-6 sm:p-8 border-2 border-[#032038]/20 shadow-xl flex-1 flex flex-col justify-between h-full"
+            className="lesson-panel glass-card w-full rounded-3xl p-6 sm:p-8 border-2 border-[#032038]/20 shadow-xl flex-1 flex flex-col justify-between h-full"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
@@ -388,14 +388,14 @@ export default function CoursePlayer() {
                   <SpeakButton text={question.question} label="" className="shrink-0 p-2.5 rounded-xl border border-[#032038]/20 hover:bg-white cursor-pointer" />
                 </div>
 
-                <div className="flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[200px]">
+                <div className="lesson-illustration flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[200px]">
                   <QuestionImage imageKey={imageKey} question={question.question} questionId={question.id} className="w-full h-full flex-1 border-2 border-[#032038]/15" />
                 </div>
               </div>
 
               {/* Right Column: Options & Check/Next Button */}
               <div className="md:col-span-7 flex flex-col justify-between h-full space-y-3 py-2">
-                <div className="grid gap-3 flex-1">
+                <div className="lesson-options grid gap-3 flex-1">
                   {question.options.map((opt, optIndex) => {
                     let cls = 'option py-3.5 sm:py-4 px-5 text-base sm:text-lg font-black border-2 cursor-pointer flex items-center transition-all';
                     if (selected === optIndex) cls += ' selected shadow-md scale-101';

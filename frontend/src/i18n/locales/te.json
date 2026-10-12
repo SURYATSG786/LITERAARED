@@ -446,5 +446,7 @@
   "actionFailed": "చర్య విఫలమైంది. దయచేసి మళ్లీ ప్రయత్నించండి.",
   "streakAndGoal": "స్ట్రీక్ మరియు స్ట్రీక్ లక్ష్యం",
   "currentStreak": "ప్రస్తుత స్ట్రీక్",
-  "setStreakGoal": "స్ట్రీక్ లక్ష్యాన్ని సెట్ చేయండి"
+  "setStreakGoal": "స్ట్రీక్ లక్ష్యాన్ని సెట్ చేయండి",
+  "voiceWordsLabel": "పదాలు",
+  "voiceSentencesLabel": "వాక్యాలు"
 }

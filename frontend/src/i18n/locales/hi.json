@@ -443,5 +443,7 @@
   "actionFailed": "क्रिया विफल रही। कृपया पुनः प्रयास करें।",
   "streakAndGoal": "स्ट्रीक और स्ट्रीक लक्ष्य",
   "currentStreak": "वर्तमान स्ट्रीक",
-  "setStreakGoal": "स्ट्रीक लक्ष्य निर्धारित करें"
+  "setStreakGoal": "स्ट्रीक लक्ष्य निर्धारित करें",
+  "voiceWordsLabel": "शब्द",
+  "voiceSentencesLabel": "वाक्य"
 }

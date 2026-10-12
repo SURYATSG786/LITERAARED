@@ -34,6 +34,7 @@ import { useAuth } from '../contexts/AuthContext';
 import api from '../api/client';
 import { PageTitle, ProgressBar } from '../components/ui';
 import { GuideBird } from '../components/RedBird';
+import TraceOutline from '../components/TraceOutline';
 import { speakText } from '../audio';
 import {
   A_Z_ALPHABET_DATA,
@@ -459,7 +460,7 @@ export default function WritingPracticePage() {
   }
 
   return (
-    <div className="w-full flex-1 flex flex-col justify-between gap-2.5 p-1 sm:p-1.5 pb-2 lg:h-[calc(100dvh-110px)] min-h-0">
+    <div className="writing-page w-full flex-1 flex flex-col justify-between gap-2.5 p-1 sm:p-1.5 pb-2 lg:h-[calc(100dvh-110px)] min-h-0">
       {/* Top Banner Guide */}
       <div className="flex items-center justify-end shrink-0">
         <GuideBird
@@ -609,7 +610,7 @@ export default function WritingPracticePage() {
       {/* 2. CHALLENGE & LEARNING SCREEN */}
       {screen === 'challenge' && (
         <motion.div
-          className="glass-card rounded-3xl p-3.5 sm:p-4 shadow-xl border-2 border-[#032038]/20 flex-1 flex flex-col justify-between space-y-2 h-full min-h-0 overflow-hidden"
+          className="practice-panel glass-card rounded-3xl p-3.5 sm:p-4 shadow-xl border-2 border-[#032038]/20 flex-1 flex flex-col justify-between space-y-2 h-full min-h-0 overflow-hidden"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           key={`${isStructured ? alphabetIndex : currentIndex}_${targetStage}_${stepFlow}`}
@@ -617,9 +618,11 @@ export default function WritingPracticePage() {
           {/* Horizontal Stepper / Roadmap Bar (For English & Tamil Structured) */}
           {isStructured && (
             <div className="shrink-0 space-y-1.5 border-b border-black/10 pb-2">
-              <div className="flex items-center justify-between text-xs font-black text-black">
-                <span className="inline-flex items-center rounded-full bg-purple-100 text-purple-900 px-3 py-0.5 font-black text-[11px] border border-purple-300 shadow-xs">
-                  {t('alphabetProgressBanner', {
+              <div className="practice-status flex items-center justify-between text-xs font-black text-black">
+                <span className="practice-status-title inline-flex items-center rounded-full bg-purple-100 text-purple-900 px-3 py-0.5 font-black text-[11px] border border-purple-300 shadow-xs">
+                  <span className="sm:hidden">{currentChallenge.target} · {alphabetIndex + 1}/{structuredLetters.length}</span>
+                  <span className="hidden sm:inline">
+                    {t('alphabetProgressBanner', {
                     letter: currentAlphabetItem.letter,
                     current: alphabetIndex + 1,
                     total: structuredLetters.length,
@@ -627,10 +630,10 @@ export default function WritingPracticePage() {
                       ? t('letterStrokeStage', 'Letter Stroke')
                       : t('wordStage', { word: currentAlphabetItem.word, emoji: currentAlphabetItem.emoji, defaultValue: `Word (${currentAlphabetItem.word} ${currentAlphabetItem.emoji})` }),
                     defaultValue: `Alphabet ${currentAlphabetItem.letter} (${alphabetIndex + 1} of ${structuredLetters.length}): ${targetStage === 'letter' ? 'Letter Stroke' : `Word (${currentAlphabetItem.word} ${currentAlphabetItem.emoji})`}`
-                  })}
+                  })}</span>
                 </span>
 
-                <div className="flex items-center gap-2">
+                <div className="practice-status-meta flex items-center gap-2">
                   <span className="text-xs font-black text-black">
                     {alphabetProgress?.completedCount || 0} / {structuredLetters.length} {t('masteredCount', 'Mastered')}
                   </span>
@@ -641,7 +644,7 @@ export default function WritingPracticePage() {
               </div>
 
               {/* Quick Navigation Carousel */}
-              <div className="flex items-center gap-1.5 overflow-x-auto py-1 no-scrollbar scroll-smooth">
+              <div className="practice-carousel flex items-center gap-1.5 overflow-x-auto py-1 no-scrollbar scroll-smooth">
                 {structuredLetters.map((item, idx) => {
                   const state = getAlphabetState(item.letter, idx);
                   const isCurrent = isStructured && alphabetIndex === idx;
@@ -684,7 +687,7 @@ export default function WritingPracticePage() {
           {/* Non-Structured Progress Bar */}
           {!isStructured && (
             <div className="space-y-1 shrink-0">
-              <div className="flex items-center justify-between text-xs font-black text-black">
+              <div className="practice-status flex items-center justify-between text-xs font-black text-black">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-2.5 py-0.5 text-black uppercase tracking-wider font-black border border-black/20 text-[11px]">
                   <Sparkles size={12} />
                   Challenge {currentIndex + 1} of 5
@@ -699,7 +702,7 @@ export default function WritingPracticePage() {
 
           {/* Two-Step Flow Stepper Tabs (Listen -> Trace) */}
           {isStructured && (
-            <div className="grid grid-cols-2 gap-2 shrink-0">
+            <div className="practice-tabs grid grid-cols-2 gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => setStepFlow('listen')}
@@ -735,13 +738,13 @@ export default function WritingPracticePage() {
           {isStructured && stepFlow === 'listen' && (
             <div className="grid gap-4 md:grid-cols-12 flex-1 h-full items-stretch min-h-0 py-1">
               {/* Left Column: Picture Card (Emoji Illustration Box like CoursePlayer) */}
-              <div className="md:col-span-5 flex flex-col h-full gap-2.5 min-h-0">
-                <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.16em] text-purple-900 bg-purple-100 px-3.5 py-1.5 rounded-full border border-purple-300 self-start shrink-0">
+              <div className="practice-context practice-listen-context md:col-span-5 flex flex-col h-full gap-2.5 min-h-0">
+                <div className="practice-phase inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.16em] text-purple-900 bg-purple-100 px-3.5 py-1.5 rounded-full border border-purple-300 self-start shrink-0">
                   <Headphones size={13} />
                   <span>{t('step1Title', 'Step 1 • Listen & Pronounce')}</span>
                 </div>
 
-                <div className="relative flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[220px] bg-gradient-to-br from-[#fdfbf7] via-[#f8f5ee] to-[#f3ece0] border-2 border-black/15 items-center justify-center">
+                <div className="practice-illustration relative flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[220px] bg-gradient-to-br from-[#fdfbf7] via-[#f8f5ee] to-[#f3ece0] border-2 border-black/15 items-center justify-center">
                   {/* Ambient Halo Glow */}
                   <motion.div
                     className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full pointer-events-none blur-2xl"
@@ -837,8 +840,8 @@ export default function WritingPracticePage() {
           {(!isStructured || stepFlow !== 'listen') && (
             <div className="grid gap-4 md:grid-cols-12 flex-1 h-full items-stretch min-h-0 py-1">
               {/* Left Column: Picture Card + Stroke Info */}
-              <div className="md:col-span-4 flex flex-col h-full gap-2.5 min-h-0 justify-between">
-                <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.14em] text-purple-900 bg-purple-100 px-3 py-1 rounded-full border border-purple-300 self-start shrink-0">
+              <div className="practice-context md:col-span-4 flex flex-col h-full gap-2.5 min-h-0 justify-between">
+                <div className="practice-phase inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.14em] text-purple-900 bg-purple-100 px-3 py-1 rounded-full border border-purple-300 self-start shrink-0">
                   <Pencil size={12} />
                   <span>
                     {isStructured
@@ -850,7 +853,7 @@ export default function WritingPracticePage() {
                 </div>
 
                 {/* Illustrated Picture Box */}
-                <div className="relative flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[160px] bg-gradient-to-br from-[#fdfbf7] via-[#f8f5ee] to-[#f3ece0] border-2 border-black/15 items-center justify-center">
+                <div className="practice-illustration relative flex-1 w-full rounded-3xl overflow-hidden shadow-sm flex flex-col min-h-[160px] bg-gradient-to-br from-[#fdfbf7] via-[#f8f5ee] to-[#f3ece0] border-2 border-black/15 items-center justify-center">
                   <motion.div
                     className="absolute w-36 h-36 rounded-full pointer-events-none blur-xl"
                     style={{ background: 'rgba(235, 210, 165, 0.45)' }}
@@ -872,7 +875,7 @@ export default function WritingPracticePage() {
                 </div>
 
                 {/* Target Letter / Word Card with Audio */}
-                <div className="rounded-2xl bg-white/90 p-3 border-2 border-black/10 shadow-xs flex items-center justify-between gap-2 shrink-0">
+                <div className="practice-target rounded-2xl bg-white/90 p-3 border-2 border-black/10 shadow-xs flex items-center justify-between gap-2 shrink-0">
                   <div className="text-left">
                     <span className="text-[10px] font-black uppercase text-slate-500 block">
                       {targetStage === 'word' ? t('targetWord', 'Target Word') : t('targetCharacter', 'Target Character')}
@@ -892,7 +895,7 @@ export default function WritingPracticePage() {
 
               {/* Right Column: Full-Height Handwriting Canvas & Controls */}
               <div className="md:col-span-8 flex flex-col justify-between h-full space-y-2 min-h-0">
-                <div className="relative rounded-2xl bg-white border-2 border-[#032038]/25 shadow-inner overflow-hidden flex items-center justify-center touch-none flex-1 min-h-[220px]">
+                <div className="writing-surface relative rounded-2xl bg-white border-2 border-[#032038]/25 shadow-inner overflow-hidden flex items-center justify-center touch-none flex-1 min-h-[220px]">
                   <canvas
                     ref={canvasRef}
                     width={800}
@@ -907,7 +910,8 @@ export default function WritingPracticePage() {
                     onTouchEnd={stopDrawing}
                   />
 
-                  {/* Guided Trace Template Outline Overlay */}
+                  {/* The entire word must fit at every screen size and in every script. */}
+                  <div className="hidden md:block">
                   {showGuide && (
                     <div
                       className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
@@ -934,8 +938,11 @@ export default function WritingPracticePage() {
                     </div>
                   )}
 
+                  </div>
+                  {showGuide && <div className="md:hidden"><TraceOutline text={currentChallenge.target} /></div>}
+
                   {!hasDrawn && !verifying && !feedback && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-slate-400">
+                    <div className="writing-hint absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-slate-400">
                       <Pencil className="opacity-30 mb-1" size={24} />
                       <span className="text-xs font-black opacity-60 uppercase tracking-widest">
                         {stepFlow === 'trace' ? t('tabTrace', '2. Trace ✍️') : t('tabWrite', '3. Write 📝')}

@@ -446,5 +446,7 @@
   "actionFailed": "Action failed. Please try again.",
   "streakAndGoal": "Streak & Streak goal",
   "currentStreak": "Current Streak",
-  "setStreakGoal": "SET STREAK GOAL"
+  "setStreakGoal": "SET STREAK GOAL",
+  "voiceWordsLabel": "Words",
+  "voiceSentencesLabel": "Sentences"
 }

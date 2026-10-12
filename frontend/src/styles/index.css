@@ -832,7 +832,6 @@ html, body {
   .app-content .grid > .h-full { height: auto; }
   .app-content .glass-card { border-radius: 1.25rem; }
   .app-content .glass-card.p-6 { padding: 1rem; }
-  .app-content [class~='md:col-span-5'] > [class*='min-h-'] { min-height: 220px; }
   .practice-intro { padding: 0 !important; background: rgba(255,255,255,.95); }
   .practice-intro > video { position: relative; display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: left center; }
   .practice-intro > .relative { padding: 1.25rem; height: auto; }
@@ -904,4 +903,64 @@ html, body {
   .admin-shell .fixed :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea),
   .app-shell .fixed :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) { font-size: 16px; min-height: 48px; max-width: 100%; }
   .admin-shell .fixed button, .app-shell .fixed button { min-height: 44px; }
+}
+
+/* Compact phone exercises keep the target and primary action together. */
+@media screen and (max-width: 767px) {
+  .app-header .glass-header { flex-wrap: nowrap; padding: .5rem; gap: .25rem; }
+  .app-header .glass-header > .flex { gap: .35rem; }
+  .app-content .guide-bird .speech-bubble { padding: .65rem .75rem; font-size: .8rem; line-height: 1.4; }
+  .app-content .guide-bird > svg { width: 36px; height: 36px; flex-shrink: 0; }
+  .app-content .practice-panel { padding: .75rem; border-width: 1px; border-radius: 1rem; gap: .5rem; }
+  .practice-panel .practice-status { gap: .5rem; align-items: center; }
+  .practice-panel .practice-status-title { border: 0; background: transparent; padding: .25rem 0; font-size: .8rem; }
+  .practice-status-meta { flex-shrink: 0; font-size: .7rem; white-space: nowrap; }
+  .voice-page .practice-status-meta > span:first-child { display: none; }
+  .practice-panel .practice-tabs button { padding: .5rem; font-size: .85rem; min-height: 44px; border-radius: .85rem; }
+  .practice-panel .practice-carousel button { min-height: 44px; padding: .5rem .65rem; font-size: .8rem; border-radius: .75rem; }
+  .practice-panel .practice-phase { display: none; }
+  .practice-panel .practice-context { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: .5rem; height: auto; }
+  .practice-panel .practice-illustration { grid-column: 1; grid-row: 1; min-height: 96px !important; height: 96px; border-radius: .85rem; border-width: 1px; }
+  .practice-panel .practice-illustration > .relative { padding: .25rem; }
+  .practice-panel .practice-illustration > .relative > span:first-child { font-size: 2.5rem; }
+  .practice-panel .practice-illustration > .relative > span:last-child { font-size: .65rem; line-height: 1.3; margin-top: .3rem; letter-spacing: 0; }
+  .practice-panel .practice-target { grid-column: 2; grid-row: 1; padding: .65rem; border-width: 1px; border-radius: .85rem; gap: .5rem; }
+  .practice-panel .practice-target p { font-size: 1.25rem; line-height: 1.4; }
+  .practice-panel .practice-target button { padding: .5rem; font-size: .8rem; }
+  .practice-panel .practice-listen-context { grid-template-columns: minmax(0, 1fr); }
+  .practice-panel .practice-listen-context .practice-illustration { height: 100px; }
+  .practice-panel .writing-surface { height: 230px; min-height: 0; flex: none; border-width: 1px; border-radius: .85rem; }
+  .practice-panel .writing-hint { top: auto; bottom: .75rem; flex-direction: row; gap: .25rem; font-size: .7rem; opacity: .55; }
+  .practice-panel .voice-recorder { min-height: 170px; padding: 1rem; border-width: 1px; border-radius: .85rem; }
+  .practice-panel .voice-recorder button.rounded-full { width: 64px; height: 64px; }
+  .practice-panel .practice-actions { gap: .5rem; }
+  .practice-panel .practice-actions button { padding: .6rem .5rem; font-size: .85rem; border-radius: .85rem; }
+  .app-content .lesson-illustration { flex: none; height: 140px; min-height: 0; border-radius: 1rem; }
+  .app-content .lesson-illustration svg { max-height: 130px; }
+}
+
+@media screen and (max-width: 767px) {
+  .app-content .dashboard-actions { display: grid; grid-template-columns: 1fr; }
+  .app-content .dashboard-actions button { width: 100%; overflow-wrap: normal; }
+}
+
+@media screen and (max-width: 767px) {
+  .app-content .lesson-panel { padding: .75rem; border-width: 1px; }
+  .lesson-panel .option { padding: .65rem .85rem; font-size: .9rem; }
+  .lesson-panel .question-prompt { padding: .75rem; }
+  .lesson-panel .lesson-illustration span { font-size: 3.5rem; }
+}
+
+@media screen and (max-width: 767px) {
+  .lesson-panel .lesson-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+  .lesson-panel .lesson-options button { min-height: 48px; overflow-wrap: normal; }
+}
+
+@media screen and (max-width: 767px) {
+  .auth-page .auth-compact-brand { display: grid; grid-template-columns: 56px minmax(0, 1fr); grid-template-rows: auto auto; gap: .25rem .75rem; text-align: left; align-items: center; padding: .5rem; }
+  .auth-compact-brand > div { grid-column: 1; grid-row: 1 / 3; margin: 0; width: 56px; height: 56px; }
+  .auth-compact-brand > div svg { width: 56px; height: 56px; }
+  .auth-compact-brand .role-speech, .auth-compact-brand .mentor-quote, .auth-compact-brand > .sky-sub { display: none; }
+  .auth-page .auth-compact-brand .sky-title { grid-column: 2; grid-row: 1; font-size: 1.75rem; margin: 0; }
+  .auth-page .auth-compact-brand .sky-tagline { grid-column: 2; grid-row: 2; font-size: .95rem; margin: 0; }
 }

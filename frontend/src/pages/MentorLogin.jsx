@@ -52,7 +52,7 @@ export default function MentorLogin() {
           initial={{ opacity: 0, x: -24 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.55 }}
-          className="auth-showcase mentor-showcase flex flex-col items-center text-center"
+          className="auth-showcase auth-compact-brand mentor-showcase flex flex-col items-center text-center"
         >
           <p className="mentor-quote">“{t('mentorQuote', 'Behind every confident reader is an administrator who never stopped believing.')}”</p>
           <div className="mentor-brand-bird"><MentorBird /></div>
